@@ -1,0 +1,80 @@
+i.mce-i-ytc {
+	font: normal 20px/1 'dashicons';
+	padding: 0;
+	vertical-align: top;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	margin-left: -2px;
+	padding-right: 2px;
+
+	&:before {
+		content: '\f236';
+	}
+}
+div[id*='_youtube-channel-'] .widget-content p {
+	width: 100%;
+	clear: both;
+
+	&.half {
+		width: 49%;
+
+		&.left {
+			float: left;
+			clear: left;
+		}
+		&.right {
+			float: right;
+			clear: right;
+		}
+	}
+
+	&.glue-top {
+		margin-top: 0;
+	}
+	&.hidden {
+		display: none;
+	}
+	&.visible {
+		display: block;
+	}
+}
+@media screen and (max-width: 782px) {
+	div[id*='_youtube-channel-'] .widget-content p.half.left,
+	div[id*='_youtube-channel-'] .widget-content p.half.right {
+		width: 100%;
+		float: none;
+		clear: none;
+	}
+}
+
+/* Settings tabs */
+.nav-tab.nav-tab-hidden {
+	display: none;
+}
+.subnav-tab-wrapper {
+	margin-bottom: 0;
+
+	& .nav-tab {
+		-webkit-user-select: none;  /* Chrome all / Safari all */
+		-moz-user-select: none;     /* Firefox all */
+		-ms-user-select: none;      /* IE 10+ */
+		user-select: none;          /* Likely future */
+
+		&:focus {
+			-webkit-box-shadow: initial;
+			box-shadow: initial;
+		}
+	}
+}
+.tab-content-ytc {
+	display: none;
+
+	&.tab-content-active {
+		display: block;
+		border-color: #ccc;
+		border-width: 0 1px 1px 1px;
+		border-style: solid;
+		padding: 10px;
+	}
+}

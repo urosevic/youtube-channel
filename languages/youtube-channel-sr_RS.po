@@ -1,0 +1,1296 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: YouTube Channel\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/youtube-channel\n"
+"POT-Creation-Date: 2015-10-15 21:56+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Aleksandar Urošević <urke.kg@gmail.com>\n"
+"Language-Team: Aleksandar Urosevic <urke.kg@gmail.com>\n"
+"Language: sr_RS\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.8.5\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: languages\n"
+"X-Poedit-SearchPath-1: .\n"
+
+#: inc/settings-template.php:6
+msgid " Settings"
+msgstr "Поставке"
+
+#: inc/settings-template.php:12 inc/settings-usage-shortcode.php:104
+#: inc/settings.php:38
+msgid "General"
+msgstr "Опште"
+
+#: inc/settings-template.php:13 inc/settings-usage-shortcode.php:105
+msgid "Video"
+msgstr "Видео"
+
+#: inc/settings-template.php:14 inc/settings-usage-shortcode.php:106
+msgid "Content"
+msgstr "Садржај"
+
+#: inc/settings-template.php:15 inc/settings-usage-shortcode.php:15
+#: inc/settings-usage-shortcode.php:107 inc/settings.php:653 inc/widget.php:217
+msgid "Link to Channel"
+msgstr "Веза до канала"
+
+#: inc/settings-template.php:16
+msgid "Tools"
+msgstr "Алатке"
+
+#: inc/settings-template.php:17
+msgid "Help"
+msgstr "Помоћ"
+
+#: inc/settings-template.php:18 youtube-channel.php:208
+msgid "Support"
+msgstr "Подршка"
+
+#: inc/settings-usage-shortcode.php:1
+msgid "How to use shortcode"
+msgstr "Како да користите шорткод"
+
+#: inc/settings-usage-shortcode.php:5
+#, php-format
+msgid ""
+"You can use shortcode %s with options listed below (all options are optional "
+"if you have set defaults in global plugin settings)."
+msgstr ""
+
+#: inc/settings-usage-shortcode.php:12 youtube-channel.php:327
+msgid "General Settings"
+msgstr "Опште поставке"
+
+#: inc/settings-usage-shortcode.php:13 inc/widget.php:163
+msgid "Video Settings"
+msgstr "Поставке видео записа"
+
+#: inc/settings-usage-shortcode.php:14 inc/widget.php:193
+msgid "Content Layout"
+msgstr "Садржај"
+
+#: inc/settings-usage-shortcode.php:101
+#, php-format
+msgid ""
+"Please note, you can omit all options listed above, and then will be used "
+"plugin defaults customized on tabs %1$s, %2$s, %3$s and %4$s."
+msgstr ""
+"Обратите пажњу да можете изоставити све опције наведене изнад, и тада ће "
+"бити употребљене подразумеване опције постављене на картицама %1$s, %2$s, "
+"%3$s и %4$s."
+
+#: inc/settings-usage-shortcode.php:112
+#, php-format
+msgid ""
+"Important note: %s blocks inserted through widget have their own settings."
+msgstr ""
+
+#: inc/settings-usage-shortcode.php:115 inc/settings.php:311
+#: inc/settings.php:730 inc/settings.php:731 inc/settings.php:758
+#: inc/settings.php:772 inc/settings.php:782 inc/settings.php:792
+#: inc/widget.php:11
+msgid "YouTube Channel"
+msgstr ""
+
+#: inc/settings-usage.php:1
+msgid "How to use YouTube Channel"
+msgstr "Како се користи YouTube Channel"
+
+#: inc/settings-usage.php:2
+msgid "You can insert YouTube Channel in couple different ways."
+msgstr "YouTube Channel можете да уметнете на два начина."
+
+#: inc/settings-usage.php:7
+#, php-format
+msgid "Add %s to preferred %s, and configure it there."
+msgstr "Додајте %s у жељену %s, и подесите опције у виџету."
+
+#: inc/settings-usage.php:10
+msgid "YouTube Channel Widget"
+msgstr "виџет YouTube Channel"
+
+#: inc/settings-usage.php:13
+msgid "Widget Area"
+msgstr ""
+
+#: inc/settings-usage.php:19
+#, php-format
+msgid ""
+"Insert shortcode %s to your page or text widget, and even modify default "
+"settings by shortcode parameters listed in section below."
+msgstr ""
+"Уметните шорткод %s у садржај странице или виџета, па чак и измените "
+"подразумеване поставке додатка помоћу параметара шорткода наведених у "
+"секцији испод."
+
+#: inc/settings.php:46 youtube-channel.php:322
+msgid "YouTube Data API Key"
+msgstr "Јутјуб АПИ кључ за податке"
+
+#: inc/settings.php:54 inc/settings.php:87
+msgid "Required"
+msgstr "Обавезно"
+
+#: inc/settings.php:58
+#, php-format
+msgid ""
+"Your YouTube Data API Key (get it from <a href=\"%1$s\" target=\"_blank\">"
+"%2$s</a>)"
+msgstr ""
+
+#: inc/settings.php:69 youtube-channel.php:324
+msgid "Google Developers Console"
+msgstr "Гугловој страници за програмере"
+
+#: inc/settings.php:79
+msgid "YouTube Channel ID"
+msgstr "ИД канала"
+
+#: inc/settings.php:91
+#, php-format
+msgid ""
+"Your YouTube Channel ID (get it from <a href=\"%1$s\" target=\"_blank\">"
+"%2$s</a>)"
+msgstr ""
+
+#: inc/settings.php:102 inc/settings.php:136 inc/settings.php:762
+msgid "YouTube Account Overview"
+msgstr "Преглед подешавања канала"
+
+#: inc/settings.php:112
+msgid "YouTube Vanity Name"
+msgstr "Прилагођено име"
+
+#: inc/settings.php:120 inc/settings.php:154 inc/settings.php:172
+msgid "Optional"
+msgstr "Није обавезно"
+
+#: inc/settings.php:124
+#, php-format
+msgid ""
+"Your YouTube Custom Name (get only part after %1$s instead whole URL from <a "
+"href=\"%2$s\" target=\"_blank\">%3$s</a>)"
+msgstr ""
+
+#: inc/settings.php:146
+msgid "Legacy YouTube Username"
+msgstr "Старо корисничко име"
+
+#: inc/settings.php:155
+msgid "Your YouTube legacy username"
+msgstr "Ваше старо корисничко име за Јутјуб"
+
+#: inc/settings.php:164
+msgid "Default Playlist ID"
+msgstr "ИД подразумеване плејлисте"
+
+#: inc/settings.php:173
+msgid "Enter default playlist ID (not playlist name)"
+msgstr "Унесите подразумевани ИД плеј листе (не назив)"
+
+#: inc/settings.php:182 inc/widget.php:134
+msgid "Resource to use"
+msgstr "Користи ресурс"
+
+#: inc/settings.php:188
+msgid "Resource:"
+msgstr "Извор:"
+
+#: inc/settings.php:189
+msgid "What to use as resource for feeds"
+msgstr "Шта користити као извор довода"
+
+#: inc/settings.php:193
+msgid "Channel"
+msgstr "Канал"
+
+#: inc/settings.php:194 inc/widget.php:137
+msgid "Favourites"
+msgstr "Омиљени"
+
+#: inc/settings.php:195
+msgid "Liked Video"
+msgstr "Свидело вам се"
+
+#: inc/settings.php:196 inc/widget.php:139
+msgid "Playlist"
+msgstr "Плеј листа"
+
+#: inc/settings.php:203
+msgid "Cache Timeout"
+msgstr "Трајање кеша"
+
+#: inc/settings.php:209
+msgid "Define caching timeout for YouTube feeds, in seconds"
+msgstr "Одредите трајање кеша Јутјуб довода у секундама"
+
+#: inc/settings.php:213
+msgid "Do not chache"
+msgstr "Без кеширања"
+
+#: inc/settings.php:214 youtube-channel.php:1271
+msgid "1 minute"
+msgstr "1 минут"
+
+#: inc/settings.php:215 youtube-channel.php:1272
+msgid "5 minutes"
+msgstr "5 минута"
+
+#: inc/settings.php:216 youtube-channel.php:1273
+msgid "15 minutes"
+msgstr "15 минута"
+
+#: inc/settings.php:217 youtube-channel.php:1274
+msgid "30 minutes"
+msgstr "30 минута"
+
+#: inc/settings.php:218 youtube-channel.php:1277
+msgid "1 hour"
+msgstr "1 сат"
+
+#: inc/settings.php:219 youtube-channel.php:1278
+msgid "2 hours"
+msgstr "2 сата"
+
+#: inc/settings.php:220 youtube-channel.php:1279
+msgid "5 hours"
+msgstr "5 сати"
+
+#: inc/settings.php:221 youtube-channel.php:1280
+msgid "10 hours"
+msgstr "10 сати"
+
+#: inc/settings.php:222 youtube-channel.php:1281
+msgid "12 hours"
+msgstr "12 сати"
+
+#: inc/settings.php:223 youtube-channel.php:1282
+msgid "18 hours"
+msgstr "18 сати"
+
+#: inc/settings.php:224 youtube-channel.php:1285
+msgid "1 day"
+msgstr "1 дан"
+
+#: inc/settings.php:225 youtube-channel.php:1286
+msgid "2 days"
+msgstr "2 дана"
+
+#: inc/settings.php:226 youtube-channel.php:1287
+msgid "3 days"
+msgstr "3 дана"
+
+#: inc/settings.php:227 youtube-channel.php:1288
+msgid "4 days"
+msgstr "4 дана"
+
+#: inc/settings.php:228 youtube-channel.php:1289
+msgid "5 days"
+msgstr "5 дана"
+
+#: inc/settings.php:229 youtube-channel.php:1290
+msgid "6 days"
+msgstr "6 дана"
+
+#: inc/settings.php:230 youtube-channel.php:1293
+msgid "1 week"
+msgstr "1 недеља"
+
+#: inc/settings.php:231 youtube-channel.php:1294
+msgid "2 weeks"
+msgstr "2 недеље"
+
+#: inc/settings.php:232 youtube-channel.php:1295
+msgid "3 weeks"
+msgstr "3 недеље"
+
+#: inc/settings.php:233 youtube-channel.php:1296
+msgid "1 month"
+msgstr "1 месец"
+
+#: inc/settings.php:240 inc/widget.php:152
+msgid "Fetch"
+msgstr "Добави из ресурса"
+
+#: inc/settings.php:246 inc/widget.php:152
+msgid ""
+"Number of videos that will be used for random pick (min 2, max 50, default "
+"25)"
+msgstr ""
+"Број видеа од којих ће бити одабран насумични (најмање 2, највише 50, "
+"подразумевано 25)"
+
+#: inc/settings.php:257 inc/widget.php:155
+msgid "Show"
+msgstr "Прикажи"
+
+#: inc/settings.php:263 inc/widget.php:155
+msgid "Number of videos to display"
+msgstr "Број видеа за приказ"
+
+#: inc/settings.php:274
+msgid "Use Enhanced privacy"
+msgstr "Побољшана приватност"
+
+#: inc/settings.php:283
+#, php-format
+msgid ""
+"Enable this option to protect your visitors privacy. <a href=\"%1$s\" target="
+"\"_blank\">%2$s</a>"
+msgstr ""
+
+#: inc/settings.php:294 inc/settings.php:427
+msgid "Learn more here"
+msgstr "Сазнајте више"
+
+#: inc/settings.php:303
+msgid "Enable TinyMCE button"
+msgstr ""
+
+#: inc/settings.php:310
+#, php-format
+msgid ""
+"Disable this option to hide %s button from TinyMCE toolbar on post and page "
+"editor."
+msgstr ""
+
+#: inc/settings.php:328
+msgid "Video Tweaks"
+msgstr "Поставке видеа"
+
+#: inc/settings.php:336
+msgid "Initial Width"
+msgstr "Почетна ширина"
+
+#: inc/settings.php:342
+msgid "Set default width for displayed video, in pixels"
+msgstr "Одредите подразумевану ширину видеа у пикселима"
+
+#: inc/settings.php:353 inc/widget.php:164
+msgid "Aspect ratio"
+msgstr "Размера"
+
+#: inc/settings.php:359
+msgid "Select aspect ratio for displayed video"
+msgstr "Одаберите размеру приказаног видеа"
+
+#: inc/settings.php:371
+msgid "What to show?"
+msgstr "Шта приказати?"
+
+#: inc/settings.php:377
+msgid "Choose how to embed video block"
+msgstr "Одаберите како да се угради блок"
+
+#: inc/settings.php:381 inc/widget.php:179
+msgid "Thumbnail"
+msgstr "Сличица"
+
+#: inc/settings.php:382 inc/widget.php:180
+msgid "HTML5 (iframe)"
+msgstr "HTML5 (iframe)"
+
+#: inc/settings.php:383 inc/widget.php:181
+msgid "HTML5 (iframe) Asynchronous"
+msgstr "HTML5 (iframe) Asynchronous"
+
+#: inc/settings.php:384 inc/widget.php:182
+msgid "Embedded Playlist"
+msgstr "Уграђена плеј листа"
+
+#: inc/settings.php:392
+msgid "Enable Responsive"
+msgstr "Омогући респонзивност"
+
+#: inc/settings.php:398
+msgid ""
+"Enable this option to make YTC videos and thumbnails responsive by default. "
+"Please note, this option will set videos and thumbnail to full width "
+"relative to parent container, and disable more than one video per row."
+msgstr ""
+
+#: inc/settings.php:407
+msgid "Play inline on iOS"
+msgstr "Репродукција на страници за iOS"
+
+#: inc/settings.php:416
+#, php-format
+msgid ""
+"Enable this option to override fullscreen playback on iOS, and force inline "
+"playback on page and in lightbox. <a href=\"%1$s\" target=\"_blank\">%2$s</a>"
+msgstr ""
+
+#: inc/settings.php:436
+msgid "Disable Lightbox"
+msgstr "Онемогући искачући прозорчић"
+
+#: inc/settings.php:442
+msgid ""
+"Enable this option to disable built-in lightbox for thumbnails (in case that "
+"you have youtube links lightbox trigger in theme or other plugin)."
+msgstr ""
+
+#: inc/settings.php:450
+msgid "Enable Full Screen"
+msgstr ""
+
+#: inc/settings.php:456
+msgid ""
+"Enable this option to make available Full Screen button for embedded "
+"playlists."
+msgstr ""
+
+#: inc/settings.php:465
+msgid "Light Theme"
+msgstr "Светла тема"
+
+#: inc/settings.php:471
+msgid ""
+"Enable this option to use light theme for playback controls instead dark."
+msgstr ""
+
+#: inc/settings.php:479
+msgid "Hide Player Controls"
+msgstr "Сакриј контроле за репродукцију"
+
+#: inc/settings.php:485
+msgid "Enable this option to hide playback controls"
+msgstr "Омогућите ову опцију да би сакрили контроле за репродукцију"
+
+#: inc/settings.php:494 inc/widget.php:187
+msgid "Autoplay video or playlist"
+msgstr "Аутоматски репродукуј видео или плеј листу"
+
+#: inc/settings.php:500
+msgid ""
+"Enable this option to start video playback right after block is rendered"
+msgstr ""
+
+#: inc/settings.php:508 inc/widget.php:188
+msgid "Mute video on autoplay"
+msgstr "Искључи звук при аутоматској репродукцији"
+
+#: inc/settings.php:514
+msgid "Enable this option to mute video when start autoplay"
+msgstr ""
+"Омогућите ову опцију да би искључити звук када започне аутоматска "
+"репродукција"
+
+#: inc/settings.php:522 inc/widget.php:189
+msgid "Hide related videos"
+msgstr "Сакриј повезане видео записе"
+
+#: inc/settings.php:528
+msgid "Enable this option to hide related videos after finished playback"
+msgstr ""
+"Омогућите ову опцију да би сакрили релевантне видео записе након завршетка "
+"репродукције"
+
+#: inc/settings.php:536
+msgid "Hide YT logo"
+msgstr "Сакриј Јутјуб логотип"
+
+#: inc/settings.php:542
+msgid ""
+"Enable this option to hide YouTube logo from playback control bar. Does not "
+"work for all videos."
+msgstr ""
+
+#: inc/settings.php:550
+msgid "Hide video annotations"
+msgstr "Сакриј видео прибелешке"
+
+#: inc/settings.php:556
+msgid ""
+"Enable this option to hide video annotations (custom text set by uploader "
+"over video during playback)"
+msgstr ""
+"Омогућите ову опцију да би сакрили видео прибелешке (текст постављен преко "
+"слике видеа током репродукције)"
+
+#: inc/settings.php:564 inc/widget.php:213
+msgid "Hide video info"
+msgstr "Сакриј информације о видео запису"
+
+#: inc/settings.php:570
+msgid ""
+"Enable this option to hide informations about video before play start (video "
+"title and uploader in overlay)"
+msgstr ""
+"Омогућите ову опцију да би сакрили информације о видео запису пре него што "
+"започен репродукција (наслов видео записа и  аутора)"
+
+#: inc/settings.php:586
+msgid "Content Tweaks"
+msgstr "Поставке садржаја"
+
+#: inc/settings.php:594 inc/widget.php:196
+msgid "Show video title"
+msgstr "Прикажи наслов видео записа"
+
+#: inc/settings.php:600
+msgid "Select should we and where display title of video"
+msgstr "Одаберите да ли треба и када приказати наслов видеа"
+
+#: inc/settings.php:604 inc/widget.php:199
+msgid "Hide title"
+msgstr "Сакриј наслов"
+
+#: inc/settings.php:605 inc/widget.php:200
+msgid "Above video/thumbnail"
+msgstr "Изнад видеа"
+
+#: inc/settings.php:606 inc/widget.php:201
+msgid "Below video/thumbnail"
+msgstr "Испод видеа"
+
+#: inc/settings.php:613 inc/widget.php:204
+msgid "Show video description"
+msgstr "Прикажи опис видео записа"
+
+#: inc/settings.php:619
+msgid "Enable this option to display description for video"
+msgstr "Омогућите ову опцију да би приказали опис видео записа"
+
+#: inc/settings.php:627 inc/widget.php:206
+msgid "Description length"
+msgstr "Дужина описа"
+
+#: inc/settings.php:633
+msgid "Enter length for video description in characters (0 for full length)"
+msgstr "Унесите дужину описа видео записа у знаковима (0 за цео опис)"
+
+#: inc/settings.php:661
+msgid "Link to..."
+msgstr "Повежи са..."
+
+#: inc/settings.php:668
+msgid "Set where link will lead visitors"
+msgstr "Одредите где ће веза да одведе посетиоца"
+
+#: inc/settings.php:672 inc/widget.php:223
+msgid "Hide link"
+msgstr "Сакриј везу"
+
+#: inc/settings.php:673
+msgid "Vanity custom URL"
+msgstr "Прилагођена адреса"
+
+#: inc/settings.php:674
+msgid "Channel page URL"
+msgstr "Страница канала"
+
+#: inc/settings.php:675
+msgid "Legacy username page"
+msgstr "Старо корисничко име"
+
+#: inc/settings.php:682
+msgid "Open link in..."
+msgstr "Отвори везу у..."
+
+#: inc/settings.php:689
+msgid "Set where link will be opened"
+msgstr "Одредите како ће веза бити отворена"
+
+#: inc/settings.php:693
+msgid "same window"
+msgstr "исти прозор"
+
+#: inc/settings.php:694
+msgid "new window (JavaScript)"
+msgstr "нови прозор (ЈаваСкрипт)"
+
+#: inc/settings.php:695
+msgid "new window (target=\"_blank\")"
+msgstr "нови прозор (target=\"_blank\")"
+
+#: inc/settings.php:702
+msgid "Text for Visit channel link"
+msgstr "Текст за везу \"Посети канал\""
+
+#: inc/settings.php:709
+msgid "Set default title for link"
+msgstr "Поставите подразумевани текст за везу"
+
+#: inc/settings.php:748
+#, php-format
+msgid ""
+"Configure general defaults for %1$s used as fallback options in widget or "
+"shortcodes. To get %2$s and %3$s visit <a href=\"%4$s\" target=\"_blank\">"
+"%5$s</a>."
+msgstr ""
+"Поставите подразумевана подешавања за опште поставке за %1$s које ће бити "
+"употребљене као почетне вредности приликом прављења новог виџета или "
+"шорткода. Да сазнате %2$s и %3$s посетите <a href=\"%4$s\" target=\"_blank\">"
+"%5$s</a>."
+
+#: inc/settings.php:759 inc/widget.php:108 inc/widget.php:119
+msgid "Channel ID"
+msgstr "ИД канала"
+
+#: inc/settings.php:760
+msgid "Vanity URL"
+msgstr "Прилагођени URL"
+
+#: inc/settings.php:771
+#, php-format
+msgid ""
+"Configure video specific defaults for %s used as fallback options in widget "
+"or shortcodes."
+msgstr ""
+"Поставите подразумевана подешавања специфична за видео које ће бити "
+"искоришћене од стране %s приликом прављења новог виџета или шорткода."
+
+#: inc/settings.php:781
+#, php-format
+msgid ""
+"Configure defaults of content around and over videos for %s used as fallback "
+"options in widget or shortcodes."
+msgstr ""
+"Поставите подразумевана подешавања за садржај који окружује видео за %s. Ове "
+"поставке ће бити употребљене као подразумеване вредности приликом прављења "
+"новог виџета или шорткода."
+
+#: inc/settings.php:791
+#, php-format
+msgid ""
+"Configure defaults for link to channel below %s block used as fallback "
+"options in widget or shortcodes."
+msgstr ""
+"Поставите подразумевана подешавања за везу ка каналу на дну %s блока. Ове "
+"поставке ће бити употребљене као подразумеване вредности приликом прављења "
+"новог виџета или шорткода."
+
+#: inc/settings.php:968
+msgid "You do not have sufficient permissions to access this page."
+msgstr "Немате одговарајуће привилегије да би приступили овој страници."
+
+#: inc/widget.php:14
+msgid "Serve YouTube videos from channel or playlist right to widget area"
+msgstr "Приказ видео записа са Јутјуб канала или плеј листе"
+
+#: inc/widget.php:90
+msgid "Widget Title"
+msgstr "Наслов виџета"
+
+#: inc/widget.php:91
+msgid "Title for widget"
+msgstr "Наслов за виџет"
+
+#: inc/widget.php:95
+msgid "Custom CSS Class"
+msgstr "Прилагођена CSS класа"
+
+#: inc/widget.php:96
+msgid "Enter custom class for YTC block, if you wish to target block styling"
+msgstr ""
+"Унесите прилагођену класу за YTC блок, ако желите да обликујете одређени блок"
+
+#: inc/widget.php:103
+#, php-format
+msgid ""
+"Get your %1$s and %2$s from <a href=\"%3$s\" target=\"_blank\">here</a>."
+msgstr "<a href=\"%3$s\" target=\"_blank\">Овде</a> пронађите ваш %1$s и %2$s."
+
+#: inc/widget.php:109
+msgid "Custom ID"
+msgstr "Прилагођени ИД"
+
+#: inc/widget.php:114
+msgid "Vanity/Custom ID"
+msgstr "Прилагођено име"
+
+#: inc/widget.php:115
+msgid "YouTube Vanity/Custom ID from URL (part after /c/)"
+msgstr "YouTube Vanity/Custom ID из везе (део иза /c/)"
+
+#: inc/widget.php:120
+msgid ""
+"Find Channel ID behind My Channel menu item in YouTube (ID have UC at the "
+"beginning)"
+msgstr ""
+
+#: inc/widget.php:124
+msgid "Legacy Username"
+msgstr "Старо корисничко име"
+
+#: inc/widget.php:125
+msgid ""
+"Legacy YouTube username located behind /user/ part of channel URL (available "
+"only on old YouTube accounts)"
+msgstr ""
+
+#: inc/widget.php:129
+msgid "Playlist ID"
+msgstr "ИД плеј листе"
+
+#: inc/widget.php:130
+msgid "Find Playlist ID in your playlists (ID have PL at the beginning)"
+msgstr ""
+
+#: inc/widget.php:136
+msgid "Channel (User Uploads)"
+msgstr "Канал (Кориснички отпремљени видеи)"
+
+#: inc/widget.php:138
+msgid "Liked Videos"
+msgstr "Видеи који се свиђају"
+
+#: inc/widget.php:144
+msgid "Cache feed"
+msgstr "Кеширај довод"
+
+#: inc/widget.php:146
+msgid "Do not cache"
+msgstr "Немој да кешираш"
+
+#: inc/widget.php:152 inc/widget.php:155
+msgid "video(s)"
+msgstr "видео запис(а)"
+
+#: inc/widget.php:158
+msgid "Enable this option to protect your visitors privacy"
+msgstr "Омогућите ову опцију да би заштитили приватност посетилаца"
+
+#: inc/widget.php:158
+#, php-format
+msgid "Enable <a href=\"%s\" target=\"_blank\">privacy-enhanced mode</a>"
+msgstr ""
+
+#: inc/widget.php:160
+msgid "Get random videos of all fetched from channel or playlist"
+msgstr ""
+"Насумично одабери видео записе из свите добијене са канала или из плеј листе"
+
+#: inc/widget.php:160
+msgid ""
+"Show random video from resource <small>(Have no effect if \"What to show?\" "
+"has been set to \"Embedded Playlist\")</small>"
+msgstr ""
+
+#: inc/widget.php:169
+msgid ""
+"Responsive video <small>(distribute one full width item per row)</small>"
+msgstr ""
+
+#: inc/widget.php:172
+msgid "Initial width"
+msgstr "Почетна ширина"
+
+#: inc/widget.php:172
+msgid "Set video width in pixels"
+msgstr "Поставите ширину видео записа у пикселима"
+
+#: inc/widget.php:172
+msgid "default"
+msgstr "подразумевано"
+
+#: inc/widget.php:176
+msgid "What to display?"
+msgstr "Шта приказати?"
+
+#: inc/widget.php:184
+msgid "Hide thumbnail tooltip"
+msgstr "Сакриј опис сличице"
+
+#: inc/widget.php:185
+msgid "Use light theme (default is dark)"
+msgstr "Користи светлу тему (тамна је подразумевана)"
+
+#: inc/widget.php:186
+msgid "Hide player controls"
+msgstr "Сакриј контроле плејера"
+
+#: inc/widget.php:190
+msgid "Hide YT Logo (does not work for all videos)"
+msgstr "Сакриј Јутјуб логотип (не ради за све видее)"
+
+#: inc/widget.php:207
+msgid ""
+"Set number of characters to cut down video description to (0 means full "
+"length)"
+msgstr "Одредите колико ће знакова имати опис видео записа (0 за цео опис)"
+
+#: inc/widget.php:210
+msgid "Hide annotations from video"
+msgstr "Сакриј прибелешке са видео записа"
+
+#: inc/widget.php:212
+msgid ""
+"Enabling this option causes the player to not display information like the "
+"video title and uploader before the video starts playing."
+msgstr ""
+
+#: inc/widget.php:219
+msgid ""
+"Default: Visit our YouTube channel. You can use placeholders %vanity%, "
+"%channel% and %username%."
+msgstr ""
+
+#: inc/widget.php:219 youtube-channel.php:1042
+msgid "Visit our YouTube channel"
+msgstr "Посетите наш Јутјуб канал"
+
+#: inc/widget.php:224
+msgid "Link to Vanity customized URL"
+msgstr "Веза на прилагођено име"
+
+#: inc/widget.php:225
+msgid "Link to Channel page URL"
+msgstr "Веза ка страници канала"
+
+#: inc/widget.php:226
+msgid "Link to Legacy username page"
+msgstr "Веза ка старом корисничком имену"
+
+#: inc/widget.php:231
+msgid "Open link in same window"
+msgstr "Отвори везу у истом прозору"
+
+#: inc/widget.php:232
+msgid "Open link in new window (JavaScript)"
+msgstr "Отвори везу у новом прозору (JavaScript)"
+
+#: inc/widget.php:233
+msgid "Open link in new window (target=\"blank\")"
+msgstr "Отвори везу у новом прозору (target=\"blank\")"
+
+#: inc/widget.php:237
+msgid "Does not work?"
+msgstr "Нешто не ради?"
+
+#: inc/widget.php:243
+#, php-format
+msgid ""
+"Carefully read <a href=\"%1$s\" target=\"_faq\">%2$s</a> before you contact "
+"us. If that does not help, <a href=\"%3$s\" target=\"_blank\">get JSON file</"
+"a> and send it to <a href=\"%4$s\" target=\"_support\">support forum</a> "
+"along with other details noted in <a href=\"%5$s\" target=_blank\">this "
+"article</a>."
+msgstr ""
+"Пажљиво прочитајте <a href=\"%1$s\" target=\"_faq\">%2$s</a> пре него што "
+"нас контирате. Ако то не помогне, <a href=\"%3$s\" target=\"_blank"
+"\">преузмите JSON датотеку</a> и пошаљите је на <a href=\"%4$s\" target="
+"\"_support\">форум за подршку</a> заједно са осталим подацима наведеним у <a "
+"href=\"%5$s\" target=_blank\">овом чланку</a>."
+
+#: inc/widget.php:249
+msgid "FAQ"
+msgstr "често постављана питања"
+
+#: youtube-channel.php:185
+msgid "Settings"
+msgstr "Поставке"
+
+#: youtube-channel.php:286
+#, php-format
+msgid ""
+"<p>Your website running on web server with PHP version %s. Please note that "
+"<strong>%s</strong> requires PHP at least 5.3 or newer to work properly. <a "
+"href=\"%s\" class=\"dismiss\">Dismiss</a></p>"
+msgstr ""
+
+#: youtube-channel.php:299
+#, php-format
+msgid ""
+"<p>Since <strong>%s</strong> v3.0.6 we store <strong>YouTube Data API Key</"
+"strong> in plugin settings. So, you can safely remove %s define line from "
+"your <strong>wp-config.php</strong> file. <a href=\"%s\" class=\"dismiss"
+"\">Dismiss</a></p>"
+msgstr ""
+
+#: youtube-channel.php:311
+#, php-format
+msgid ""
+"<p>Please note, to make <strong>%1$s</strong> plugin v3+ work, generate "
+"<strong>%2$s</strong> in <a href=\"%3$s\" target=\"_blank\">%4$s</a>, as "
+"explained <a href=\"%5$s\" target=\"_blank\">here</a>, then add it to <a "
+"href=\"%6$s\">%7$s</a>.<br><br>If you have any issue with new version of "
+"plugin, please ask for help on official <a href=\"%8$s\" target=\"_blank\">"
+"%9$s</a>.<br>This notice will disappear when you add missing key as "
+"mentioned above!</p>"
+msgstr ""
+
+#: youtube-channel.php:329
+msgid "support forum"
+msgstr "форум за подршку"
+
+#: youtube-channel.php:338
+#, php-format
+msgid ""
+"<p><strong>%s</strong> since version 2.4 supports linking to channel through "
+"<em>Vanity/Custom</em> URL. Please review <a href=\"%s\">global</a> and <a "
+"href=\"%s\">widgets</a> settings. <a href=\"%s\" class=\"dismiss\">Dismiss</"
+"a>"
+msgstr ""
+
+#: youtube-channel.php:352
+#, php-format
+msgid ""
+"<p><strong>%s</strong> changed shortcode parameters by removing "
+"<code>only_pl</code> and <code>showgoto</code>, and combining with "
+"parameters <code>display</code> and <code>link_to</code> respectively. "
+"Please check out <a href=\"%s&tab=help\">%s</a> and update your shortcodes. "
+"<a href=\"%s\" class=\"dismiss\">Dismiss</a>"
+msgstr ""
+
+#: youtube-channel.php:615
+#, php-format
+msgid ""
+"<strong>%s</strong> version 3+ requires <strong>YouTube DATA API Key</"
+"strong> to work. <a href=\"%s\" target=\"_blank\">Learn more here</a>."
+msgstr ""
+
+#: youtube-channel.php:789
+#, php-format
+msgid ""
+"You have set to display videos from %s [resource list ID: %s], but there "
+"have no public videos in that resouce."
+msgstr ""
+
+#: youtube-channel.php:792
+#, php-format
+msgid ""
+"We have empty record for this feed. Please read <a href=\"%s\" target="
+"\"_blank\">FAQ</a> and if that does not help, contact <a href=\"%s\" target="
+"\"_blank\">support</a>."
+msgstr ""
+
+#: youtube-channel.php:834
+#, php-format
+msgid ""
+"Double check <em>YouTube Data API Key</em> on <em>General</em> plugin tab "
+"and make sure it's correct. Read <a href=\"%s\" target=\"_blank"
+"\">Installation</a> document."
+msgstr ""
+
+#: youtube-channel.php:840
+#, php-format
+msgid ""
+"You have set wrong Channel ID. Fix that in General plugin settings, Widget "
+"and/or shortcode. Read <a href=\"%s\" target=\"_blank\">FAQ</a> document."
+msgstr ""
+
+#: youtube-channel.php:843
+#, php-format
+msgid ""
+"You do not have permission to access ressource <strong>%s</strong> (it's "
+"maybe set to private or even does not exists!)"
+msgstr ""
+
+#: youtube-channel.php:964
+msgid "Oops, something went wrong."
+msgstr "Извините, нешто не функционише како треба."
+
+#: youtube-channel.php:1045
+msgid "in new window/tab"
+msgstr "у новом прозору"
+
+#: youtube-channel.php:1195
+#, php-format
+msgid "Watch video %1$s published on %2$s"
+msgstr "Гледај видео %1$s објављен на %2$s"
+
+#~ msgid ""
+#~ "Your YouTube Data API Key (get it from <a href=\"%s\" target=\"_blank\">"
+#~ "%s</a>)"
+#~ msgstr ""
+#~ "Ваш АПИ кључ за Јутјуб податке (пронађите га на <a href=\"%s\" target="
+#~ "\"_blank\">%s</a>)"
+
+#~ msgid ""
+#~ "Your YouTube Channel ID (get it from <a href=\"%s\" target=\"_blank\">%s</"
+#~ "a>)"
+#~ msgstr ""
+#~ "Ваш ИД Јутјуб канала (пронађите га на <a href=\"%s\" target=\"_blank\">"
+#~ "%s</a>)"
+
+#~ msgid ""
+#~ "Your YouTube Custom Name (get only part after www.youtube.com/c/ instead "
+#~ "whole URL from <a href=\"%s\" target=\"_blank\">%s</a>)"
+#~ msgstr ""
+#~ "Ваше Прилагођено име (само део иза www.youtube.com/c/ а не целу адресу са "
+#~ "странице <a href=\"%s\" target=\"_blank\">%s</a>)"
+
+#~ msgid ""
+#~ "Enable this option to protect your visitors privacy. <a href=\"%s\" "
+#~ "target=\"_blank\">%s</a>"
+#~ msgstr ""
+#~ "Омогућите ову опцију да би заштитили приватност Ваших посетилаца. <a href="
+#~ "\"%s\" target=\"_blank\">%s</a>"
+
+#~ msgid ""
+#~ "Carefully read <a href=\"%s\" target=\"_faq\">FAQ</a> before you contact "
+#~ "us. If that does not help, <a href=\"%s\" target=\"_blank\">get JSON "
+#~ "file</a> and send it to <a href=\"%s\" target=\"_support\">support forum</"
+#~ "a> along with other details noted in <a href=\"%s\" target=_blank\">this "
+#~ "article</a>."
+#~ msgstr ""
+#~ "Пажљиво прочитајте <a href=\"%s\" target=\"_faq\">често постављана "
+#~ "питања</a> пре него што нас контактирате. Ако то не помогне, <a href=\"%s"
+#~ "\" target=\"_blank\">преузмите JSON датотеку</a> и пошаљите је на <a href="
+#~ "\"%s\" target=\"_support\">форуму за подршку</a> заједно са осталим "
+#~ "подацима наведеним <a href=\"%s\" target=_blank\">у овом чланку</a>."
+
+#~ msgid ""
+#~ "Your YouTube Data API Key (get it from <a href=\"%s\" target=\"_blank"
+#~ "\">Google Developers Console</a>)"
+#~ msgstr ""
+#~ "Ваш Јутјуб АПИ кључ за податке (пронађите га у <a href=\"%s\" target="
+#~ "\"_blank\">Гугловој конзоли за програмере</a>)"
+
+#~ msgid ""
+#~ "Your YouTube Channel ID (get it from <a href=\"%s\" target=\"_blank"
+#~ "\">YouTube Account Overview</a>)"
+#~ msgstr ""
+#~ "ИД Вашег јутјуб канала (пронађите га на <a href=\"%s\" target=\"_blank"
+#~ "\">YouTube Account Overview</a>)"
+
+#~ msgid ""
+#~ "Your YouTube Custom Name (get only part after www.youtube.com/c/ instead "
+#~ "whole URL from <a href=\"%s\" target=\"_blank\">YouTube Account Overview</"
+#~ "a>)"
+#~ msgstr ""
+#~ "Ваше лично прилагођено име за Јутјуб (само део иза www.youtube.com/c/ а "
+#~ "не цео линк, са странице <a href=\"%s\" target=\"_blank\">YouTube Account "
+#~ "Overview</a>)"
+
+#~ msgid ""
+#~ "Enable this option to protect your visitors privacy. <a href=\"%s\" "
+#~ "target=\"_blank\">Learn more here</a>"
+#~ msgstr ""
+#~ "Омогућите ову опцију да би заштитили приватност Ваших посетилаца. <a href="
+#~ "\"%s\" target=\"_blank\">Сазнајте више</a>"
+
+#~ msgid "Aleksandar Urošević"
+#~ msgstr "Александар Урошевић"
+
+#~ msgid ""
+#~ "Enter your YouTube channel ID (channel name, not full URL to channel)"
+#~ msgstr "Унесите ИД Вашег Јутјуб канала (само назив канала, не целу путању)"
+
+#~ msgid "Favorites"
+#~ msgstr "Омиљени"
+
+#~ msgid "Embed standard playlist"
+#~ msgstr "Угради стандардну листу"
+
+#~ msgid ""
+#~ "Enable this option to embed whole playlist instead single video from "
+#~ "playlist when you chose playlist as resource"
+#~ msgstr ""
+#~ "Омогућите ову опцију за уградњу комплетне плејлисте када одаберете "
+#~ "плејлисту као ресурс"
+
+#~ msgid "Fix <em>No items</em> error/Respect playlist order"
+#~ msgstr "Поправи <em>No items</em> гешку (поштуј поредак плејлисте)"
+
+#~ msgid "Enable this option if you get error No Item"
+#~ msgstr "Омогућите ову опцију ако добијете грешку <em>No items</em>"
+
+#~ msgid "Show random video"
+#~ msgstr "Прикажи насумични видео"
+
+#~ msgid "Aspect Ratio"
+#~ msgstr "Размера"
+
+#~ msgid "16:9"
+#~ msgstr "16:9"
+
+#~ msgid "16:10"
+#~ msgstr "16:10"
+
+#~ msgid "4:3"
+#~ msgstr "4:3"
+
+#~ msgid "Video Width"
+#~ msgstr "Ширина видеа"
+
+#~ msgid "Set what will be shown by default"
+#~ msgstr "Одредите шта ће подразумевано бити приказано"
+
+#~ msgid "Flash (object)"
+#~ msgstr "Флеш објекат"
+
+#~ msgid "HTML5 (iframe) Async"
+#~ msgstr "Асинхрони HTML5 (iframe)"
+
+#~ msgid "Chromeless"
+#~ msgstr "Chromeless"
+
+#~ msgid "Use light theme"
+#~ msgstr "Користи светлу тему"
+
+#~ msgid ""
+#~ "Enable this option to use light theme for playback controls instead dark"
+#~ msgstr ""
+#~ "Омогућите ову опцију да би се користила светла тема у Јутрјуб плејеру"
+
+#~ msgid "Fix video height"
+#~ msgstr "Поправи висину видеа"
+
+#~ msgid ""
+#~ "Enable this option to fix video height when playback controls are not "
+#~ "hidden"
+#~ msgstr ""
+#~ "Омогућите ову опцију да би поправили висину када контроле за репродукцију "
+#~ "нису сакривене"
+
+#~ msgid "Enable this option to display title of video"
+#~ msgstr "Омогућите ову опцију да би приказали наслов видео записа"
+
+#~ msgid "Et cetera string"
+#~ msgstr "Знак за скраћени текст"
+
+#~ msgid "Indicator for shortened video description (default: …)"
+#~ msgstr "Индикатор за скраћени опис видео записа (подразумевано: ...)"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid "Visit YouTube Channel text"
+#~ msgstr "Текст за везу до канала"
+
+#~ msgid "Use placeholder %channel% to insert channel name"
+#~ msgstr "Користи резервисану ниску %channel% да уметнете назив канала"
+
+#~ msgid "Visit my channel %channel%"
+#~ msgstr "Посетите мој канал %channel%"
+
+#~ msgid "Show link to channel"
+#~ msgstr "Прикажи везу до канала"
+
+#~ msgid ""
+#~ "Enable this option to show customized link to channel at the bottom of "
+#~ "YTC block"
+#~ msgstr "Омогућите ову опцију да би приказали веу до канала на дну YTC блока"
+
+#~ msgid "Open YouTube channel page"
+#~ msgstr "Отвори страницу Јутрјуб канала"
+
+#~ msgid "in same window"
+#~ msgstr "у истом прозору"
+
+#~ msgid "in new window (JavaScript)"
+#~ msgstr "у новом прозору (јаваскрипт)"
+
+#~ msgid "in new window (Target)"
+#~ msgstr "у новом прозору (циљано)"
+
+#~ msgid "Link to channel instead to user"
+#~ msgstr "Усмери као каналу уместо кориснику"
+
+#~ msgid ""
+#~ "Enable this option if link to your channel have <code>/channel/</code> "
+#~ "instead <code>/user/</code> part in URL"
+#~ msgstr ""
+#~ "Омогућите ову опцију ако веза до Вашег канала садржи <code>/channel/</"
+#~ "code> уместо <code>/user/</code>"
+
+#~ msgid "Usage"
+#~ msgstr "Употреба"
+
+#~ msgid " Options"
+#~ msgstr "Опције"
+
+#~ msgid ""
+#~ "<p>Easy embed playable videos from YouTube.</p><p>Here you can set "
+#~ "default options that will be used as defaults for new widgets, and for "
+#~ "shortcode.</p>"
+#~ msgstr ""
+#~ "<p>Лако уградите видео запис са Јутјуба.</p><p>Овде можете поставити "
+#~ "подразумеване опције које ће бити коришћене приликом прављења новог "
+#~ "виџета или у шорткоду.</p>"
+
+#~ msgid ""
+#~ "Enable this option to protect your visitors <a href=\"%s\" target=\"_blank"
+#~ "\">privacy</a>."
+#~ msgstr ""
+#~ "Омогућите ову опцију како би заштитили  <a href=\"%s\" target=\"_blank"
+#~ "\">приватност</a> посетилаца."
+
+#~ msgid "YouTube Channel name (not URL to channel)"
+#~ msgstr "Назив Јутјуб канала (не адреса до канала)"
+
+#~ msgid "YouTube Playlist ID (not playlist name)"
+#~ msgstr "ИД плеј листе (не назив)"
+
+#~ msgid ""
+#~ "Enable this option to embed YouTube playlist widget instead single video "
+#~ "from playlist"
+#~ msgstr ""
+#~ "Омогућите ову опцију да би уградили плеј листу са Јутјуба уместо "
+#~ "појдеиначног видеа из плеј листе"
+
+#~ msgid "Use <a href=\"%s\" target=\"_blank\">Enhanced Privacy</a>"
+#~ msgstr "Користи <a href=\"%s\" target=\"_blank\">Унапређену приватност</a>"
+
+#~ msgid "Width"
+#~ msgstr "Ширина"
+
+#~ msgid "Fix height taken by controls"
+#~ msgstr "Поправи висину коју заузимају контроле"
+
+#~ msgid "Default: &amp;hellip;"
+#~ msgstr "Подразумевано: &amp;hellip;"
+
+#~ msgid ""
+#~ "Default: Visit channel %channel%. Use placeholder %channel% to insert "
+#~ "channel name."
+#~ msgstr ""
+#~ "Подразумевано: Посетите канал %channel%. Користите резервисану ниску "
+#~ "%channel% за уметање назива канала."
+
+#~ msgid "Debug YTC"
+#~ msgstr "Одклањање неправилности"
+
+#~ msgid "Enable debugging"
+#~ msgstr "Омогући одклањање неправилности"
+
+#~ msgid ""
+#~ "Insert debug data to <a href=\"%s\" target=\"_support\">support forum</a>."
+#~ "<br />Please do not remove channel and playlist ID`s. If you are "
+#~ "concerned about privacy, send this debug log to email %s"
+#~ msgstr ""
+#~ "Пошаљите податке за отклањање неисправности на <a href=\"%s\" target="
+#~ "\"_support\">форум за подршку</a>.<br />Молим Вас да не укљањате ИД "
+#~ "канала и плеј листе. Ако сте забринути за своју приватност, пошаљите "
+#~ "запис за озклањање неисправности електронском поштом на %s"
+
+#~ msgid "updated to version"
+#~ msgstr "ажуриран на верзију"
+
+#~ msgid "I did this already, dismiss notice!"
+#~ msgstr "Већ сам уради, исклјучи упозорење"
+
+#~ msgid ""
+#~ "To configure global <strong>%s</strong> options, you need to install and "
+#~ "activate <strong>%s</strong>."
+#~ msgstr ""
+#~ "За подешавање општих поставки <strong>%s</strong>, треба да додате и "
+#~ "активирате додатак <strong>%s</strong>."
+
+#~ msgid "No items"
+#~ msgstr "Нема видеа"
+
+#~ msgid "Check here why"
+#~ msgstr "проверите овде зашто"
+
+#~ msgid "Visit channel %1$s"
+#~ msgstr "Посетите канал %1$s"
+
+#~ msgid "Resource to use:"
+#~ msgstr "Користи ресурс"
+
+#~ msgid "Fetch:"
+#~ msgstr "Добави"
+
+#~ msgid "Show:"
+#~ msgstr "Прикажи"

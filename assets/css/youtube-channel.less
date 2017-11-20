@@ -1,0 +1,142 @@
+.youtube_channel {
+	float: left;
+	clear: both;
+	position: relative;
+	box-sizing: border-box;
+
+	& .ytc_video_container {
+		float: left;
+		position: relative;
+
+		& iframe {
+			margin-bottom: 0;
+		}
+		/* Fix for Twenty Fifteen */
+		& a {
+			border: none;
+		}
+	}
+
+	&.responsive {
+		width:100%;
+		& .ytc_video_container {
+			width:100%!important;
+
+			/* responsive iframe */
+			&.ar16_9 .fluid-width-video-wrapper {
+				position: relative;
+				padding-bottom: 56.25%; /* 16:9 */
+				height: 0;
+			}
+			&.ar4_3 .fluid-width-video-wrapper {
+				position: relative;
+				padding-bottom: 75%; /* 4:3; */
+				height: 0;
+			}
+			& .fluid-width-video-wrapper iframe {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+			}
+		}
+
+	} // .responsive
+
+	& .ytc_thumb {
+		display: block;
+		overflow: hidden;
+		position: relative;
+		height: 0;
+		width: 100%;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		cursor: pointer;
+
+		&>span {
+			height: 0;
+			width: 100%;
+			display: block;
+			-webkit-background-size: cover;
+			background-size: cover;
+			background-position: center center;
+			background-repeat: no-repeat;
+
+			&:before {
+				content: " ";
+				display: block;
+				// width: 48px;
+				// height: 48px;
+				width: 84px;
+				height: 59px;
+				background-image: url(../img/yt_play.png);
+				background-position: top center;
+				background-repeat: no-repeat;
+				background-color: transparent;
+				// opacity: .6;
+				opacity: 0.9;
+				// transition: .4s;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				padding: 0!important;
+				// margin-left: -24px;
+				// margin-top: -25px;
+				margin-left: -42px;
+				margin-top: -30px;
+				cursor: pointer;
+				transform: scale(0.85);
+			}
+		}
+
+		&:hover>span:before {
+			// opacity: 1;
+			background-position: bottom center;
+		}
+
+		/* Aspect Ratio Thumbs */
+		&.ar16_9,
+		&.ar16_9>span/*,
+		&.ar16_9>span:before*/ {
+			padding-bottom: 56.26%;
+		}
+		&.ar4_3,
+		&.ar4_3>span/*,
+		&.ar4_3>span:before*/ {
+			padding-bottom: 75%;
+		}
+	} // .ytc_thumb
+
+	/* link */
+	& .ytc_link {
+		position: relative;
+		clear: both;
+		float: left;
+		width: 100%;
+
+		&>p {
+			padding: 0;
+			margin: 0;
+		}
+	}
+
+	/* Debug Errors */
+	& p.ytc_error {
+		color: #DD0000;
+	}
+
+} // .youtube_channel
+
+.clearfix:after,
+.widget_youtube-channel:after,
+.youtube_channel:after {
+	content: " "; /* Older browser do not support empty content */
+	visibility: hidden;
+	display: block;
+	height: 0;
+	clear: both;
+}
+

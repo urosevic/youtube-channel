@@ -1,0 +1,1261 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: YouTube Channel 2.4.1.7\n"
+"POT-Creation-Date: 2015-06-19 21:18+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Aleksandar Urošević <urke.kg@gmail.com>\n"
+"Language-Team: GSAdev (aka TeamBlogos) <i18n@gsadev.dk>\n"
+"Language: da_DK\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.1\n"
+"X-Poedit-Basepath: d:\\wordpress\\plugins\\youtube-channel\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: d:\\wordpress\\plugins\\youtube-channel\n"
+
+#: inc/settings.php:38 inc/settings_template.php:14
+#: inc/settings_usage_shortcode.php:104
+msgid "General"
+msgstr "Generelt"
+
+#: inc/settings.php:46 youtube-channel.php:316
+msgid "YouTube Data API Key"
+msgstr ""
+
+#: inc/settings.php:54 inc/settings.php:86
+msgid "Required"
+msgstr ""
+
+#: inc/settings.php:58
+#, php-format
+msgid ""
+"Your YouTube Data API Key (get it from <a href=\"%s\" target=\"_blank\">%s</"
+"a>)"
+msgstr ""
+
+#: inc/settings.php:68 youtube-channel.php:318
+msgid "Google Developers Console"
+msgstr ""
+
+#: inc/settings.php:78
+msgid "YouTube Channel ID"
+msgstr "ID for YouTube-kanal"
+
+#: inc/settings.php:90
+#, php-format
+msgid ""
+"Your YouTube Channel ID (get it from <a href=\"%s\" target=\"_blank\">%s</a>)"
+msgstr ""
+
+#: inc/settings.php:100 inc/settings.php:132 inc/settings.php:718
+msgid "YouTube Account Overview"
+msgstr ""
+
+#: inc/settings.php:110
+msgid "YouTube Vanity Name"
+msgstr ""
+
+#: inc/settings.php:118 inc/settings.php:150 inc/settings.php:168
+msgid "Optional"
+msgstr ""
+
+#: inc/settings.php:122
+#, php-format
+msgid ""
+"Your YouTube Custom Name (get only part after www.youtube.com/c/ instead "
+"whole URL from <a href=\"%s\" target=\"_blank\">%s</a>)"
+msgstr ""
+
+#: inc/settings.php:142
+msgid "Legacy YouTube Username"
+msgstr ""
+
+#: inc/settings.php:151
+msgid "Your YouTube legacy username"
+msgstr ""
+
+#: inc/settings.php:160
+msgid "Default Playlist ID"
+msgstr "Standard-ID for afspilningsliste"
+
+#: inc/settings.php:169
+msgid "Enter default playlist ID (not playlist name)"
+msgstr "Angiv ID for standardafspilningsliste (ikke navn på afspilningsliste)"
+
+#: inc/settings.php:178 inc/widget.php:134
+msgid "Resource to use"
+msgstr "Ressource, der skal bruges"
+
+#: inc/settings.php:184
+msgid "Resource:"
+msgstr ""
+
+#: inc/settings.php:185
+msgid "What to use as resource for feeds"
+msgstr "Hvad skal bruges som ressource for feeds"
+
+#: inc/settings.php:189
+msgid "Channel"
+msgstr "Kanal"
+
+#: inc/settings.php:190 inc/widget.php:137
+msgid "Favourites"
+msgstr ""
+
+#: inc/settings.php:191
+msgid "Liked Video"
+msgstr ""
+
+#: inc/settings.php:192 inc/widget.php:139
+msgid "Playlist"
+msgstr "Afspilningsliste"
+
+#: inc/settings.php:199
+msgid "Cache Timeout"
+msgstr "Timeout for cache"
+
+#: inc/settings.php:205
+msgid "Define caching timeout for YouTube feeds, in seconds"
+msgstr "Definere cachetimeout for YouTube-feeds, i sekunder"
+
+#: inc/settings.php:209
+msgid "Do not chache"
+msgstr "Cache ikke"
+
+#: inc/settings.php:210 youtube-channel.php:1273
+msgid "1 minute"
+msgstr "1 minut"
+
+#: inc/settings.php:211 youtube-channel.php:1274
+msgid "5 minutes"
+msgstr "5 minutter"
+
+#: inc/settings.php:212 youtube-channel.php:1275
+msgid "15 minutes"
+msgstr "15 minutter"
+
+#: inc/settings.php:213 youtube-channel.php:1276
+msgid "30 minutes"
+msgstr "30 minutter"
+
+#: inc/settings.php:214 youtube-channel.php:1279
+msgid "1 hour"
+msgstr "1 time"
+
+#: inc/settings.php:215 youtube-channel.php:1280
+msgid "2 hours"
+msgstr "2 timer"
+
+#: inc/settings.php:216 youtube-channel.php:1281
+msgid "5 hours"
+msgstr "5 timer"
+
+#: inc/settings.php:217 youtube-channel.php:1282
+msgid "10 hours"
+msgstr "10 timer"
+
+#: inc/settings.php:218 youtube-channel.php:1283
+msgid "12 hours"
+msgstr "12 timer"
+
+#: inc/settings.php:219 youtube-channel.php:1284
+msgid "18 hours"
+msgstr "18 timer"
+
+#: inc/settings.php:220 youtube-channel.php:1287
+msgid "1 day"
+msgstr "1 dag"
+
+#: inc/settings.php:221 youtube-channel.php:1288
+msgid "2 days"
+msgstr "2 dage"
+
+#: inc/settings.php:222 youtube-channel.php:1289
+msgid "3 days"
+msgstr "3 dage"
+
+#: inc/settings.php:223 youtube-channel.php:1290
+msgid "4 days"
+msgstr "4 dage"
+
+#: inc/settings.php:224 youtube-channel.php:1291
+msgid "5 days"
+msgstr "5 dage"
+
+#: inc/settings.php:225 youtube-channel.php:1292
+msgid "6 days"
+msgstr "6 dage"
+
+#: inc/settings.php:226 youtube-channel.php:1295
+msgid "1 week"
+msgstr "1 uge"
+
+#: inc/settings.php:227 youtube-channel.php:1296
+msgid "2 weeks"
+msgstr "2 uger"
+
+#: inc/settings.php:228 youtube-channel.php:1297
+msgid "3 weeks"
+msgstr "3 uger"
+
+#: inc/settings.php:229 youtube-channel.php:1298
+msgid "1 month"
+msgstr "1 måned"
+
+#: inc/settings.php:236 inc/widget.php:152
+msgid "Fetch"
+msgstr "Hent"
+
+#: inc/settings.php:242 inc/widget.php:152
+msgid ""
+"Number of videos that will be used for random pick (min 2, max 50, default "
+"25)"
+msgstr ""
+"Antallet af videoer, der vælges tilfældigt fra (min. 2, maks. 50, standard "
+"25)"
+
+#: inc/settings.php:253 inc/widget.php:155
+msgid "Show"
+msgstr "Vis"
+
+#: inc/settings.php:259 inc/widget.php:155
+msgid "Number of videos to display"
+msgstr "Antal videoer at vise"
+
+#: inc/settings.php:270
+msgid "Use Enhanced privacy"
+msgstr "Brug udvidet beskyttelse af personlige oplysninger"
+
+#: inc/settings.php:279
+#, php-format
+msgid ""
+"Enable this option to protect your visitors privacy. <a href=\"%s\" target="
+"\"_blank\">%s</a>"
+msgstr ""
+
+#: inc/settings.php:289
+msgid "Learn more here"
+msgstr ""
+
+#: inc/settings.php:306
+msgid "Video Tweaks"
+msgstr ""
+
+#: inc/settings.php:314
+msgid "Initial Width"
+msgstr ""
+
+#: inc/settings.php:320
+msgid "Set default width for displayed video, in pixels"
+msgstr "Indstille standardbredde for viste video, i pixels"
+
+#: inc/settings.php:331 inc/widget.php:164
+msgid "Aspect ratio"
+msgstr "Billedformat"
+
+#: inc/settings.php:338
+msgid "Select aspect ratio for displayed video"
+msgstr "Vælg skærmformat for viste video"
+
+#: inc/settings.php:350
+msgid "What to show?"
+msgstr "Hvad skal vises?"
+
+#: inc/settings.php:356
+msgid "Choose how to embed video block"
+msgstr ""
+
+#: inc/settings.php:360 inc/widget.php:179
+msgid "Thumbnail"
+msgstr "Miniature"
+
+#: inc/settings.php:361 inc/widget.php:180
+msgid "HTML5 (iframe)"
+msgstr "HTML5 (iframe)"
+
+#: inc/settings.php:362 inc/widget.php:181
+msgid "HTML5 (iframe) Asynchronous"
+msgstr ""
+
+#: inc/settings.php:363 inc/widget.php:182
+msgid "Embedded Playlist"
+msgstr ""
+
+#: inc/settings.php:371
+msgid "Enable Responsive"
+msgstr ""
+
+#: inc/settings.php:377
+msgid ""
+"Enable this option to make YTC videos and thumbnails responsive by default. "
+"Please note, this option will set videos and thumbnail to full width "
+"relative to parent container, and disable more than one video per row."
+msgstr ""
+
+#: inc/settings.php:386
+msgid "Play inline on iOS"
+msgstr ""
+
+#: inc/settings.php:394
+#, php-format
+msgid ""
+"Enable this option to override fullscreen playback on iOS, and force inline "
+"playback on page and in lightbox. Learn more <a href=\"%s\">here</a>."
+msgstr ""
+
+#: inc/settings.php:406
+msgid "Disable Lightbox"
+msgstr ""
+
+#: inc/settings.php:412
+msgid ""
+"Enable this option to disable built-in lightbox for thumbnails (in case that "
+"you have youtube links lightbox trigger in theme or other plugin)."
+msgstr ""
+
+#: inc/settings.php:421
+msgid "Light Theme"
+msgstr ""
+
+#: inc/settings.php:427
+msgid ""
+"Enable this option to use light theme for playback controls instead dark."
+msgstr ""
+
+#: inc/settings.php:435
+msgid "Hide Player Controls"
+msgstr ""
+
+#: inc/settings.php:441
+msgid "Enable this option to hide playback controls"
+msgstr "Aktivér denne indstilling for at skjule afspilningskontroller"
+
+#: inc/settings.php:450 inc/widget.php:187
+msgid "Autoplay video or playlist"
+msgstr "Auto-afspil video eller afspilningsliste"
+
+#: inc/settings.php:456
+msgid ""
+"Enable this option to start video playback right after block is rendered"
+msgstr ""
+"Aktivér denne indstilling for at starte videoafspilning, så snart videoen er "
+"renderet"
+
+#: inc/settings.php:464 inc/widget.php:188
+msgid "Mute video on autoplay"
+msgstr "Slå lyden fra ved autoplay"
+
+#: inc/settings.php:470
+msgid "Enable this option to mute video when start autoplay"
+msgstr "Aktivér denne indstilling for at slå lyden fra, når autoplay starter"
+
+#: inc/settings.php:478 inc/widget.php:189
+msgid "Hide related videos"
+msgstr "Skjul relaterede videoer"
+
+#: inc/settings.php:484
+msgid "Enable this option to hide related videos after finished playback"
+msgstr ""
+"Aktivér denne indstilling for at skjule relaterede videoer efter afspilning "
+"af videoen"
+
+#: inc/settings.php:492
+msgid "Hide YT logo"
+msgstr ""
+
+#: inc/settings.php:498
+msgid ""
+"Enable this option to hide YouTube logo from playback control bar. Does not "
+"work for all videos."
+msgstr ""
+"Aktivér denne indstilling for at skjule YouTube-logo fra "
+"afspilningskontrolbjælken. Virker ikke for alle videoer."
+
+#: inc/settings.php:506
+msgid "Hide video annotations"
+msgstr ""
+
+#: inc/settings.php:512
+msgid ""
+"Enable this option to hide video annotations (custom text set by uploader "
+"over video during playback)"
+msgstr ""
+"Aktivér denne indstilling for at skjule videoanmærkninger (brugerdefineret "
+"tekst sat af uploader over videoen under afspilning)"
+
+#: inc/settings.php:520 inc/widget.php:213
+msgid "Hide video info"
+msgstr "Skjul videoinfo"
+
+#: inc/settings.php:526
+msgid ""
+"Enable this option to hide informations about video before play start (video "
+"title and uploader in overlay)"
+msgstr ""
+"Aktivér denne indstilling for at skjule informationer om video før start "
+"(videotitel og uploader i overlay)"
+
+#: inc/settings.php:542
+msgid "Content Tweaks"
+msgstr ""
+
+#: inc/settings.php:550 inc/widget.php:196
+msgid "Show video title"
+msgstr "Vis videotitel"
+
+#: inc/settings.php:556
+msgid "Select should we and where display title of video"
+msgstr ""
+
+#: inc/settings.php:560 inc/widget.php:199
+msgid "Hide title"
+msgstr ""
+
+#: inc/settings.php:561 inc/widget.php:200
+msgid "Above video/thumbnail"
+msgstr ""
+
+#: inc/settings.php:562 inc/widget.php:201
+msgid "Below video/thumbnail"
+msgstr ""
+
+#: inc/settings.php:569 inc/widget.php:204
+msgid "Show video description"
+msgstr "Vis videobeskrivelse"
+
+#: inc/settings.php:575
+msgid "Enable this option to display description for video"
+msgstr "Aktivér denne indstilling at vise beskrivelse af video"
+
+#: inc/settings.php:583 inc/widget.php:206
+msgid "Description length"
+msgstr "Beskrivelse længde"
+
+#: inc/settings.php:589
+msgid "Enter length for video description in characters (0 for full length)"
+msgstr "Indtast længde for videobeskrivelse i tegn (0 for fuld længde)"
+
+#: inc/settings.php:609 inc/settings_template.php:17
+#: inc/settings_usage_shortcode.php:15 inc/settings_usage_shortcode.php:107
+#: inc/widget.php:217
+msgid "Link to Channel"
+msgstr "Link til kanal"
+
+#: inc/settings.php:617
+msgid "Link to..."
+msgstr ""
+
+#: inc/settings.php:624
+msgid "Set where link will lead visitors"
+msgstr ""
+
+#: inc/settings.php:628 inc/widget.php:223
+msgid "Hide link"
+msgstr ""
+
+#: inc/settings.php:629
+msgid "Vanity custom URL"
+msgstr ""
+
+#: inc/settings.php:630
+msgid "Channel page URL"
+msgstr ""
+
+#: inc/settings.php:631
+msgid "Legacy username page"
+msgstr ""
+
+#: inc/settings.php:638
+msgid "Open link in..."
+msgstr ""
+
+#: inc/settings.php:645
+msgid "Set where link will be opened"
+msgstr ""
+
+#: inc/settings.php:649
+msgid "same window"
+msgstr ""
+
+#: inc/settings.php:650
+msgid "new window (JavaScript)"
+msgstr ""
+
+#: inc/settings.php:651
+msgid "new window (target=\"_blank\")"
+msgstr ""
+
+#: inc/settings.php:658
+msgid "Text for Visit channel link"
+msgstr ""
+
+#: inc/settings.php:665
+msgid "Set default title for link"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+#: inc/settings.php:686 inc/settings.php:687 inc/settings.php:714
+#: inc/settings.php:728 inc/settings.php:738 inc/settings.php:748
+#: inc/settings_usage_shortcode.php:115 inc/widget.php:11
+msgid "YouTube Channel"
+msgstr ""
+
+#: inc/settings.php:704
+#, php-format
+msgid ""
+"Configure general defaults for %1$s used as fallback options in widget or "
+"shortcodes. To get %2$s and %3$s visit <a href=\"%4$s\" target=\"_blank\">"
+"%5$s</a>."
+msgstr ""
+
+#: inc/settings.php:715 inc/widget.php:108 inc/widget.php:119
+msgid "Channel ID"
+msgstr "Kanal-ID"
+
+#: inc/settings.php:716
+msgid "Vanity URL"
+msgstr ""
+
+#: inc/settings.php:727
+#, php-format
+msgid ""
+"Configure video specific defaults for %s used as fallback options in widget "
+"or shortcodes."
+msgstr ""
+
+#: inc/settings.php:737
+#, php-format
+msgid ""
+"Configure defaults of content around and over videos for %s used as fallback "
+"options in widget or shortcodes."
+msgstr ""
+
+#: inc/settings.php:747
+#, php-format
+msgid ""
+"Configure defaults for link to channel below %s block used as fallback "
+"options in widget or shortcodes."
+msgstr ""
+
+#: inc/settings.php:908
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: inc/settings_template.php:6
+msgid " Settings"
+msgstr ""
+
+#: inc/settings_template.php:15 inc/settings_usage_shortcode.php:105
+msgid "Video"
+msgstr "Video"
+
+#: inc/settings_template.php:16 inc/settings_usage_shortcode.php:106
+msgid "Content"
+msgstr "Indhold"
+
+#: inc/settings_template.php:18
+msgid "Tools"
+msgstr "Værktøjer"
+
+#: inc/settings_template.php:19
+msgid "Help"
+msgstr ""
+
+#: inc/settings_template.php:20 youtube-channel.php:201
+msgid "Support"
+msgstr "Support"
+
+#: inc/settings_usage.php:1
+msgid "How to use YouTube Channel"
+msgstr ""
+
+#: inc/settings_usage.php:2
+msgid "You can insert YouTube Channel in couple different ways."
+msgstr ""
+
+#: inc/settings_usage.php:7
+#, php-format
+msgid "Add %s to preferred %s, and configure it there."
+msgstr ""
+
+#: inc/settings_usage.php:10
+msgid "YouTube Channel Widget"
+msgstr ""
+
+#: inc/settings_usage.php:13
+msgid "Widget Area"
+msgstr ""
+
+#: inc/settings_usage.php:19
+#, php-format
+msgid ""
+"Insert shortcode %s to your page or text widget, and even modify default "
+"settings by shortcode parameters listed in section below."
+msgstr ""
+
+#: inc/settings_usage_shortcode.php:1
+msgid "How to use shortcode"
+msgstr ""
+
+#: inc/settings_usage_shortcode.php:5
+#, php-format
+msgid ""
+"You can use shortcode %s with options listed below (all options are optional "
+"if you have set defaults in global plugin settings)."
+msgstr ""
+
+#: inc/settings_usage_shortcode.php:12 youtube-channel.php:321
+msgid "General Settings"
+msgstr ""
+
+#: inc/settings_usage_shortcode.php:13 inc/widget.php:163
+msgid "Video Settings"
+msgstr "Videoindstillinger"
+
+#: inc/settings_usage_shortcode.php:14 inc/widget.php:193
+msgid "Content Layout"
+msgstr "Indholdslayout"
+
+#: inc/settings_usage_shortcode.php:101
+#, php-format
+msgid ""
+"Please note, you can omit all options listed above, and then will be used "
+"plugin defaults customized on tabs %1$s, %2$s, %3$s and %4$s."
+msgstr ""
+
+#: inc/settings_usage_shortcode.php:112
+#, php-format
+msgid ""
+"Important note: %s blocks inserted through widget have their own settings."
+msgstr ""
+
+#: inc/widget.php:14
+msgid "Serve YouTube videos from channel or playlist right to widget area"
+msgstr ""
+"Vis YouTube-videoer fra kanal eller afspilningsliste til højre for "
+"widgetområdet"
+
+#: inc/widget.php:90
+msgid "Widget Title"
+msgstr "Widgettitel"
+
+#: inc/widget.php:91
+msgid "Title for widget"
+msgstr "Titel for widget"
+
+#: inc/widget.php:95
+msgid "Custom CSS Class"
+msgstr "Brugerdefineret CSS-klasse"
+
+#: inc/widget.php:96
+msgid "Enter custom class for YTC block, if you wish to target block styling"
+msgstr ""
+"Angiv brugerdefineret klasse for YTC-blok, hvis du ønsker at målrette blok-"
+"styling"
+
+#: inc/widget.php:103
+#, php-format
+msgid ""
+"Get your %1$s and %2$s from <a href=\"%3$s\" target=\"_blank\">here</a>."
+msgstr ""
+
+#: inc/widget.php:109
+msgid "Custom ID"
+msgstr ""
+
+#: inc/widget.php:114
+msgid "Vanity/Custom ID"
+msgstr ""
+
+#: inc/widget.php:115
+msgid "YouTube Vanity/Custom ID from URL (part after /c/)"
+msgstr ""
+
+#: inc/widget.php:120
+msgid ""
+"Find Channel ID behind My Channel menu item in YouTube (ID have UC at the "
+"beginning)"
+msgstr ""
+
+#: inc/widget.php:124
+msgid "Legacy Username"
+msgstr ""
+
+#: inc/widget.php:125
+msgid ""
+"Legacy YouTube username located behind /user/ part of channel URL (available "
+"only on old YouTube accounts)"
+msgstr ""
+
+#: inc/widget.php:129
+msgid "Playlist ID"
+msgstr "ID for afspilningsliste"
+
+#: inc/widget.php:130
+msgid "Find Playlist ID in your playlists (ID have PL at the beginning)"
+msgstr ""
+
+#: inc/widget.php:136
+msgid "Channel (User Uploads)"
+msgstr ""
+
+#: inc/widget.php:138
+msgid "Liked Videos"
+msgstr ""
+
+#: inc/widget.php:144
+msgid "Cache feed"
+msgstr "Cache feed"
+
+#: inc/widget.php:146
+msgid "Do not cache"
+msgstr "Cache ikke"
+
+#: inc/widget.php:152 inc/widget.php:155
+msgid "video(s)"
+msgstr "video(er)"
+
+#: inc/widget.php:158
+msgid "Enable this option to protect your visitors privacy"
+msgstr "Aktivér denne indstilling for at beskytte dine besøgendes privatliv"
+
+#: inc/widget.php:158
+#, php-format
+msgid "Enable <a href=\"%s\" target=\"_blank\">privacy-enhanced mode</a>"
+msgstr ""
+
+#: inc/widget.php:160
+msgid "Get random videos of all fetched from channel or playlist"
+msgstr "Udvælg tilfældige fra alle kanalens eller afspilningslistens videoer"
+
+#: inc/widget.php:160
+msgid ""
+"Show random video from resource <small>(Have no effect if \"What to show?\" "
+"has been set to \"Embedded Playlist\")</small>"
+msgstr ""
+
+#: inc/widget.php:169
+msgid ""
+"Responsive video <small>(distribute one full width item per row)</small>"
+msgstr ""
+
+#: inc/widget.php:172
+msgid "Initial width"
+msgstr ""
+
+#: inc/widget.php:172
+msgid "Set video width in pixels"
+msgstr "Indstille videobredde i pixels"
+
+#: inc/widget.php:172
+msgid "default"
+msgstr "standard"
+
+#: inc/widget.php:176
+msgid "What to display?"
+msgstr ""
+
+#: inc/widget.php:184
+msgid "Hide thumbnail tooltip"
+msgstr ""
+
+#: inc/widget.php:185
+msgid "Use light theme (default is dark)"
+msgstr "Brug lyst tema (standard er mørkt)"
+
+#: inc/widget.php:186
+msgid "Hide player controls"
+msgstr "Skjul spillerkontroller"
+
+#: inc/widget.php:190
+msgid "Hide YT Logo (does not work for all videos)"
+msgstr "Skjul YT-logo (virker ikke for alle videoer)"
+
+#: inc/widget.php:207
+msgid ""
+"Set number of characters to cut down video description to (0 means full "
+"length)"
+msgstr ""
+"Angiv antallet af tegn, videobeskrivelsen skal begrænses til (0 betyder fuld "
+"længde)"
+
+#: inc/widget.php:210
+msgid "Hide annotations from video"
+msgstr "Skjul anmærkninger på video"
+
+#: inc/widget.php:212
+msgid ""
+"Enabling this option causes the player to not display information like the "
+"video title and uploader before the video starts playing."
+msgstr ""
+
+#: inc/widget.php:219
+msgid ""
+"Default: Visit our YouTube channel. You can use placeholders %vanity%, "
+"%channel% and %username%."
+msgstr ""
+
+#: inc/widget.php:219 youtube-channel.php:1043
+msgid "Visit our YouTube channel"
+msgstr ""
+
+#: inc/widget.php:224
+msgid "Link to Vanity customized URL"
+msgstr ""
+
+#: inc/widget.php:225
+msgid "Link to Channel page URL"
+msgstr ""
+
+#: inc/widget.php:226
+msgid "Link to Legacy username page"
+msgstr ""
+
+#: inc/widget.php:231
+msgid "Open link in same window"
+msgstr ""
+
+#: inc/widget.php:232
+msgid "Open link in new window (JavaScript)"
+msgstr ""
+
+#: inc/widget.php:233
+msgid "Open link in new window (target=\"blank\")"
+msgstr ""
+
+#: inc/widget.php:237
+msgid "Does not work?"
+msgstr ""
+
+#: inc/widget.php:243
+#, php-format
+msgid ""
+"Carefully read <a href=\"%1$s\" target=\"_faq\">%2$s</a> before you contact "
+"us. If that does not help, <a href=\"%3$s\" target=\"_blank\">get JSON file</"
+"a> and send it to <a href=\"%4$s\" target=\"_support\">support forum</a> "
+"along with other details noted in <a href=\"%5$s\" target=_blank\">this "
+"article</a>."
+msgstr ""
+
+#: inc/widget.php:249
+msgid "FAQ"
+msgstr ""
+
+#: youtube-channel.php:179
+msgid "Settings"
+msgstr "Indstillinger"
+
+#: youtube-channel.php:280
+#, php-format
+msgid ""
+"<p>Your website running on web server with PHP version %s. Please note that "
+"<strong>%s</strong> requires PHP at least 5.3 or newer to work properly. <a "
+"href=\"%s\" class=\"dismiss\">Dismiss</a></p>"
+msgstr ""
+
+#: youtube-channel.php:293
+#, php-format
+msgid ""
+"<p>Since <strong>%s</strong> v3.0.6 we store <strong>YouTube Data API Key</"
+"strong> in plugin settings. So, you can safely remove %s define line from "
+"your <strong>wp-config.php</strong> file. <a href=\"%s\" class=\"dismiss"
+"\">Dismiss</a></p>"
+msgstr ""
+
+#: youtube-channel.php:305
+#, php-format
+msgid ""
+"<p>Please note, to make <strong>%1$s</strong> plugin v3+ work, generate "
+"<strong>%2$s</strong> in <a href=\"%3$s\" target=\"_blank\">%4$s</a>, as "
+"explained <a href=\"%5$s\" target=\"_blank\">here</a>, then add it to <a "
+"href=\"%6$s\">%7$s</a>.<br><br>If you have any issue with new version of "
+"plugin, please ask for help on official <a href=\"%8$s\" target=\"_blank\">"
+"%9$s</a>.<br>This notice will disappear when you add missing key as "
+"mentioned above!</p>"
+msgstr ""
+
+#: youtube-channel.php:323
+msgid "support forum"
+msgstr ""
+
+#: youtube-channel.php:332
+#, php-format
+msgid ""
+"<p><strong>%s</strong> since version 2.4 supports linking to channel through "
+"<em>Vanity/Custom</em> URL. Please review <a href=\"%s\">global</a> and <a "
+"href=\"%s\">widgets</a> settings. <a href=\"%s\" class=\"dismiss\">Dismiss</"
+"a>"
+msgstr ""
+
+#: youtube-channel.php:346
+#, php-format
+msgid ""
+"<p><strong>%s</strong> changed shortcode parameters by removing "
+"<code>only_pl</code> and <code>showgoto</code>, and combining with "
+"parameters <code>display</code> and <code>link_to</code> respectively. "
+"Please check out <a href=\"%s&tab=help\">%s</a> and update your shortcodes. "
+"<a href=\"%s\" class=\"dismiss\">Dismiss</a>"
+msgstr ""
+
+#: youtube-channel.php:609
+#, php-format
+msgid ""
+"<strong>%s</strong> version 3+ requires <strong>YouTube DATA API Key</"
+"strong> to work. <a href=\"%s\" target=\"_blank\">Learn more here</a>."
+msgstr ""
+
+#: youtube-channel.php:782
+#, php-format
+msgid ""
+"You have set to display videos from %s [resource list ID: %s], but there "
+"have no public videos in that resouce."
+msgstr ""
+
+#: youtube-channel.php:786
+#, php-format
+msgid ""
+"We have empty record for this feed. Please read <a href=\"%s\" target="
+"\"_blank\">FAQ</a> and if that does not help, contact <a href=\"%s\" target="
+"\"_blank\">support</a>."
+msgstr ""
+
+#: youtube-channel.php:828
+#, php-format
+msgid ""
+"Double check <em>YouTube Data API Key</em> on <em>General</em> plugin tab "
+"and make sure it's correct. Read <a href=\"%s\" target=\"_blank"
+"\">Installation</a> document."
+msgstr ""
+
+#: youtube-channel.php:836
+#, php-format
+msgid ""
+"You have set wrong Channel ID. Fix that in General plugin settings, Widget "
+"and/or shortcode. Read <a href=\"%s\" target=\"_blank\">FAQ</a> document."
+msgstr ""
+
+#: youtube-channel.php:840
+#, php-format
+msgid ""
+"You do not have permission to access ressource <strong>%s</strong> (it's "
+"maybe set to private or even does not exists!)"
+msgstr ""
+
+#: youtube-channel.php:964
+msgid "Oops, something went wrong."
+msgstr ""
+
+#: youtube-channel.php:1046
+msgid "in new window/tab"
+msgstr "i nyt vindue/fane"
+
+#: youtube-channel.php:1198
+#, php-format
+msgid "Watch video %1$s published on %2$s"
+msgstr "Se video %1$s offentliggjort den %2$s"
+
+#. Plugin URI of the plugin/theme
+msgid "http://urosevic.net/wordpress/plugins/youtube-channel/"
+msgstr "http://urosevic.net/wordpress/plugins/youtube-channel/"
+
+#. Description of the plugin/theme
+msgid ""
+"Quick and easy embed latest or random videos from YouTube channel (user "
+"uploads, liked or favourited videos) or playlist. Use <a href=\"widgets.php"
+"\">widget</a> for sidebar or shortcode for content. Works with <em>YouTube "
+"Data API v3</em>."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Aleksandar Urošević"
+msgstr "Aleksandar Urošević"
+
+#. Author URI of the plugin/theme
+msgid "http://urosevic.net/"
+msgstr "http://urosevic.net/"
+
+#~ msgid ""
+#~ "Enter your YouTube channel ID (channel name, not full URL to channel)"
+#~ msgstr ""
+#~ "Angiv ID for din YouTube kanal (kanalnavn, ikke hele webadressen for "
+#~ "kanal)"
+
+#~ msgid "Favorites"
+#~ msgstr "Favoritter"
+
+#~ msgid "Embed standard playlist"
+#~ msgstr "Indlejr standardafspilningsliste"
+
+#~ msgid ""
+#~ "Enable this option to embed whole playlist instead single video from "
+#~ "playlist when you chose playlist as resource"
+#~ msgstr ""
+#~ "Aktivér denne indstilling for at indlejre hele afspilningslisten i stedet "
+#~ "for en enkelt video fra afspilningslisten, når du vælger afspilningsliste "
+#~ "som ressource"
+
+#~ msgid ""
+#~ "Enable this option to protect your visitors <a href=\"%s\" target=\"_blank"
+#~ "\">privacy</a>."
+#~ msgstr ""
+#~ "Aktivér denne indstilling for at beskytte dine besøgendes <a href=\"%s\" "
+#~ "target=\"_blank\">privatliv</a>."
+
+#~ msgid "Fix <em>No items</em> error/Respect playlist order"
+#~ msgstr "Fiks <em>Intet at vise</em>-fejl/Følg afspilningslistens rækkefølge"
+
+#~ msgid "Enable this option if you get error No Item"
+#~ msgstr "Aktivere denne indstilling, hvis du får fejlen Intet at se"
+
+#~ msgid "Show random video"
+#~ msgstr "Vis tilfældig video"
+
+#~ msgid "Aspect Ratio"
+#~ msgstr "billedformat"
+
+#~ msgid "16:9"
+#~ msgstr "16:9"
+
+#~ msgid "16:10"
+#~ msgstr "16:10"
+
+#~ msgid "4:3"
+#~ msgstr "4:3"
+
+#~ msgid "Make responsive"
+#~ msgstr "Gør responsiv"
+
+#~ msgid ""
+#~ "Enable this option to make all YTC videos responsive. Please note, this "
+#~ "option will set all videos full width relative to parent container, and "
+#~ "disable more than one video per row."
+#~ msgstr ""
+#~ "Aktivér denne indstilling for at gøre alle YTC-videoer responsive. Bemærk "
+#~ "venligst, denne indstilling vil sætte alle videoer til fuld bredde i "
+#~ "forhold til overordnede objektbeholder og deaktivere mere end én video "
+#~ "pr. række."
+
+#~ msgid "Video Width"
+#~ msgstr "Videobredde"
+
+#~ msgid "Set what will be shown by default"
+#~ msgstr "Angive, hvad der skal vises som standard"
+
+#~ msgid "Flash (object)"
+#~ msgstr "Flash (objekt)"
+
+#~ msgid "HTML5 (iframe) Async"
+#~ msgstr "HTML5 (iframe) Async"
+
+#~ msgid "Use light theme"
+#~ msgstr "Brug lyst tema"
+
+#~ msgid ""
+#~ "Enable this option to use light theme for playback controls instead dark"
+#~ msgstr ""
+#~ "Aktivér denne indstilling for at bruge lyst tema for "
+#~ "afspilningskontroller i stedet for mørkt"
+
+#~ msgid "Fix video height"
+#~ msgstr "Fiks videohøjde"
+
+#~ msgid ""
+#~ "Enable this option to fix video height when playback controls are not "
+#~ "hidden"
+#~ msgstr ""
+#~ "Aktivér denne indstilling for at fikse videohøjden, når "
+#~ "afspilningskontroller ikke er skjult"
+
+#~ msgid "Hide YT Logo"
+#~ msgstr "Skjul YT-logo"
+
+#~ msgid "Enable this option to display title of video"
+#~ msgstr "Aktivér denne indstilling for at vise videoens titel"
+
+#~ msgid "Et cetera string"
+#~ msgstr "Tegn for \"osv.\""
+
+#~ msgid "Indicator for shortened video description (default: …)"
+#~ msgstr "Indikator for forkortet videobeskrivelse (standard: …)"
+
+#~ msgid "..."
+#~ msgstr "…"
+
+#~ msgid "Visit YouTube Channel text"
+#~ msgstr "Tekst for Besøg YouTube-kanal"
+
+#~ msgid "Use placeholder %channel% to insert channel name"
+#~ msgstr "Brug pladsholderen %channel% til at indsætte kanalnavn"
+
+#~ msgid "Visit my channel %channel%"
+#~ msgstr "Besøg min kanal %channel%"
+
+#~ msgid "Show link to channel"
+#~ msgstr "Vis link til kanal"
+
+#~ msgid ""
+#~ "Enable this option to show customized link to channel at the bottom of "
+#~ "YTC block"
+#~ msgstr ""
+#~ "Aktivér denne indstilling for at vise tilpassede link til kanal i bunden "
+#~ "af YTC-blok"
+
+#~ msgid "Open YouTube channel page"
+#~ msgstr "Åbn YouTube-kanalside"
+
+#~ msgid "in same window"
+#~ msgstr "i samme vindue"
+
+#~ msgid "in new window (JavaScript)"
+#~ msgstr "i nyt vindue (JavaScript)"
+
+#~ msgid "in new window (Target)"
+#~ msgstr "i nyt vindue (Target)"
+
+#~ msgid "Link to channel instead to user"
+#~ msgstr "Link til kanal i stedet for til bruger"
+
+#~ msgid ""
+#~ "Enable this option if link to your channel have <code>/channel/</code> "
+#~ "instead <code>/user/</code> part in URL"
+#~ msgstr ""
+#~ "Aktivér denne indstilling, hvis link til din kanal har <code>/channel/</"
+#~ "code> i stedet for <code>/user/</code> som en del af URL"
+
+#~ msgid "Usage"
+#~ msgstr "Brug"
+
+#~ msgid " Options"
+#~ msgstr "Indstillinger"
+
+#~ msgid ""
+#~ "<p>Easy embed playable videos from YouTube.</p><p>Here you can set "
+#~ "default options that will be used as defaults for new widgets, and for "
+#~ "shortcode.</p>"
+#~ msgstr ""
+#~ "<p>Indlejr let afspillelige videoer fra YouTube.</p><p>Her kan du angive "
+#~ "standardindstillinger, som vil blive brugt som standard for nye widgets "
+#~ "og for kortkoder.</p>"
+
+#~ msgid "Youtube Channel"
+#~ msgstr "Youtube-kanal"
+
+#~ msgid "YouTube Channel name (not URL to channel)"
+#~ msgstr "Navn på YouTube-kanal (ikke URL til kanal)"
+
+#~ msgid "YouTube Playlist ID (not playlist name)"
+#~ msgstr "ID for YouTube-afspilningsliste (ikke navnet)"
+
+#~ msgid ""
+#~ "Enable this option to embed YouTube playlist instead single video from "
+#~ "playlist."
+#~ msgstr ""
+#~ "Aktivér denne indstilling for at indlejre YouTube-afspilningsliste i "
+#~ "stedet for en enkelt video fra afspilningslisten."
+
+#~ msgid ""
+#~ "Embed standard playlist<br /><small>(Please note <em>What to show?</em> "
+#~ "have no effect for embedded playlist)</small>"
+#~ msgstr ""
+#~ "Integrér standardafspilningsliste<br><small>(Bemærk <em>Hvad de skal vise?"
+#~ "</em> har ingen effekt for indlejrede afspilningslister)</small>"
+
+#~ msgid "Use <a href=\"%s\" target=\"_blank\">Enhanced Privacy</a>"
+#~ msgstr ""
+#~ "Bruge <a href=\"%s\" target=\"_blank\">udvidet beskyttelse af personlige "
+#~ "oplysninger</a>"
+
+#~ msgid "Responsive video (distribute one full width video per row)"
+#~ msgstr "Responsiv video (der vises en video pr. række i fuld bredde)"
+
+#~ msgid "Width"
+#~ msgstr "Bredde"
+
+#~ msgid "Fix height taken by controls"
+#~ msgstr "Fiks højde brugt af kontroller"
+
+#~ msgid "Default: &amp;hellip;"
+#~ msgstr "Standard: &amp;hellip;"
+
+#~ msgid ""
+#~ "Default: Visit channel %channel%. Use placeholder %channel% to insert "
+#~ "channel name."
+#~ msgstr ""
+#~ "Standard: Besøg kanal %channel%. Brug pladsholderen %channel% til at "
+#~ "indsætte kanalnavn."
+
+#~ msgid "Does not work? Contact support!"
+#~ msgstr "Virker ikke? Kontakt support!"
+
+#~ msgid "Get JSON file"
+#~ msgstr "Hent JSON-fil"
+
+#~ msgid ""
+#~ "and send it to %s or to <a href=\"%s\" target=\"_support\">support forum</"
+#~ "a>."
+#~ msgstr ""
+#~ "og send det til %s eller til <a href=\"%s\" target=\"_support"
+#~ "\">supportforummet</a>."
+
+#~ msgid ""
+#~ "Please review <a href=\"%s\">global settings</a>, YTC widgets and "
+#~ "shortcodes."
+#~ msgstr ""
+#~ "Tjek venligst <a href=\"%s\">globale indstillinger</a>, YTC-widgets og -"
+#~ "kortkoder."
+
+#~ msgid ""
+#~ "If you use caching for any YTC widget or shortcode, please "
+#~ "<strong>ReCache</strong> feeds in <strong>Tools</strong> section of <a "
+#~ "href=\"%s\">plugin settings</a> page."
+#~ msgstr ""
+#~ "Hvis du bruger cache til YTC-widgets eller -kortkoder, bør du "
+#~ "<strong>ReCache</strong> feeds i <strong>Værktøjer</strong>-sektionen på "
+#~ "siden <a href=\"%s\">Indstillinger</a>."
+
+#~ msgid ""
+#~ "We switched to <em>Redux Framework</em> so please review global plugin <a "
+#~ "href=\"%s\">settings page</a>."
+#~ msgstr ""
+#~ "Vi er skiftet til <em>Redux Frameworket</em>, så tjek venligst <a href="
+#~ "\"%s\">de globale indstillinger</a>."
+
+#~ msgid ""
+#~ "We switched to <em>Redux Framework</em> so please install and activate "
+#~ "dependency and then review global YouTube Channel plugin settings."
+#~ msgstr ""
+#~ "Vi er skiftet til <em>Redux Frameworket</em>, så du skal installere og "
+#~ "aktivere dependens og gennemse derefter de globale indstillinger for "
+#~ "YouTube Channel-pluginnet."
+
+#~ msgid "updated to version"
+#~ msgstr "opdateret til version"
+
+#~ msgid "I did this already, dismiss notice!"
+#~ msgstr "Det har jeg allerede. Skjul besked!"
+
+#~ msgid "I got it! Dismiss this notice."
+#~ msgstr "OK! Skjul denne besked."
+
+#~ msgid "Dismiss this notice"
+#~ msgstr "Skjul denne besked"
+
+#~ msgid ""
+#~ "To configure global <strong>%s</strong> options, you need to install and "
+#~ "activate <strong>%s</strong>."
+#~ msgstr ""
+#~ "Hvis du vil bruge globale indstillinger for <strong>%s</strong>, skal du "
+#~ "installere og aktivere <strong>%s</strong>."
+
+#~ msgid "No items"
+#~ msgstr "Intet at vise"
+
+#~ msgid "Check here why"
+#~ msgstr "Tjek her hvorfor"
+
+#~ msgid "Visit channel %1$s"
+#~ msgstr "Besøg %1$s-kanalen"

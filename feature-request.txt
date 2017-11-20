@@ -1,0 +1,3 @@
+Option to select how videos are sorted (by views) https://wordpress.org/support/topic/sort-by-views-1?replies=2
+Display number of views below video https://wordpress.org/support/topic/show-views?replies=1
+Like on desktop I show 10 videos and on mobile I decide to show only 5 because to save space on the screen. by @fantasmo https://wordpress.org/support/topic/pagination-in-dynamic-wall/#post-8897785
