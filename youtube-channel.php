@@ -722,13 +722,14 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 				$resource_key = "{$resource_id}_{$fetch}";
 
 				// Do we need cache? Let we define cache fallback key
-				$cache_key_fallback = 'ytc_' . md5( $resource_key ) . '_fallback';
+				$cache_desc = ! empty( $instance['showdesc'] ) ? 'd' : 'n';
+				$cache_key_fallback = 'ytc_' . $cache_desc . md5( $resource_key ) . '_fallback';
 
 				// Do cache magic
 				if ( ! empty( $instance['cache'] ) && $instance['cache'] > 0 ) {
 
 					// generate feed cache key for caching time
-					$cache_key = 'ytc_' . md5( $resource_key ) . '_' . $instance['cache'];
+					$cache_key = 'ytc_' . $cache_desc . md5( $resource_key ) . '_' . $instance['cache'];
 
 					if ( ! empty( $_GET['ytc_force_recache'] ) ) {
 						delete_transient( $cache_key );
@@ -738,7 +739,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 					if ( false === ( $json = get_transient( $cache_key ) ) || empty( $json ) ) {
 
 						// no cached JSON, get new
-						$json = $this->fetch_youtube_feed( $resource_id, $fetch );
+						$json = $this->fetch_youtube_feed( $resource_id, $fetch, $instance['showdesc'] );
 
 						// set decoded JSON to transient cache_key
 						set_transient( $cache_key, base64_encode( $json ), $instance['cache'] );
@@ -752,7 +753,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 				} else {
 
 					// just get fresh feed if cache disabled
-					$json = $this->fetch_youtube_feed( $resource_id, $fetch );
+					$json = $this->fetch_youtube_feed( $resource_id, $fetch, $instance['showdesc'] );
 
 				}
 
@@ -912,7 +913,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 		 * @param  integer $items   Number of items to fetch (min 2, no max)
 		 * @return array            JSON with videos
 		 */
-		function fetch_youtube_feed( $resource_id, $items ) {
+		function fetch_youtube_feed( $resource_id, $items, $with_description = true ) {
 
 			// Prepare control vars with number of items to fetch
 			$total_fetched_num = 0;
@@ -925,12 +926,14 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 				$to_fetch_num = intval( $items );
 			}
 
+			// @TODO: If description has not required to show, do not fetch it (increase available playlist length on limited servers)
 			// Compose basic feed with next page token
 			$feed_base = 'https://www.googleapis.com/youtube/v3/playlistItems';
 			$feed_base .= "?key={$this->defaults['apikey']}";
 			$feed_base .= '&part=snippet';
 			$feed_base .= "&playlistId={$resource_id}";
-			$feed_base .= '&fields=items(snippet(title%2Cdescription%2CpublishedAt%2CresourceId(videoId)))%2CnextPageToken%2CpageInfo%2FtotalResults';
+			$description = ! empty( $with_description ) ? '%2Cdescription' : '';
+			$feed_base .= '&fields=items(snippet(title' . $description . '%2CpublishedAt%2CresourceId(videoId)))%2CnextPageToken%2CpageInfo%2FtotalResults';
 			$feed_base .= '&maxResults=';
 
 			$data = $this->yt_remote_get_feed( "{$feed_base}{$to_fetch_num}" );
@@ -993,6 +996,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			if ( empty( $url ) ) {
 				return '{"error":{"errors":[{"reason":"noFeedURL","message":"URL for YouTube playlist feed has not been provided.","domain":"yt_remote_get_feed"}]}}';
 			}
+			// error_log( 'Fetch from ' . $url );
 
 			// Fetch first page
 			$response = wp_remote_get( $url, array( 'timeout' => 15 ) );
@@ -1032,7 +1036,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 					'snippet' => array(
 						'publishedAt' => $item->snippet->publishedAt,
 						'title'       => $item->snippet->title,
-						'description' => $item->snippet->description,
+						'description' => ! empty( $item->snippet->description ) ? $item->snippet->description : '',
 						'resourceId'  => array( 'videoId' => $item->snippet->resourceId->videoId ),
 					),
 				);
