@@ -3,7 +3,7 @@
 Plugin Name: YouTube Channel
 Plugin URI: https://urosevic.net/wordpress/plugins/youtube-channel/
 Description: Quick and easy embed latest or random videos from YouTube channel (user uploads, liked or favourited videos) or playlist. Use <a href="widgets.php">widget</a> for sidebar or shortcode for content. Works with <em>YouTube Data API v3</em>.
-Version: 3.0.11.3
+Version: 3.1.0
 Author: Aleksandar Urošević
 Author URI: https://urosevic.net/
 Text Domain: youtube-channel
@@ -18,7 +18,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 	class WPAU_YOUTUBE_CHANNEL {
 
 		const DB_VER = 20;
-		const VER = '3.0.11.3';
+		const VER = '3.1.0';
 
 		public $plugin_name   = 'YouTube Channel';
 		public $plugin_slug   = 'youtube-channel';
@@ -716,7 +716,8 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 				// Get max items for random video
 				$fetch = ( empty( $instance['fetch'] ) ) ? $this->defaults['fetch'] : $instance['fetch'];
 				if ( $fetch < 1 ) { $fetch = 10; } // default 10
-				elseif ( $fetch > 50 ) { $fetch = 50; } // max 50
+				// Unlimited fetch since v3.1.0 (pagged fetch)
+				// elseif ( $fetch > 50 ) { $fetch = 50; } // max 50
 
 				$resource_key = "{$resource_id}_{$fetch}";
 
@@ -907,42 +908,139 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 
 		/**
 		 * Download YouTube video feed through API 3.0
-		 * @param  string $id       ID of resource
-		 * @param  integer $items   Number of items to fetch (min 2, max 50)
+		 * @param  string  $id      ID of resource
+		 * @param  integer $items   Number of items to fetch (min 2, no max)
 		 * @return array            JSON with videos
 		 */
 		function fetch_youtube_feed( $resource_id, $items ) {
 
-			$feed_url = 'https://www.googleapis.com/youtube/v3/playlistItems?';
-			$feed_url .= 'part=snippet';
-			$feed_url .= "&playlistId={$resource_id}";
-			$feed_url .= '&fields=items(snippet(title%2Cdescription%2CpublishedAt%2CresourceId(videoId)))';
-			$feed_url .= "&maxResults={$items}";
-			$feed_url .= "&key={$this->defaults['apikey']}";
-
-			$wparg = array(
-				'timeout' => 5, // five seconds only
-			);
-
-			$response = wp_remote_get( $feed_url, $wparg );
-
-			// If we have WP error, make JSON with error
-			if ( is_wp_error( $response ) ) {
-
-				$json = sprintf( '{"error":{"errors":[{"reason":"wpError","message":"%s","domain":"wpRemoteGet"}]}}', $response->get_error_message() );
-
-			} else {
-
-				$json = wp_remote_retrieve_body( $response );
-
+			// Prepare control vars with number of items to fetch
+			$total_fetched_num = 0;
+			$to_fetch_num = 50;
+			if ( 0 > intval( $items ) ) {
+				// If negative limit, get all from playlist
+				$items = 999999;
+			} else if ( 50 >= intval( $items ) ) {
+				// If less than 50 then get only limited amount
+				$to_fetch_num = intval( $items );
 			}
 
-			// Free some memory
-			unset( $response );
+			// Compose basic feed with next page token
+			$feed_base = 'https://www.googleapis.com/youtube/v3/playlistItems';
+			$feed_base .= "?key={$this->defaults['apikey']}";
+			$feed_base .= '&part=snippet';
+			$feed_base .= "&playlistId={$resource_id}";
+			$feed_base .= '&fields=items(snippet(title%2Cdescription%2CpublishedAt%2CresourceId(videoId)))%2CnextPageToken%2CpageInfo%2FtotalResults';
+			$feed_base .= '&maxResults=';
 
-			return $json;
+			$data = $this->yt_remote_get_feed( "{$feed_base}{$to_fetch_num}" );
 
-		} // END function fetch_youtube_feed($resource_id, $items)
+			// Return error message for bad feed
+			if ( ! isset( $data->pageInfo ) ) {
+				return $data; // error from yt_remote_get_feed() is JSON already
+			}
+
+			// Update total fetched items counter
+			$total_fetched_num = count( $data->items );
+
+			// Re-Pack JSON
+			$json_arr_final = array();
+			$json_arr_final = $this->merge_yt_items( $json_arr_final, $data );
+
+			// Limit max items to playlist size for pagged fetch
+			if ( 50 < $items && $items > $data->pageInfo->totalResults ) {
+				$items = $data->pageInfo->totalResults;
+			}
+
+			// Loop until last page got fetched
+			while ( 50 < $items && $total_fetched_num < $items && ! empty( $data->nextPageToken ) ) {
+				// Decide how many items we have to fetch for curren tloop
+				$to_fetch_num = $items - $total_fetched_num;
+				if ( $to_fetch_num > 0 && $to_fetch_num > 50 ) {
+					$to_fetch_num = 50;
+				}
+
+				// Download feed from Nth page
+				$data = $this->yt_remote_get_feed( $feed_base . $to_fetch_num . '&pageToken=' . $data->nextPageToken );
+
+				// Return error message for bad feed from page
+				if ( ! isset( $data->pageInfo ) ) {
+					return $data; // error from yt_remote_get_feed() is JSON already
+				}
+
+				// Update total fetched items counter
+				$fetched_num = count( $data->items );
+				$total_fetched_num += $fetched_num;
+
+				// Append items from pages to main array
+				$json_arr_final = $this->merge_yt_items( $json_arr_final, $data );
+
+			} // END while
+
+			// Convert merged array to json and return
+			return json_encode( $json_arr_final, JSON_UNESCAPED_UNICODE );
+
+		} // END function fetch_youtube_feed( $resource_id, $items )
+
+		/**
+		 * Download JSON playlist feed and parse to data array
+		 * @param  string $url URL for YouTube API Data Feed
+		 * @return array       Array of YouTube playlist items
+		 */
+		function yt_remote_get_feed( $url ) {
+
+			// Fallback
+			if ( empty( $url ) ) {
+				return '{"error":{"errors":[{"reason":"noFeedURL","message":"URL for YouTube playlist feed has not been provided.","domain":"yt_remote_get_feed"}]}}';
+			}
+
+			// Fetch first page
+			$response = wp_remote_get( $url, array( 'timeout' => 15 ) );
+
+			// If we have WP error, return JSON with error
+			if ( is_wp_error( $response ) ) {
+				return $response->get_error_message();
+			}
+
+			// Try to parse JSON
+			$json = wp_remote_retrieve_body( $response );
+			$data = json_decode( $json );
+
+			// If feed has not good, return error message
+			if ( ! isset( $data->pageInfo ) ) {
+				return $json;
+			}
+
+			return $data;
+
+		} // END function yt_remote_get_feed( $url )
+
+		/**
+		 * Parse YouTube items from playlist and merge to complete data array
+		 * @param  array  $json_arr_items Cummulative data array of YouTube items
+		 * @param  array $data            Unfiltered data array of YouTube items
+		 * @return array                  Merged data array of YouTube items
+		 */
+		function merge_yt_items( $json_arr_items = array(), $data ) {
+
+			if ( ! isset( $data->items ) ) {
+				return $json_arr_items;
+			}
+
+			foreach ( $data->items as $item ) {
+				$json_arr_items['items'][] = array(
+					'snippet' => array(
+						'publishedAt' => $item->snippet->publishedAt,
+						'title'       => $item->snippet->title,
+						'description' => $item->snippet->description,
+						'resourceId'  => array( 'videoId' => $item->snippet->resourceId->videoId ),
+					),
+				);
+			}
+
+			return $json_arr_items;
+
+		} // END function merge_yt_items( $json_arr_final, $data )
 
 		/**
 		 * Print explanation of error for administrators (users with capability manage_options)
