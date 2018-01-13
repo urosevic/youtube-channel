@@ -124,8 +124,8 @@
 									type: 'textbox',
 									name: 'fetch',
 									label: 'Fetch',
-									value: '10',
-									tooltip: 'Number of videos that will be used for random pick (min 2, max 50, default 25)'
+									value: '25',
+									tooltip: 'Number of videos that will be used for random pick (min 2, max inf, default 25)'
 								},
 								{
 									type: 'textbox',
