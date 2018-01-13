@@ -164,7 +164,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 			</label>
 		</p>
 		<p class="half left glue-top">
-			<label for="<?php echo $this->get_field_id( 'fetch' ); ?>"><?php _e( 'Fetch', 'youtube-channel' ); ?> <input class="small-text" id="<?php echo $this->get_field_id( 'fetch' ); ?>" name="<?php echo $this->get_field_name( 'fetch' ); ?>" type="number" min="2" value="<?php echo $fetch; ?>" title="<?php _e( 'Number of videos that will be used for random pick (min 2, max 50, default 25)', 'youtube-channel' ); ?>" /> <?php _e( 'video(s)', 'youtube-channel' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'fetch' ); ?>"><?php _e( 'Fetch', 'youtube-channel' ); ?> <input class="small-text" id="<?php echo $this->get_field_id( 'fetch' ); ?>" name="<?php echo $this->get_field_name( 'fetch' ); ?>" type="number" min="2" value="<?php echo $fetch; ?>" title="<?php _e( 'Number of videos that will be used for random pick (min 2, max inf, default 25)', 'youtube-channel' ); ?>" /> <?php _e( 'video(s)', 'youtube-channel' ); ?></label>
 		</p>
 		<p class="half right glue-top">
 			<label for="<?php echo $this->get_field_id( 'num' ); ?>"><?php _e( 'Show', 'youtube-channel' ); ?></label> <input class="small-text" id="<?php echo $this->get_field_id( 'num' ); ?>" name="<?php echo $this->get_field_name( 'num' ); ?>" type="number" min="1" value="<?php echo ( $num ) ? $num : '1'; ?>" title="<?php _e( 'Number of videos to display', 'youtube-channel' ); ?>" /> <?php _e( 'video(s)', 'youtube-channel' ); ?>

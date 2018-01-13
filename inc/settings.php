@@ -228,11 +228,11 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 				'ytc_general', // section
 				array(
 					'field'       => $this->option_name . '[fetch]',
-					'description' => __( 'Number of videos that will be fetched from YouTube and used for random pick (min 2, max 50, default 25)', 'youtube-channel' ),
+					'description' => __( 'Number of videos that will be fetched from YouTube and used for random pick. Theoretically, it is ulimited, but make sure to not set too high value or you will crash your website! (min 2, default 25)', 'youtube-channel' ),
 					'class'       => 'num',
 					'value'       => isset( $this->defaults['fetch'] ) ? $this->defaults['fetch'] : '25',
 					'min'         => 1,
-					'max'         => 50,
+					'max'         => 999999,
 					'std'         => 25,
 				) // args
 			);
@@ -249,7 +249,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 					'class'       => 'num',
 					'value'       => isset( $this->defaults['num'] ) ? $this->defaults['num'] : '1',
 					'min'         => 1,
-					'max'         => 50,
+					'max'         => 999999,
 					'std'         => 1,
 				) // args
 			);
