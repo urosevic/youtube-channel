@@ -802,7 +802,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 			sprintf(
 				wp_kses(
 					__(
-						'Configure general defaults for %1$s used as fallback options in widget or shortcodes. To get %2$s and %3$s visit <a href="%4$s" target="_blank">%5$s</a>.',
+						'Configure general defaults for %1$s used as fallback options for shortcodes. Only some options are fallback for widget (Channel ID, Vanity Name, Legacy Username, Default Playlist), while other options are just initial set of settings for new widget. To get %2$s and %3$s visit <a href="%4$s" target="_blank">%5$s</a>.',
 						'youtube-channel'
 					),
 					array(
@@ -825,7 +825,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 		public function settings_video_section_description() {
 			echo '<p>' .
 			sprintf(
-				__( 'Configure video specific defaults for %s used as fallback options in widget or shortcodes.', 'youtube-channel' ),
+				__( 'Configure video specific defaults for %s used as fallback options for shortcodes and initial set of options for new widget.', 'youtube-channel' ),
 				__( 'YouTube Channel', 'youtube-channel' )
 			) .
 			'</p>';
@@ -834,7 +834,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 		public function settings_content_section_description() {
 			echo '<p>' .
 			sprintf(
-				__( 'Configure defaults of content around and over videos for %s used as fallback options in widget or shortcodes.', 'youtube-channel' ),
+				__( 'Configure defaults of content around and over videos for %s used as fallback options for shortcodes and initial set of options for new widget.', 'youtube-channel' ),
 				__( 'YouTube Channel', 'youtube-channel' )
 			) .
 			'</p>';
@@ -843,7 +843,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 		public function settings_link_section_description() {
 			echo '<p>' .
 			sprintf(
-				__( 'Configure defaults for link to channel below %s block used as fallback options in widget or shortcodes.', 'youtube-channel' ),
+				__( 'Configure defaults for link to channel below %s block used as fallback options for shortcodes and initial set of options for new widget.', 'youtube-channel' ),
 				__( 'YouTube Channel', 'youtube-channel' )
 			) .
 			'</p>';
