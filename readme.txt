@@ -366,8 +366,9 @@ If you don't wish to pay for enhancements (then you don't care would that be imp
 
 == Changelog ==
 
-= 3.1.0 (20180113) =
-* Enhancement: Exclude description from fetching if not enabled for displaying to increase length of cacheable playlist on servers with limited resources and memory
+= 3.1.0 (20180226) =
+* (20180226) Enhancement: Add Enhanced Privacy additional note for HTML5 Asynchronous display mode
+* (20180113) Enhancement: Exclude description from fetching if not enabled for displaying to increase length of cacheable playlist on servers with limited resources and memory
 * Enhancement: Enable fetching/displaying more than 50 items from playlist (pagged fetch)
 
 = 3.0.11.3 (20171001) =

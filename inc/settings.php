@@ -266,7 +266,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 					'description' => sprintf(
 						wp_kses(
 							__(
-								'Enable this option to protect your visitors privacy. <a href="%1$s" target="_blank">%2$s</a>',
+								'Enable this option to protect your visitors privacy. Please note, does not work with HTML5 Asynchronous display mode (iframe2). <a href="%1$s" target="_blank">%2$s</a>',
 								'youtube-channel'
 							),
 							array(
