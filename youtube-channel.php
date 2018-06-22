@@ -1266,7 +1266,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 				}
 				$yt_thumb  = "//img.youtube.com/vi/${yt_id}/${thumb_quality}.jpg"; // zero for HD thumb
 
-				// Show video title above video?
+				// Show video title inside video?
 				$title_inside = '';
 				if ( ! empty( $instance['showtitle'] ) && in_array( $instance['showtitle'], array( 'inside', 'inside_b' ) ) ) {
 					$title_inside = sprintf(

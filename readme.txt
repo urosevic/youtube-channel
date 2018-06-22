@@ -27,7 +27,7 @@ For manual set of videos from YouTube check out [Easy YouTube Gallery](https://w
 * Responsive (one full width video per row) or non responsive
 * Preferred aspect ratio relative to width (16:9 and 4:3)
 * Custom width for video embeded object (default is 306px)
-* Enhanced Privacy
+* Enhanced Privacy (display mode *HTML5 (IFRAME) Asynchronous* (iframe2) does not support Enhanced Privacy due to YouTube API limitations)
 * Choose to display video as thumbnail (default), HTML5 (iframe) or HTML5 Asynchronous (iframe2)
 * Thumbnail mode opens video in lightbox
 * Hide or show video title above/below video wrapped to HTML tag by your choice (h3, h4, h5, span or div)
