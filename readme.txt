@@ -3,7 +3,7 @@ Contributors: urkekg
 Donate link: https://urosevic.net/wordpress/donate/?donate_for=youtube-channel
 Tags: youtube, channel, playlist, single, widget, widgets, youtube player, feed, video, thumbnail, embed, sidebar, iframe, html5, responsive
 Requires at least: 4.0
-Tested up to: 4.9
+Tested up to: 4.9.6
 Stable tag: 3.0.11.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -21,6 +21,7 @@ If you like our plugin and you find it useful, please [write review and rate it]
 For manual set of videos from YouTube check out [Easy YouTube Gallery](https://wordpress.org/plugins/easy-youtube-gallery/).
 
 = Features =
+
 * Display latest videos from YouTube Channel (resources are sorted in reverse chronological order based on the date they were created) or videos naturaly sorted from Favorited Videos, Liked Videos and Playlist
 * Option to get random video from any of 4 resources
 * Responsive (one full width video per row) or non responsive
@@ -53,6 +54,8 @@ You can use `style.css` from theme or other custom location to additionaly style
 * `.ytc_title` – class for video title container above thumbnail/video object
   * `.ytc_title_above` - additional class for video title above video/thumbnail
   * `.ytc_title_below` - additional class for video title below video/thumbnail
+  * `.ytc_title_inside` - additional class for video title printed inside of the thumbnail
+  * `.ytc_title_inside_bottom` - additional class for bottom aligned video title printed inside of the thumbnail
 * `.ytc_video_container` – class of container for single item, plus:
   * `.ytc_video_1`, `.ytc_video_2`, … – class of container for single item with ordering number of item in widget
   * `.ytc_video_first` – class of first container for single item
@@ -137,6 +140,8 @@ Along to Widget, you can add YouTube Channel block inline by using shortcode `[y
   * `none` - Hide title
   * `above` - Display title above video/thumbnail
   * `below` - Display title below video/thumbnail
+  * `inside` - Display top aligned title inside thumbnail; if `display` is not `thumbnail` then treat as `above`
+  * `inside_b` - Display bottom aligned title inside thumbnail; if `display` is not `thumbnail` then treat as `below`
 * `showdesc` (bool) Set to 1 or true to show video description.
 * `desclen` (int) Set number of characters to cut down length of video description. Set to 0 to use full length description.
 * `noinfo` (bool) Set to 1 or true to hide overlay video infos (from embedded player)
@@ -366,8 +371,9 @@ If you don't wish to pay for enhancements (then you don't care would that be imp
 
 == Changelog ==
 
-= 3.0.11.4 (20180213) =
-* Update: section descriptions on plugin settings.
+= 3.0.11.4 (20180622) =
+* Improvement: add `showtitle` options `inside` and `inside_b`.
+* (20180213) Update: section descriptions on plugin settings.
 
 = 3.0.11.3 (20171001) =
 * Fix: Default values in dropdown lists does not preselect in TinyMCE shortcode selector

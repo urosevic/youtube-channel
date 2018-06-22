@@ -614,9 +614,11 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 					'class'       => 'regular-text',
 					'value'       => isset( $this->defaults['showtitle'] ) ? $this->defaults['showtitle'] : 'none',
 					'items'       => array(
-						'none'  => __( 'Hide title', 'youtube-channel' ),
-						'above' => __( 'Above video/thumbnail', 'youtube-channel' ),
-						'below' => __( 'Below video/thumbnail', 'youtube-channel' ),
+						'none'     => __( 'Hide title', 'youtube-channel' ),
+						'above'    => __( 'Above video/thumbnail', 'youtube-channel' ),
+						'below'    => __( 'Below video/thumbnail', 'youtube-channel' ),
+						'inside'   => __( 'Inside thumbnail, top aligned', 'youtube-channel' ),
+						'inside_b' => __( 'Inside thumbnail, bottom aligned', 'youtube-channel' ),
 					),
 				) // args
 			);

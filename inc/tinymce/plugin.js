@@ -295,6 +295,8 @@
 										{text: 'Hide title', value: 'none'},
 										{text: 'Above video/thumbnail', value: 'above'},
 										{text: 'Below video/thumbnail', value: 'below'},
+										{text: 'Inside thumbnail, top aligned', value: 'inside'},
+										{text: 'Inside thumbnail, bottom aligned', value: 'inside_b'},
 									],
 									value : 'none'
 								},

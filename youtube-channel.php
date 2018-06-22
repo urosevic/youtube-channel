@@ -3,7 +3,7 @@
 Plugin Name: YouTube Channel
 Plugin URI: https://urosevic.net/wordpress/plugins/youtube-channel/
 Description: Quick and easy embed latest or random videos from YouTube channel (user uploads, liked or favourited videos) or playlist. Use <a href="widgets.php">widget</a> for sidebar or shortcode for content. Works with <em>YouTube Data API v3</em>.
-Version: 3.0.11.3
+Version: 3.0.11.4
 Author: Aleksandar Urošević
 Author URI: https://urosevic.net/
 Text Domain: youtube-channel
@@ -18,7 +18,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 	class WPAU_YOUTUBE_CHANNEL {
 
 		const DB_VER = 20;
-		const VER = '3.0.11.3';
+		const VER = '3.0.11.4';
 
 		public $plugin_name   = 'YouTube Channel';
 		public $plugin_slug   = 'youtube-channel';
@@ -123,7 +123,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 				'autoplay_mute'  => 0,
 				'norel'          => 0,
 				'playsinline'    => 0, // play video on mobile devices inline instead in native device player
-				'showtitle'      => 'none',
+				'showtitle'      => 'none', // above, below, inside, inside_b
 				'titletag'       => 'h3',
 				'showdesc'       => 0,
 				'desclen'        => 0,
@@ -514,7 +514,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 					'norel'          => $instance['norel'],
 					'playsinline'    => $instance['playsinline'], // play video on mobile devices inline instead in native device player
 
-					'showtitle'      => $instance['showtitle'], // none, above, below
+					'showtitle'      => $instance['showtitle'], // none, above, below, inside, inside_b
 					'showdesc'       => $instance['showdesc'], // ex showvidesc
 					'nobrand'        => ! empty( $instance['modestbranding'] ) ? $instance['modestbranding'] : '0',
 					'desclen'        => $instance['desclen'], // ex videsclen
@@ -1144,12 +1144,18 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			// Set proper class for responsive thumbs per selected aspect ratio
 			$arclass = $this->arclass( $instance );
 
+			// Prepare title_tag (H3, etc)
+			$title_tag = isset( $instance['titletag'] ) ? $instance['titletag'] : $this->defaults['titletag'];
+
 			$output .= "<div class=\"ytc_video_container ytc_video_{$y} ytc_video_{$vnumclass} ${arclass}\" style=\"width:{$instance['width']}px\">";
 
 			// Show video title above video?
-			if ( ! empty( $instance['showtitle'] ) && 'above' == $instance['showtitle'] ) {
-				$title_tag = isset( $instance['titletag'] ) ? $instance['titletag'] : $this->defaults['titletag'];
-				$output .= "<{$title_tag} class=\"ytc_title ytc_title_above\">{$yt_title}</{$title_tag}>";
+			if ( ! empty( $instance['showtitle'] ) && 'thumbnail' != $instance['display'] && ( in_array( $instance['showtitle'], array( 'above', 'inside' ) ) ) ) {
+				$output .= sprintf(
+					'<%1$s class="ytc_title ytc_title_above">%2$s</%1$s>',
+					$title_tag,
+					$yt_title
+				);
 			}
 
 			// Print out video
@@ -1260,13 +1266,28 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 				}
 				$yt_thumb  = "//img.youtube.com/vi/${yt_id}/${thumb_quality}.jpg"; // zero for HD thumb
 
-				$output .= "<a href=\"//www.youtube.com/watch?v=${yt_id}${p}\" ${tag_title} class=\"ytc_thumb ${lightbox_class} ${arclass}\" ${target}><span style=\"background-image: url(${yt_thumb});\" ${tag_title} id=\"ytc_{$yt_id}\"></span></a>";
+				// Show video title above video?
+				$title_inside = '';
+				if ( ! empty( $instance['showtitle'] ) && in_array( $instance['showtitle'], array( 'inside', 'inside_b' ) ) ) {
+					$title_inside = sprintf(
+						'<%1$s class="ytc_title ytc_title_inside %3$s">%2$s</%1$s>',
+						$title_tag,
+						$yt_title,
+						'inside_b' == $instance['showtitle'] ? 'ytc_title_inside_bottom' : ''
+					);
+				}
+
+				$output .= "<a href=\"//www.youtube.com/watch?v=${yt_id}${p}\" ${tag_title} class=\"ytc_thumb ${lightbox_class} ${arclass}\" ${target}><span style=\"background-image: url(${yt_thumb});\" ${tag_title} id=\"ytc_{$yt_id}\">{$title_inside}</span></a>";
 
 			} // what to show conditions
 
-			// show video title below video?
-			if ( ! empty( $instance['showtitle'] ) && 'below' == $instance['showtitle'] ) {
-				$output .= "<h3 class=\"ytc_title ytc_title_below\">{$yt_title}</h3>";
+			// Show video title below video?
+			if ( ! empty( $instance['showtitle'] ) && 'thumbnail' != $instance['display'] && in_array( $instance['showtitle'], array( 'below', 'inside_b' ) ) ) {
+				$output .= sprintf(
+					'<%1$s class="ytc_title ytc_title_below">%2$s</%1$s>',
+					$title_tag,
+					$yt_title
+				);
 			}
 
 			// do we need to show video description?

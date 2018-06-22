@@ -75,7 +75,15 @@ printf(
 
 <div class="tab-content-ytc" id="ytc-content-settings">
 <ul>
-	<li><code>showtitle</code> <em>(string)</em> Set to <code>none</code> to hide title; <code>above</code> to show video title above video/thumbnail, or <code>below</code> to show video title below video/thumbnail.</li>
+	<li><code>showtitle</code> <em>(string)</em> Set to:
+		<ul>
+			<li>&bullet; <code>none</code> to hide title</li>
+			<li>&bullet; <code>above</code> to show video title above video/thumbnail</li>
+			<li>&bullet; <code>below</code> to show video title below video/thumbnail</li>
+			<li>&bullet; <code>inside</code> to show top aligned video title inside thumbnail; if <code>display</code> is not <code>thumbnail</code> then treat as <code>above</code><li>
+			<li>&bullet; <code>inside_b</code> to show bottom aligned title inside thumbnail; if <code>display</code> is not <code>thumbnail</code> then treat as <code>below</code></li>
+		</ul>
+	</li>
 	<li><code>showdesc</code> <em>(bool)</em> Set to <code>1</code> or <code>true</code> to show video description.</li>
 	<li><code>desclen</code> <em>(int)</em> Set number of characters to cut down length of video description. Set to <code>0</code> to use full length description.</li>
 	<li><code>noinfo</code> <em>(bool)</em> Set to <code>1</code> or <code>true</code> to hide overlay video infos (from embedded player)</li>

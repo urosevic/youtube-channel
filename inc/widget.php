@@ -227,6 +227,8 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 				<option value="none"<?php selected( $showtitle, 'none' ); ?>><?php _e( 'Hide title', 'youtube-channel' ); ?></option>
 				<option value="above"<?php selected( $showtitle, 'above' ); ?>><?php _e( 'Above video/thumbnail', 'youtube-channel' ); ?></option>
 				<option value="below"<?php selected( $showtitle, 'below' ); ?>><?php _e( 'Below video/thumbnail', 'youtube-channel' ); ?></option>
+				<option value="inside"<?php selected( $showtitle, 'inside' ); ?>><?php _e( 'Inside thumbnail, top aligned', 'youtube-channel' ); ?></option>
+				<option value="inside_b"<?php selected( $showtitle, 'inside_b' ); ?>><?php _e( 'Inside thumbnail, bototm aligned', 'youtube-channel' ); ?></option>
 			</select><br />
 			<label for="<?php echo $this->get_field_id( 'showdesc' ); ?>">
 				<input class="checkbox" type="checkbox" <?php checked( (bool) $showdesc, true ); ?> id="<?php echo $this->get_field_id( 'showdesc' ); ?>" name="<?php echo $this->get_field_name( 'showdesc' ); ?>" /> <?php _e( 'Show video description', 'youtube-channel' ); ?>
