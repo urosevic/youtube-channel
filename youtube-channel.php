@@ -1150,12 +1150,19 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			$output .= "<div class=\"ytc_video_container ytc_video_{$y} ytc_video_{$vnumclass} ${arclass}\" style=\"width:{$instance['width']}px\">";
 
 			// Show video title above video?
-			if ( ! empty( $instance['showtitle'] ) && 'thumbnail' != $instance['display'] && ( in_array( $instance['showtitle'], array( 'above', 'inside' ) ) ) ) {
-				$output .= sprintf(
-					'<%1$s class="ytc_title ytc_title_above">%2$s</%1$s>',
-					$title_tag,
-					$yt_title
-				);
+			if ( ! empty( $instance['showtitle'] ) ) {
+				if (
+					// for non-thumbnail for `above` and `inside`
+					( 'thumbnail' != $instance['display'] && in_array( $instance['showtitle'], array( 'above', 'inside' ) ) ) ||
+					// for thubmanil only if it's `below`
+					( 'thumbnail' == $instance['display'] && 'above' == $instance['showtitle'] )
+				) {
+					$output .= sprintf(
+						'<%1$s class="ytc_title ytc_title_above">%2$s</%1$s>',
+						$title_tag,
+						$yt_title
+					);
+				}
 			}
 
 			// Print out video
@@ -1282,12 +1289,19 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			} // what to show conditions
 
 			// Show video title below video?
-			if ( ! empty( $instance['showtitle'] ) && 'thumbnail' != $instance['display'] && in_array( $instance['showtitle'], array( 'below', 'inside_b' ) ) ) {
-				$output .= sprintf(
-					'<%1$s class="ytc_title ytc_title_below">%2$s</%1$s>',
-					$title_tag,
-					$yt_title
-				);
+			if ( ! empty( $instance['showtitle'] ) ) {
+				if (
+					// for non-thumbnail for `below` and `inside_b`
+					( 'thumbnail' != $instance['display'] && in_array( $instance['showtitle'], array( 'below', 'inside_b' ) ) ) ||
+					// for thubmanil only if it's `below`
+					( 'thumbnail' == $instance['display'] && 'below' == $instance['showtitle'] )
+				) {
+					$output .= sprintf(
+						'<%1$s class="ytc_title ytc_title_below">%2$s</%1$s>',
+						$title_tag,
+						$yt_title
+					);
+				}
 			}
 
 			// do we need to show video description?
