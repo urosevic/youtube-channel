@@ -142,6 +142,7 @@ Along to Widget, you can add YouTube Channel block inline by using shortcode `[y
   * `below` - Display title below video/thumbnail
   * `inside` - Display top aligned title inside thumbnail; if `display` is not `thumbnail` then treat as `above`
   * `inside_b` - Display bottom aligned title inside thumbnail; if `display` is not `thumbnail` then treat as `below`
+* `titletag` - Video title HTML tag to wrap title (H3, H4, H5, div, span, strong, etc)
 * `showdesc` (bool) Set to 1 or true to show video description.
 * `desclen` (int) Set number of characters to cut down length of video description. Set to 0 to use full length description.
 * `noinfo` (bool) Set to 1 or true to hide overlay video infos (from embedded player)
@@ -372,6 +373,7 @@ If you don't wish to pay for enhancements (then you don't care would that be imp
 == Changelog ==
 
 = 3.0.11.5 (20180721) =
+* Add: Missing `titletag` parameter for shortcode, shortcode TinyMCE wizard and widget
 * Fix: Missing video title for `thubmbnail` display with `above` or `below` positioning (thanks @nimeldk)
 
 = 3.0.11.4 (20180622) =

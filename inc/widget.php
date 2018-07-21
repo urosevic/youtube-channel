@@ -86,6 +86,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 
 		// Content Layout
 		$showtitle      = ! empty( $instance['showtitle'] ) ? esc_attr( $instance['showtitle'] ) : 'none';
+		$titletag       = ! empty( $instance['titletag'] ) ? strtolower( esc_attr( $instance['titletag'] ) ) : 'h3';
 		$showdesc       = ! empty( $instance['showdesc'] ) ? esc_attr( $instance['showdesc'] ) : '';
 		$modestbranding = ! empty( $instance['modestbranding'] ) ? esc_attr( $instance['modestbranding'] ) : '';
 		$desclen        = ! empty( $instance['desclen'] ) ? esc_attr( $instance['desclen'] ) : 0;
@@ -230,6 +231,20 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 				<option value="inside"<?php selected( $showtitle, 'inside' ); ?>><?php _e( 'Inside thumbnail, top aligned', 'youtube-channel' ); ?></option>
 				<option value="inside_b"<?php selected( $showtitle, 'inside_b' ); ?>><?php _e( 'Inside thumbnail, bototm aligned', 'youtube-channel' ); ?></option>
 			</select><br />
+			<label for="<?php echo $this->get_field_id( 'titletag' ); ?>">
+				<?php _e( 'Title HTML tag', 'youtube-channel' ); ?>
+			</label>
+			<select class="widefat" id="<?php echo $this->get_field_id( 'titletag' ); ?>" name="<?php echo $this->get_field_name( 'titletag' ); ?>">
+				<?php
+				foreach ( array( 'h3', 'h4', 'h5', 'div', 'span', 'strong' ) as $tag ) {
+					printf(
+						'<option value="%1$s" %2$s>%1$s</option>',
+						$tag,
+						selected( $titletag, $tag )
+					);
+				}
+				?>
+			</select><br />
 			<label for="<?php echo $this->get_field_id( 'showdesc' ); ?>">
 				<input class="checkbox" type="checkbox" <?php checked( (bool) $showdesc, true ); ?> id="<?php echo $this->get_field_id( 'showdesc' ); ?>" name="<?php echo $this->get_field_name( 'showdesc' ); ?>" /> <?php _e( 'Show video description', 'youtube-channel' ); ?>
 			</label><br />
@@ -309,6 +324,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 		$instance['link_to']        = $new_instance['link_to'];
 
 		$instance['showtitle']      = isset( $new_instance['showtitle'] ) ? $new_instance['showtitle'] : 'none';
+		$instance['titletag']       = isset( $new_instance['titletag'] ) ? $new_instance['titletag'] : 'h3';
 		$instance['showdesc']       = isset( $new_instance['showdesc'] ) ? $new_instance['showdesc'] : false;
 		$instance['desclen']        = strip_tags( $new_instance['desclen'] );
 		$instance['width']          = strip_tags( $new_instance['width'] );

@@ -301,6 +301,21 @@
 									value : 'none'
 								},
 								{
+									type: 'listbox',
+									name: 'titletag',
+									label: 'Title HTML tag',
+									tooltip: 'Select which HTML tag to use for title wrapper.',
+									values : [
+										{text: 'h3', value: 'h3'},
+										{text: 'h4', value: 'h4'},
+										{text: 'h5', value: 'h5'},
+										{text: 'div', value: 'div'},
+										{text: 'span', value: 'span'},
+										{text: 'strong', value: 'strong'},
+									],
+									value : 'none'
+								},
+								{
 									type: 'checkbox',
 									name: 'showdesc',
 									label: 'Show video description',
@@ -391,6 +406,7 @@
 
 						// Content Layout
 						if ( e.data.showtitle ) shortcode += ' showtitle=' + e.data.showtitle + '';
+						if ( e.data.titletag ) shortcode += ' titletag=' + e.data.titletag + '';
 						if ( e.data.showdesc ) shortcode += ' showdesc=1';
 						if ( e.data.desclen ) shortcode += ' desclen=' + e.data.desclen.replace(/[^0-9.]/g, '') + '';
 						if ( e.data.noanno ) shortcode += ' noanno=1';

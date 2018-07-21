@@ -515,6 +515,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 					'playsinline'    => $instance['playsinline'], // play video on mobile devices inline instead in native device player
 
 					'showtitle'      => $instance['showtitle'], // none, above, below, inside, inside_b
+					'titletag'       => $instance['titletag'], // h3, h4, h5, div, span, strong
 					'showdesc'       => $instance['showdesc'], // ex showvidesc
 					'nobrand'        => ! empty( $instance['modestbranding'] ) ? $instance['modestbranding'] : '0',
 					'desclen'        => $instance['desclen'], // ex videsclen
@@ -575,6 +576,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 
 			// Content Layout
 			$instance['showtitle']      = $atts['showtitle']; // show video title, disabled by default
+			$instance['titletag']       = $atts['titletag']; // title HTML tag wrapper, h3 by default
 			$instance['showdesc']       = $atts['showdesc']; // show video description, disabled by default
 			$instance['modestbranding'] = $atts['nobrand']; // hide YT logo
 			$instance['desclen']        = (int) $atts['desclen']; // cut video description, number of characters

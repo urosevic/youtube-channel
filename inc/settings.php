@@ -631,19 +631,16 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 				'ytc_content', // section
 				array(
 					'field'       => $this->option_name . '[titletag]',
-					'description' => sprintf(
-						'%1$s %2$s',
-						$this->settings_description_global(),
-						__( 'Select which HTML tag to use for title wrapper.', 'youtube-channel' )
-					),
+					'description' => __( 'Select which HTML tag to use for title wrapper. Fallback if not set in shortcode.', 'youtube-channel' ),
 					'class'       => 'regular-text',
 					'value'       => isset( $this->defaults['titletag'] ) ? $this->defaults['titletag'] : 'h3',
 					'items'       => array(
-						'h3'   => 'H3',
-						'h4'   => 'H4',
-						'h5'   => 'H5',
-						'span' => 'span',
-						'div'  => 'div',
+						'h3'     => 'h3',
+						'h4'     => 'h4',
+						'h5'     => 'h5',
+						'div'    => 'div',
+						'span'   => 'span',
+						'strong' => 'strong',
 					),
 				) // args
 			);
@@ -1073,7 +1070,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 				// --- Content ---
 				case 'ytc_content':
 					$sanitized['showtitle']  = ( ! empty( $options['showtitle'] ) ) ? $options['showtitle'] : $this->defaults['showtitle'];
-					$sanitized['titletag']   = ( ! empty( $options['titletag'] ) ) ? $options['titletag'] : $this->defaults['titletag'];
+					$sanitized['titletag']   = ( ! empty( $options['titletag'] ) ) ? strtolower( $options['titletag'] ) : strtolower( $this->defaults['titletag'] );
 					$sanitized['showdesc']   = ( ! empty( $options['showdesc'] ) && $options['showdesc'] ) ? 1 : 0;
 					$sanitized['desclen']    = ( ! empty( $options['desclen'] ) ) ? intval( $options['desclen'] ) : $this->defaults['desclen'];
 				break; // Content
