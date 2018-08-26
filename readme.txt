@@ -163,6 +163,67 @@ Along to Widget, you can add YouTube Channel block inline by using shortcode `[y
 
 *Please note, to enhance plugin functionality, we can change some shortcode parameters in future.*
 
+== Filter hooks ==
+
+You can modify final output of video block by hooking to filter `ytc_print_video`.
+
+Four parameters are provided:
+* `video_content` - HTML of original video block
+* `item` - YouTube video object which contains:
+  * `snippet->publishedAt` - date of publishing YouTube video
+  * `shippet->title` - YouTube video title
+  * `shippet->description` - YouTube video description
+  * `snippet->resourceId->videoId` -> YouTube video ID
+* `instance` - Current YouTUbe Channel Block parameters, including global settings:
+  * `vanity`
+  * `channel`
+  * `username`
+  * `playlist`
+  * `resource`
+  * `cache`
+  * `fetch`
+  * `num`
+  * `privacy`
+  * `ratio`
+  * `width`
+  * `responsive`
+  * `display`
+  * `themelight`
+  * `fullscreen`
+  * `controls`
+  * `autoplay`
+  * `autoplay_mute`
+  * `norel`
+  * `playsinline`
+  * `showtitle`
+  * `titletag`
+  * `showdesc`
+  * `desclen`
+  * `modestbranding`
+  * `hideanno`
+  * `hideinfo`
+  * `goto_txt`
+  * `popup_goto`
+  * `link_to`
+  * `tinymce`
+  * `nolightbox`
+  * `apikey`
+  * `thumb_quality`
+  * `timeout`
+  * `random`
+  * `no_thumb_title`
+  * `class`
+  * `target`
+* `y` - order number of video (`1` for first, `2` for second, etc)
+
+Example:
+`add_filter( 'ytc_print_video', 'customized_ytc_print_video', 10, 4 );
+function customized_ytc_print_video( $video_block, $item, $instance, $y ) {
+  // Do whatever you wish to do
+  // ...
+  return $video_block;
+}`
+
 == Installation ==
 
 You can use the built in installer and upgrader, or you can install the plugin manually.
@@ -371,6 +432,11 @@ If you really need that missing feature ASAP, feel free to [contact me](urosevic
 If you don't wish to pay for enhancements (then you don't care would that be implemented in a week, month, year or so), then send new [Support topic](https://wordpress.org/support/plugin/youtube-channel) with *Topic title* in format **[Feature Request] ...**
 
 == Changelog ==
+= 3.0.11.7 (20180826) =
+* Add: Override video block template by 3rd party theme or plugin with filter `ytc_print_video`
+* Add: Customizable timeout for wp_remote_get()
+* Improvement: Disable LastPass altering settings fields
+
 = 3.0.11.6 (20180826) =
 * Add compatibility with async/defer optimization (thanks to @lordbass)
 

@@ -493,3 +493,22 @@ function au_youtube_channel_update_routine_20() {
 	}
 
 } // END function au_youtube_channel_update_routine_20()
+
+/**
+ * Add default value for new global option timeout
+ */
+function au_youtube_channel_update_routine_21() {
+
+	// get options from DB
+	$defaults = get_option( 'youtube_channel_defaults' );
+
+	if ( ! isset( $defaults['timeout'] ) ) {
+		$defaults['timeout'] = 5;
+	}
+
+	if ( isset( $defaults ) ) {
+		update_option( 'youtube_channel_defaults', $defaults );
+		unset( $defaults );
+	}
+
+} // END function au_youtube_channel_update_routine_21()

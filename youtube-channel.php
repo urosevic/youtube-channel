@@ -3,7 +3,7 @@
 Plugin Name: YouTube Channel
 Plugin URI: https://urosevic.net/wordpress/plugins/youtube-channel/
 Description: Quick and easy embed latest or random videos from YouTube channel (user uploads, liked or favourited videos) or playlist. Use <a href="widgets.php">widget</a> for sidebar or shortcode for content. Works with <em>YouTube Data API v3</em>.
-Version: 3.0.11.6
+Version: 3.0.11.7
 Author: Aleksandar Urošević
 Author URI: https://urosevic.net/
 Text Domain: youtube-channel
@@ -17,14 +17,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 	class WPAU_YOUTUBE_CHANNEL {
 
-		const DB_VER = 20;
-		const VER = '3.0.11.6';
+		const DB_VER = 21;
+		const VER = '3.0.11.7';
 
 		public $plugin_name   = 'YouTube Channel';
 		public $plugin_slug   = 'youtube-channel';
 		public $plugin_option = 'youtube_channel_defaults';
 		public $plugin_url;
 		public $ytc_html5_js = '';
+		public $defaults;
 
 		/**
 		 * Construct class
@@ -136,6 +137,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 				'link_to'        => 'none', // 0 legacy username, 1 channel, 2 vanity
 				'tinymce'        => 1, // show TinyMCE button by default
 				'nolightbox'     => 0, // do not use lightbox global setting
+				'timeout'        => 5, // timeout for wp_remote_get()
 			);
 
 			add_option( 'youtube_channel_version', self::VER, '', 'no' );
@@ -886,7 +888,11 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 						}
 
 						// Generate single video block
-						$output .= $this->ytc_print_video( $item, $instance, $y );
+						$video_block = $this->ytc_print_video( $item, $instance, $y );
+						// Allow plugins/themes to override the default video block template.
+						$video_block = apply_filters( 'ytc_print_video', $video_block, $item, $instance, $y );
+						// Append video block to final output
+						$output .= $video_block;
 					}
 					// Free some memory
 					unset( $random_used, $random_item, $json );
@@ -925,9 +931,9 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			$feed_url .= "&key={$this->defaults['apikey']}";
 
 			$wparg = array(
-				'timeout' => 5, // five seconds only
+				'timeout' => $this->defaults['timeout'], // five seconds only by default
 			);
-
+error_log(print_r($wparg,1));
 			$response = wp_remote_get( $feed_url, $wparg );
 
 			// If we have WP error, make JSON with error

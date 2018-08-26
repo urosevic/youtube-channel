@@ -253,6 +253,23 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 					'std'         => 1,
 				) // args
 			);
+			// Timeout
+			add_settings_field(
+				$this->option_name . 'timeout', // id
+				__( 'Timeout', 'youtube-channel' ), // Title
+				array( &$this, 'settings_field_input_number' ), // Callback
+				$this->slug . '_general', // Page
+				'ytc_general', // section
+				array(
+					'field'       => $this->option_name . '[timeout]',
+					'description' => __( 'Time in seconds, before the connection with YouTube DATA Api is dropped and an error is returned', 'youtube-channel' ),
+					'class'       => 'timeout',
+					'value'       => isset( $this->defaults['timeout'] ) ? $this->defaults['timeout'] : 5,
+					'min'         => 5,
+					'max'         => 360,
+					'std'         => 5,
+				) // args
+			);
 			// Enhanced privacy
 			add_settings_field(
 				$this->option_name . 'privacy', // id
@@ -861,7 +878,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 		public function settings_field_input_text( $args ) {
 
 			printf(
-				'<input type="text" name="%1$s" id="%1$s" value="%2$s" class="%3$s" /><p class="description">%4$s</p>',
+				'<input type="text" name="%1$s" id="%1$s" value="%2$s" class="%3$s" data-lpignore="true" /><p class="description">%4$s</p>',
 				$args['field'],
 				$args['value'],
 				$args['class'],
@@ -876,7 +893,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 		public function settings_field_input_password( $args ) {
 
 			printf(
-				'<input type="password" name="%1$s" id="%1$s" value="%2$s" class="%3$s" /><p class="description">%4$s</p>',
+				'<input type="password" name="%1$s" id="%1$s" value="%2$s" class="%3$s" data-lpignore="true" /><p class="description">%4$s</p>',
 				$args['field'],
 				$args['value'],
 				$args['class'],
@@ -1045,6 +1062,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 					$sanitized['num']      = ( ! empty( $options['num'] ) ) ? intval( $options['num'] ) : $this->defaults['num'];
 					$sanitized['privacy']  = ( ! empty( $options['privacy'] ) && $options['privacy'] ) ? 1 : 0;
 					$sanitized['tinymce']  = ( ! empty( $options['tinymce'] ) && $options['tinymce'] ) ? 1 : 0;
+					$sanitized['timeout']  = ( ! empty( $options['timeout'] ) ) ? intval( $options['timeout'] ) : $this->defaults['timeout'];
 				break; // General
 
 				// --- Video ---
