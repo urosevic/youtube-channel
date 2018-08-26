@@ -933,7 +933,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			$wparg = array(
 				'timeout' => $this->defaults['timeout'], // five seconds only by default
 			);
-error_log(print_r($wparg,1));
+
 			$response = wp_remote_get( $feed_url, $wparg );
 
 			// If we have WP error, make JSON with error
