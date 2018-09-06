@@ -270,6 +270,39 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 					'std'         => 5,
 				) // args
 			);
+
+			// SSL Verify
+			add_settings_field(
+				$this->option_name . 'sslverify', // id
+				__( 'SSL Verify', 'youtube-channel' ), // Title
+				array( &$this, 'settings_field_checkbox' ), // Callback
+				$this->slug . '_general', // Page
+				'ytc_general', // section
+				array(
+					'field'       => $this->option_name . '[sslverify]',
+					'label'       => __( 'Enable', 'youtube-channel' ),
+					'description' => __( 'If your website host fail to verify SSL Certificate for GoogleApis.com server (if you see in YTC Error keywords cURL and SSL), disable this option.', 'youtube-channel' ),
+					'class'       => 'checkbox',
+					'value'       => isset( $this->defaults['sslverify'] ) ? $this->defaults['sslverify'] : '0',
+				) // args
+			);
+
+			// Event Listener
+			add_settings_field(
+				$this->option_name . 'js_ev_listener', // id
+				__( 'Event Listener', 'youtube-channel' ), // Title
+				array( &$this, 'settings_field_checkbox' ), // Callback
+				$this->slug . '_general', // Page
+				'ytc_general', // section
+				array(
+					'field'       => $this->option_name . '[js_ev_listener]',
+					'label'       => __( 'Enable', 'youtube-channel' ),
+					'description' => __( 'If YTC block fail to render on your website because of async/defer loading of java script, try to enable this option to wrap YTC code within DOMContentLoaded event listener', 'youtube-channel' ),
+					'class'       => 'checkbox',
+					'value'       => isset( $this->defaults['js_ev_listener'] ) ? $this->defaults['js_ev_listener'] : '0',
+				) // args
+			);
+
 			// Enhanced privacy
 			add_settings_field(
 				$this->option_name . 'privacy', // id
@@ -1051,18 +1084,20 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 				// --- General ---
 				case 'ytc_general':
 					$apikey = ( defined( 'YOUTUBE_DATA_API_KEY' ) ) ? YOUTUBE_DATA_API_KEY : '';
-					$sanitized['apikey']   = ( ! empty( $options['apikey'] ) ) ? trim( $options['apikey'] ) : $apikey;
-					$sanitized['channel']  = ( ! empty( $options['channel'] ) ) ? trim( $options['channel'] ) : '';
-					$sanitized['vanity']   = ( ! empty( $options['vanity'] ) ) ? trim( $options['vanity'] ) : '';
-					$sanitized['username'] = ( ! empty( $options['username'] ) ) ? trim( $options['username'] ) : '';
-					$sanitized['playlist'] = ( ! empty( $options['playlist'] ) ) ? trim( $options['playlist'] ) : '';
-					$sanitized['resource'] = ( isset( $options['resource'] ) ) ? intval( $options['resource'] ) : $this->defaults['resource'];
-					$sanitized['cache']    = ( isset( $options['cache'] ) ) ? intval( $options['cache'] ) : $this->defaults['cache'];
-					$sanitized['fetch']    = ( ! empty( $options['fetch'] ) ) ? intval( $options['fetch'] ) : $this->defaults['fetch'];
-					$sanitized['num']      = ( ! empty( $options['num'] ) ) ? intval( $options['num'] ) : $this->defaults['num'];
-					$sanitized['privacy']  = ( ! empty( $options['privacy'] ) && $options['privacy'] ) ? 1 : 0;
-					$sanitized['tinymce']  = ( ! empty( $options['tinymce'] ) && $options['tinymce'] ) ? 1 : 0;
-					$sanitized['timeout']  = ( ! empty( $options['timeout'] ) ) ? intval( $options['timeout'] ) : $this->defaults['timeout'];
+					$sanitized['apikey']         = ( ! empty( $options['apikey'] ) ) ? trim( $options['apikey'] ) : $apikey;
+					$sanitized['channel']        = ( ! empty( $options['channel'] ) ) ? trim( $options['channel'] ) : '';
+					$sanitized['vanity']         = ( ! empty( $options['vanity'] ) ) ? trim( $options['vanity'] ) : '';
+					$sanitized['username']       = ( ! empty( $options['username'] ) ) ? trim( $options['username'] ) : '';
+					$sanitized['playlist']       = ( ! empty( $options['playlist'] ) ) ? trim( $options['playlist'] ) : '';
+					$sanitized['resource']       = ( isset( $options['resource'] ) ) ? intval( $options['resource'] ) : $this->defaults['resource'];
+					$sanitized['cache']          = ( isset( $options['cache'] ) ) ? intval( $options['cache'] ) : $this->defaults['cache'];
+					$sanitized['fetch']          = ( ! empty( $options['fetch'] ) ) ? intval( $options['fetch'] ) : $this->defaults['fetch'];
+					$sanitized['num']            = ( ! empty( $options['num'] ) ) ? intval( $options['num'] ) : $this->defaults['num'];
+					$sanitized['privacy']        = ( ! empty( $options['privacy'] ) && $options['privacy'] ) ? 1 : 0;
+					$sanitized['tinymce']        = ( ! empty( $options['tinymce'] ) && $options['tinymce'] ) ? 1 : 0;
+					$sanitized['sslverify']      = ( ! empty( $options['sslverify'] ) && $options['sslverify'] ) ? 1 : 0;
+					$sanitized['js_ev_listener'] = ( ! empty( $options['js_ev_listener'] ) && $options['js_ev_listener'] ) ? 1 : 0;
+					$sanitized['timeout']        = ( ! empty( $options['timeout'] ) ) ? intval( $options['timeout'] ) : $this->defaults['timeout'];
 				break; // General
 
 				// --- Video ---

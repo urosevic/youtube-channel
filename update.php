@@ -512,3 +512,25 @@ function au_youtube_channel_update_routine_21() {
 	}
 
 } // END function au_youtube_channel_update_routine_21()
+
+/**
+ * Add default value for new global options sslverify and js_ev_listener
+ */
+function au_youtube_channel_update_routine_22() {
+
+	// get options from DB
+	$defaults = get_option( 'youtube_channel_defaults' );
+
+	if ( ! isset( $defaults['sslverify'] ) ) {
+		$defaults['sslverify'] = true;
+	}
+	if ( ! isset( $defaults['js_ev_listener'] ) ) {
+		$defaults['js_ev_listener'] = false;
+	}
+
+	if ( isset( $defaults ) ) {
+		update_option( 'youtube_channel_defaults', $defaults );
+		unset( $defaults );
+	}
+
+} // END function au_youtube_channel_update_routine_22()

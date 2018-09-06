@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 	class WPAU_YOUTUBE_CHANNEL {
 
-		const DB_VER = 21;
+		const DB_VER = 22;
 		const VER = '3.0.11.7';
 
 		public $plugin_name   = 'YouTube Channel';
@@ -138,6 +138,8 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 				'tinymce'        => 1, // show TinyMCE button by default
 				'nolightbox'     => 0, // do not use lightbox global setting
 				'timeout'        => 5, // timeout for wp_remote_get()
+				'sslverify'      => true,
+				'js_ev_listener' => false,
 			);
 
 			add_option( 'youtube_channel_version', self::VER, '', 'no' );
@@ -458,14 +460,14 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			} // END if ( empty($this->defaults['nolightbox']) )
 
 			if ( ! empty( $js ) ) {
-				$js = "
+				$js = sprintf('
 				<!-- YouTube Channel 3 -->
-				<script type=\"text/javascript\">
-				window.addEventListener('DOMContentLoaded', function() {
-				$js
-				});
-				</script>\n
-				";
+				<script type="text/javascript">%2$s%1$s%3$s</script>
+				',
+				$js,
+				$this->defaults['js_ev_listener'] ? "window.addEventListener('DOMContentLoaded', function() {" : '',
+				$this->defaults['js_ev_listener'] ? "});" : ''
+				);
 
 				if ( WP_DEBUG ) {
 					// Uncompressed code if WP debug is enabled
@@ -931,7 +933,8 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			$feed_url .= "&key={$this->defaults['apikey']}";
 
 			$wparg = array(
-				'timeout' => $this->defaults['timeout'], // five seconds only by default
+				'timeout' => $this->defaults['timeout'],
+				'sslverify' => $this->defaults['sslverify'] ? true : false,
 			);
 
 			$response = wp_remote_get( $feed_url, $wparg );
