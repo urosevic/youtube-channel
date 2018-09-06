@@ -272,6 +272,14 @@ Please note, latest FAQ you can find [on our website](http://urosevic.net/wordpr
 
 Please folllow [Installation](https://wordpress.org/plugins/youtube-channel/installation/) instructions.
 
+= Plugin does not work with premium theme or clash with other premium plugin =
+
+As a developer of free plugin YouTube Channel, I can not afford to purchase and renew licence for premium themes and plugins.
+
+If you experiencing issue on premium theme or see clash with premium plugin, I can help you only if you help me. Ask theme/plugin developer for approval to provide a package of premium theme/plugin to me, so I can install it on my local development domain youtube-channel.test and debug issue in YouTube Channel.
+
+Upload premium theme or plugin installation package to Dropbox or Google Drive, and provide share link for package by [contact form](https://urosevic.net/wordpress/contact/?subject=YouTube%20Channel).
+
 = I set everything correct but receiveing 'Oops, something went wrong' message =
 
 Login as user with Administrator role and you'll see YTC ERROR message with explanation what's wrong. Examples:
