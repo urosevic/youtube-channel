@@ -4,7 +4,7 @@ Donate link: https://urosevic.net/wordpress/donate/?donate_for=youtube-channel
 Tags: youtube, channel, playlist, single, widget, widgets, youtube player, feed, video, thumbnail, embed, sidebar, iframe, html5, responsive
 Requires at least: 4.0
 Tested up to: 4.9.8
-Stable tag: 3.0.11.7
+Stable tag: 3.0.11.8
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
