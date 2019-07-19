@@ -440,6 +440,9 @@ If you really need that missing feature ASAP, feel free to [contact me](urosevic
 If you don't wish to pay for enhancements (then you don't care would that be implemented in a week, month, year or so), then send new [Support topic](https://wordpress.org/support/plugin/youtube-channel) with *Topic title* in format **[Feature Request] ...**
 
 == Changelog ==
+= 3.0.11.8 (20190719) =
+* Fix: referrer is wrong for protected API keys (thanks to @hmmux)
+
 = 3.0.11.7 (20180906) =
 * Add: Global option `sslverify` to disable SSL Verification
 * Add: Global option `js_ev_listener` to enable Event Listener DOMContentLoaded

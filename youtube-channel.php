@@ -3,7 +3,7 @@
 Plugin Name: YouTube Channel
 Plugin URI: https://urosevic.net/wordpress/plugins/youtube-channel/
 Description: Quick and easy embed latest or random videos from YouTube channel (user uploads, liked or favourited videos) or playlist. Use <a href="widgets.php">widget</a> for sidebar or shortcode for content. Works with <em>YouTube Data API v3</em>.
-Version: 3.0.11.7
+Version: 3.0.11.8
 Author: Aleksandar Urošević
 Author URI: https://urosevic.net/
 Text Domain: youtube-channel
@@ -18,7 +18,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 	class WPAU_YOUTUBE_CHANNEL {
 
 		const DB_VER = 22;
-		const VER = '3.0.11.7';
+		const VER = '3.0.11.8';
 
 		public $plugin_name   = 'YouTube Channel';
 		public $plugin_slug   = 'youtube-channel';
@@ -935,6 +935,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			$wparg = array(
 				'timeout' => $this->defaults['timeout'],
 				'sslverify' => $this->defaults['sslverify'] ? true : false,
+				'headers' => array( 'referer' => site_url() ),
 			);
 
 			$response = wp_remote_get( $feed_url, $wparg );
