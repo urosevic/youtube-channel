@@ -1,13 +1,15 @@
 <?php
-/*
-Plugin Name: YouTube Channel
-Plugin URI: https://urosevic.net/wordpress/plugins/youtube-channel/
-Description: Quick and easy embed latest or random videos from YouTube channel (user uploads, liked or favourited videos) or playlist. Use <a href="widgets.php">widget</a> for sidebar or shortcode for content. Works with <em>YouTube Data API v3</em>.
-Version: 3.0.11.8
-Author: Aleksandar Urošević
-Author URI: https://urosevic.net/
-Text Domain: youtube-channel
-*/
+/**
+ * Plugin Name: YouTube Channel
+ * Plugin URI:  https://urosevic.net/wordpress/plugins/youtube-channel/
+ * Description: Quick and easy embed latest or random videos from YouTube channel (user uploads, liked or favourited videos) or playlist. Use <a href="widgets.php">widget</a> for sidebar or shortcode for content. Works with <em>YouTube Data API v3</em>.
+ * Version:     3.0.11.8
+ * Author:      Aleksandar Urošević
+ * Author URI:  https://urosevic.net/
+ * License:     GPLv3
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.txt
+ * Text Domain: youtube-channel
+ */
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
