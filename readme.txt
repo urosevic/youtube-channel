@@ -443,6 +443,10 @@ If you really need that missing feature ASAP, feel free to [contact me](urosevic
 If you don't wish to pay for enhancements (then you don't care would that be implemented in a week, month, year or so), then send new [Support topic](https://wordpress.org/support/plugin/youtube-channel) with *Topic title* in format **[Feature Request] ...**
 
 == Changelog ==
+
+= 3.0.12 (20201014) =
+* Add: shortcode parameter `skip` to skip requested number of items
+
 = 3.0.11.8 (20200810) =
 * Tested: WordPress 5.5-RC2-48768 and PHP 7.4.1
 * (20190719) Fix: referrer is wrong for protected API keys (thanks to @hmmux)

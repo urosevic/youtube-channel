@@ -538,6 +538,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 
 					'nolightbox'     => ! empty( $instance['nolightbox'] ) ? $instance['nolightbox'] : '0',
 					'target'         => '',
+					'skip'           => 0, // how many items to skip
 					),
 				$atts
 			);
@@ -602,6 +603,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			$instance['nolightbox']     = $atts['nolightbox']; // custom usage of lightbox
 			$instance['target']         = $atts['target'];     // custom target for thumbnails w/o lightbox (empty, _blank or custom)
 
+			$instance['skip']           = (int) $atts['skip'];
 			// return implode( array_values( $this->output( $instance ) ) );
 			return $this->output( $instance );
 		} // END public function shortcode()
@@ -728,6 +730,11 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 				if ( $fetch < 1 ) { $fetch = 10; } // default 10
 				elseif ( $fetch > 50 ) { $fetch = 50; } // max 50
 
+				// How many items to skip?
+				$skip = $instance['skip'] > 49 ? 49 : $instance['skip'];
+				// If we have to skip more items than we have in fetch, set skip to $fetch-1
+				if ( $skip >= $fetch ) { $skip = $fetch - 1; }
+
 				$resource_key = "{$resource_id}_{$fetch}";
 
 				// Do we need cache? Let we define cache fallback key
@@ -814,7 +821,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 						if ( ! $num ) {
 							$num = 1;
 						}
-						$items = array_slice( $json_entry, 0, $num );
+						$items = array_slice( $json_entry, $skip, $num );
 					}
 				}
 

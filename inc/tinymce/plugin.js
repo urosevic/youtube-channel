@@ -129,6 +129,13 @@
 								},
 								{
 									type: 'textbox',
+									name: 'skip',
+									label: 'Skip',
+									value: '0',
+									tooltip: 'Number of videos to skip (not applicable for embedded playlist and random pick (min 0, max 49, default 0)'
+								},
+								{
+									type: 'textbox',
 									name: 'num',
 									label: 'Show',
 									value: '1',
@@ -385,6 +392,7 @@
 						if ( e.data.privacy ) shortcode += ' privacy=1';
 						if ( e.data.random ) shortcode += ' random=1';
 						if ( e.data.fetch ) shortcode += ' fetch=' + e.data.fetch.replace(/[^0-9.]/g, '') +'';
+						if ( e.data.skip ) shortcode += ' skip=' + e.data.skip.replace(/[^0-9.]/g, '') +'';
 						if ( e.data.num ) shortcode += ' num=' + e.data.num.replace(/[^0-9.]/g, '') +'';
 
 						// Video Settings
