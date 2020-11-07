@@ -31,6 +31,7 @@ printf(
 	<li><code>cache</code> <em>(int)</em> Period in seconds for caching feed. You can disable caching by setting this option to <code>0</code>, but if you have a lot of visits, consider at least short caching (couple minutes).</li>
 
 	<li><code>fetch</code> <em>(int)</em> Number of videos that will be used as stack for random pick (min 2, max 50)</li>
+	<li><code>skip</code> <em>(int)</em> Number of videos to skip (not applicable for embedable playlist and random pick (min 0, max 49, default 0) [<strong>Individual option, does not exists in global plugin settings!</strong>]</li>
 	<li><code>num</code> <em>(int)</em> Number of videos to display per YTC block.</li>
 
 	<li><code>random</code> <em>(bool)</em> Option to randomize videos on every page load. [<strong>Individual option, does not exists in global plugin settings!</strong>]</li>
