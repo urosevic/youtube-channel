@@ -1014,7 +1014,6 @@ $.magnificPopupAU.registerModule(IFRAME_NS, {
 				id: 'v=',
 				rel: 'rel=',
 				modestbranding: 'modestbranding=',
-				theme: 'theme=',
 				controls: 'controls=',
 				playsinline: 'playsinline=',
 				enhanceprivacy: 'enhanceprivacy=',

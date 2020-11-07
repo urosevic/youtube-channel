@@ -79,7 +79,6 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 		$thumb_quality  = ! empty( $instance['thumb_quality'] ) ? esc_attr( $instance['thumb_quality'] ) : trim( $defaults['thumb_quality'] );
 		$no_thumb_title = ! empty( $instance['no_thumb_title'] ) ? esc_attr( $instance['no_thumb_title'] ) : 0;
 
-		$themelight     = ! empty( $instance['themelight'] ) ? esc_attr( $instance['themelight'] ) : '';
 		$controls       = ! empty( $instance['controls'] ) ? esc_attr( $instance['controls'] ) : '';
 		$autoplay       = ! empty( $instance['autoplay'] ) ? esc_attr( $instance['autoplay'] ) : '';
 		$autoplay_mute  = ! empty( $instance['autoplay_mute'] ) ? esc_attr( $instance['autoplay_mute'] ) : '';
@@ -87,13 +86,13 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 
 		// Content Layout
 		$showtitle      = ! empty( $instance['showtitle'] ) ? esc_attr( $instance['showtitle'] ) : 'none';
+		$linktitle      = ! empty( $instance['linktitle'] ) ? esc_attr( $instance['linktitle'] ) : 0;
 		$titletag       = ! empty( $instance['titletag'] ) ? strtolower( esc_attr( $instance['titletag'] ) ) : 'h3';
 		$showdesc       = ! empty( $instance['showdesc'] ) ? esc_attr( $instance['showdesc'] ) : '';
 		$modestbranding = ! empty( $instance['modestbranding'] ) ? esc_attr( $instance['modestbranding'] ) : '';
 		$desclen        = ! empty( $instance['desclen'] ) ? esc_attr( $instance['desclen'] ) : 0;
 
 		$hideanno       = ! empty( $instance['hideanno'] ) ? esc_attr( $instance['hideanno'] ) : '';
-		$hideinfo       = ! empty( $instance['hideinfo'] ) ? esc_attr( $instance['hideinfo'] ) : '';
 
 		// Link to Channel
 		$link_to        = ! empty( $instance['link_to'] ) ? esc_attr( $instance['link_to'] ) : 'none';
@@ -231,12 +230,38 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( 'display' ); ?>">
 				<?php _e( 'What to display?', 'youtube-channel' ); ?>
-				<select class="widefat" id="<?php echo $this->get_field_id( 'display' ); ?>" name="<?php echo $this->get_field_name( 'display' ); ?>">
+				<select class="widefat" id="<?php echo $this->get_field_id( 'display' ); ?>" name="<?php echo $this->get_field_name( 'display' ); ?>" onchange="ytcToggle('display', '<?php echo $this->get_field_id(''); ?>');">
 					<option value="thumbnail"<?php selected( $display, 'thumbnail' ); ?>><?php _e( 'Thumbnail', 'youtube-channel' ); ?></option>
 					<option value="iframe"<?php selected( $display, 'iframe' ); ?>><?php _e( 'HTML5 (iframe)', 'youtube-channel' ); ?></option>
 					<option value="iframe2"<?php selected( $display, 'iframe2' ); ?>><?php _e( 'HTML5 (iframe) Asynchronous', 'youtube-channel' ); ?></option>
 					<option value="playlist"<?php selected( $display, 'playlist' ); ?>><?php _e( 'Embedded Playlist', 'youtube-channel' ); ?></option>
 				</select>
+			</label>
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'controls' ); ?>">
+				<input class="checkbox" type="checkbox" <?php checked( (bool) $controls, true ); ?> id="<?php echo $this->get_field_id( 'controls' ); ?>" name="<?php echo $this->get_field_name( 'controls' ); ?>" />
+				<?php _e( 'Hide player controls', 'youtube-channel' ); ?>
+			</label>
+			<br />
+			<label for="<?php echo $this->get_field_id( 'modestbranding' ); ?>" title="<?php _e( "Hide a YouTube logo from YouTube player control bar. Note that a small YouTube text label will still display in the upper-right corner of a paused video when the user's mouse pointer hovers over the player.", 'youtube-channel' ); ?>">
+				<input class="checkbox" type="checkbox" <?php checked( (bool) $modestbranding, true ); ?> id="<?php echo $this->get_field_id( 'modestbranding' ); ?>" name="<?php echo $this->get_field_name( 'modestbranding' ); ?>" />
+				<?php _e( 'Hide YouTube Logo (does not work for all videos)', 'youtube-channel' ); ?>
+			</label>
+			<br />
+			<label for="<?php echo $this->get_field_id( 'norel' ); ?>" title="<?php _e( 'Enable this option to show after finished playback only related videos that come from the same channel as the video that was just played', 'youtube-channel' ); ?>">
+				<input class="checkbox" type="checkbox" <?php checked( (bool) $norel, true ); ?> id="<?php echo $this->get_field_id( 'norel' ); ?>" name="<?php echo $this->get_field_name( 'norel' ); ?>" />
+				<?php _e( 'Allow only channel related videos', 'youtube-channel' ); ?>
+			</label>
+			<br />
+			<label for="<?php echo $this->get_field_id( 'autoplay' ); ?>">
+				<input class="checkbox" type="checkbox" <?php checked( (bool) $autoplay, true ); ?> id="<?php echo $this->get_field_id( 'autoplay' ); ?>" name="<?php echo $this->get_field_name( 'autoplay' ); ?>" />
+				<?php _e( 'Autoplay video or playlist', 'youtube-channel' ); ?>
+			</label>
+			<br />
+			<label for="<?php echo $this->get_field_id( 'autoplay_mute' ); ?>">
+				<input class="checkbox" type="checkbox" <?php checked( (bool) $autoplay_mute, true ); ?> id="<?php echo $this->get_field_id( 'autoplay_mute' ); ?>" name="<?php echo $this->get_field_name( 'autoplay_mute' ); ?>" />
+				<?php _e( 'Mute video on autoplay', 'youtube-channel' ); ?>
 			</label>
 		</p>
 		<p>
@@ -254,37 +279,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( 'no_thumb_title' ); ?>">
 				<input class="checkbox" type="checkbox" <?php checked( (bool) $no_thumb_title, true ); ?> id="<?php echo $this->get_field_id( 'no_thumb_title' ); ?>" name="<?php echo $this->get_field_name( 'no_thumb_title' ); ?>" />
-				<?php _e( 'Hide thumbnail tooltip', 'youtube-channel' ); ?>
-			</label>
-			<br />
-			<label for="<?php echo $this->get_field_id( 'themelight' ); ?>">
-				<input class="checkbox" type="checkbox" <?php checked( (bool) $themelight, true ); ?> id="<?php echo $this->get_field_id( 'themelight' ); ?>" name="<?php echo $this->get_field_name( 'themelight' ); ?>" />
-				<?php _e( 'Use light theme (default is dark)', 'youtube-channel' ); ?>
-			</label>
-			<br />
-			<label for="<?php echo $this->get_field_id( 'controls' ); ?>">
-				<input class="checkbox" type="checkbox" <?php checked( (bool) $controls, true ); ?> id="<?php echo $this->get_field_id( 'controls' ); ?>" name="<?php echo $this->get_field_name( 'controls' ); ?>" />
-				<?php _e( 'Hide player controls', 'youtube-channel' ); ?>
-			</label>
-			<br />
-			<label for="<?php echo $this->get_field_id( 'autoplay' ); ?>">
-				<input class="checkbox" type="checkbox" <?php checked( (bool) $autoplay, true ); ?> id="<?php echo $this->get_field_id( 'autoplay' ); ?>" name="<?php echo $this->get_field_name( 'autoplay' ); ?>" />
-				<?php _e( 'Autoplay video or playlist', 'youtube-channel' ); ?>
-			</label>
-			<br />
-			<label for="<?php echo $this->get_field_id( 'autoplay_mute' ); ?>">
-				<input class="checkbox" type="checkbox" <?php checked( (bool) $autoplay_mute, true ); ?> id="<?php echo $this->get_field_id( 'autoplay_mute' ); ?>" name="<?php echo $this->get_field_name( 'autoplay_mute' ); ?>" />
-				<?php _e( 'Mute video on autoplay', 'youtube-channel' ); ?>
-			</label>
-			<br />
-			<label for="<?php echo $this->get_field_id( 'norel' ); ?>">
-				<input class="checkbox" type="checkbox" <?php checked( (bool) $norel, true ); ?> id="<?php echo $this->get_field_id( 'norel' ); ?>" name="<?php echo $this->get_field_name( 'norel' ); ?>" />
-				<?php _e( 'Hide related videos', 'youtube-channel' ); ?>
-			</label>
-			<br />
-			<label for="<?php echo $this->get_field_id( 'modestbranding' ); ?>">
-				<input class="checkbox" type="checkbox" <?php checked( (bool) $modestbranding, true ); ?> id="<?php echo $this->get_field_id( 'modestbranding' ); ?>" name="<?php echo $this->get_field_name( 'modestbranding' ); ?>" />
-				<?php _e( 'Hide YT Logo (does not work for all videos)', 'youtube-channel' ); ?>
+				<?php _e( 'Disable thumbnail tooltip', 'youtube-channel' ); ?>
 			</label>
 		</p>
 
@@ -292,13 +287,18 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( 'showtitle' ); ?>">
 				<?php _e( 'Show video title', 'youtube-channel' ); ?>
-				<select class="widefat" id="<?php echo $this->get_field_id( 'showtitle' ); ?>" name="<?php echo $this->get_field_name( 'showtitle' ); ?>">
+				<select class="widefat" id="<?php echo $this->get_field_id( 'showtitle' ); ?>" name="<?php echo $this->get_field_name( 'showtitle' ); ?>" onchange="ytcToggle('title', '<?php echo $this->get_field_id(''); ?>');">
 					<option value="none"<?php selected( $showtitle, 'none' ); ?>><?php _e( 'Hide title', 'youtube-channel' ); ?></option>
 					<option value="above"<?php selected( $showtitle, 'above' ); ?>><?php _e( 'Above video/thumbnail', 'youtube-channel' ); ?></option>
 					<option value="below"<?php selected( $showtitle, 'below' ); ?>><?php _e( 'Below video/thumbnail', 'youtube-channel' ); ?></option>
 					<option value="inside"<?php selected( $showtitle, 'inside' ); ?>><?php _e( 'Inside thumbnail, top aligned', 'youtube-channel' ); ?></option>
 					<option value="inside_b"<?php selected( $showtitle, 'inside_b' ); ?>><?php _e( 'Inside thumbnail, bototm aligned', 'youtube-channel' ); ?></option>
 				</select>
+			</label>
+			<br />
+			<label for="<?php echo $this->get_field_id( 'linktitle' ); ?>">
+				<input class="checkbox" type="checkbox" <?php checked( (bool) $linktitle, true ); ?> id="<?php echo $this->get_field_id( 'linktitle' ); ?>" name="<?php echo $this->get_field_name( 'linktitle' ); ?>" title="<?php _e( 'Enable this option to link outside title to video', 'youtube-channel' ); ?>" />
+				<?php _e( 'Link outside title to video', 'youtube-channel' ); ?>
 			</label>
 		</p>
 		<p>
@@ -321,11 +321,6 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 			<label for="<?php echo $this->get_field_id( 'hideanno' ); ?>">
 				<input class="checkbox" type="checkbox" <?php checked( (bool) $hideanno, true ); ?> id="<?php echo $this->get_field_id( 'hideanno' ); ?>" name="<?php echo $this->get_field_name( 'hideanno' ); ?>" />
 				<?php _e( 'Hide annotations from video', 'youtube-channel' ); ?>
-			</label>
-			<br />
-			<label for="<?php echo $this->get_field_id( 'hideinfo' ); ?>" title="<?php _e( 'Enabling this option causes the player to not display information like the video title and uploader before the video starts playing.' ); ?>">
-				<input class="checkbox" type="checkbox" <?php checked( (bool) $hideinfo, true ); ?> id="<?php echo $this->get_field_id( 'hideinfo' ); ?>" name="<?php echo $this->get_field_name( 'hideinfo' ); ?>" />
-				<?php _e( 'Hide video info', 'youtube-channel' ); ?>
 			</label>
 			<br />
 			<label for="<?php echo $this->get_field_id( 'showdesc' ); ?>">
@@ -391,7 +386,6 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 			?>
 			</small>
 		</p>
-
 		<?php
 	} // END public function form()
 
@@ -417,6 +411,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 		$instance['link_to']        = $new_instance['link_to'];
 
 		$instance['showtitle']      = isset( $new_instance['showtitle'] ) ? $new_instance['showtitle'] : 'none';
+		$instance['linktitle']      = isset( $new_instance['linktitle'] ) ? $new_instance['linktitle'] : false;
 		$instance['titletag']       = isset( $new_instance['titletag'] ) ? $new_instance['titletag'] : 'h3';
 		$instance['showdesc']       = isset( $new_instance['showdesc'] ) ? $new_instance['showdesc'] : false;
 		$instance['desclen']        = strip_tags( $new_instance['desclen'] );
@@ -433,9 +428,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 
 		$instance['ratio']          = strip_tags( $new_instance['ratio'] );
 		$instance['controls']       = isset( $new_instance['controls'] ) ? $new_instance['controls'] : false;
-		$instance['hideinfo']       = isset( $new_instance['hideinfo'] ) ? $new_instance['hideinfo'] : '';
 		$instance['hideanno']       = isset( $new_instance['hideanno'] ) ? $new_instance['hideanno'] : '';
-		$instance['themelight']     = isset( $new_instance['themelight'] ) ? $new_instance['themelight'] : '';
 		$instance['privacy']        = isset( $new_instance['privacy'] ) ? $new_instance['privacy'] : '';
 
 		return $instance;

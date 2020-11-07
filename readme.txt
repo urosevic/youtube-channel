@@ -4,7 +4,7 @@ Donate link: https://urosevic.net/wordpress/donate/?donate_for=youtube-channel
 Tags: youtube, channel, playlist, widget, video
 Requires at least: 4.9
 Tested up to: 5.5
-Stable tag: 3.0.11.8
+Stable tag: 3.0.12
 Requires PHP: 5.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -186,12 +186,12 @@ Four parameters are provided:
   * `cache`
   * `fetch`
   * `num`
+  * `skip`
   * `privacy`
   * `ratio`
   * `width`
   * `responsive`
   * `display`
-  * `themelight`
   * `fullscreen`
   * `controls`
   * `autoplay`
@@ -204,7 +204,6 @@ Four parameters are provided:
   * `desclen`
   * `modestbranding`
   * `hideanno`
-  * `hideinfo`
   * `goto_txt`
   * `popup_goto`
   * `link_to`
@@ -445,6 +444,8 @@ If you don't wish to pay for enhancements (then you don't care would that be imp
 == Changelog ==
 
 = 3.0.12 (20201107) =
+* Add: link video title to YouTube playback page opened in new tab/window
+* Cleanup: remove deprecated parameters `theme` (`themelight`), `showinfo` (`noinfo`, `hideinfo`)
 * Improve: code for widget
 * Add: widget parameter `skip`
 * (20201014) Add: shortcode parameter `skip` to skip requested number of items

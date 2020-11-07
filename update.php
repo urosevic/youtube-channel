@@ -537,7 +537,7 @@ function au_youtube_channel_update_routine_22() {
 
 
 /**
- * Add default value for new option skip
+ * Add default value for new option skip and remove deprecatged options themelight and showinfo
  */
 function au_youtube_channel_update_routine_23() {
 
@@ -545,7 +545,13 @@ function au_youtube_channel_update_routine_23() {
 	$defaults = get_option( 'youtube_channel_defaults' );
 
 	if ( ! isset( $defaults['skip'] ) ) {
-		$defaults['sslverify'] = 0;
+		$defaults['skip'] = 0;
+	}
+	if ( isset( $defaults['themelight'] ) ) {
+		unset( $defaults['themelight'] );
+	}
+	if ( isset( $defaults['noinfo'] ) ) {
+		unset( $defaults['noinfo'] );
 	}
 
 	if ( isset( $defaults ) ) {

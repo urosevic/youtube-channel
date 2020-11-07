@@ -64,7 +64,6 @@ printf(
 	</ul></li>
 
 	<li><code>no_thumb_title</code> <em>(bool)</em> By default YouTube thumbnail will have tooltip with info about video title and date of publishing. By setting this option to <code>1</code> or <code>true</code> you can hide tooltip</li>
-	<li><code>themelight</code> <em>(bool)</em> By default YouTube have dark play controls theme. By setting this option to <code>1</code> or <code>true</code> you can get light theme in player (HTML5 and Flash)</li>
 	<li><code>controls</code> <em>(bool)</em> Set this option to <code>1</code> or <code>true</code> to hide playback controls. To display controls set this option to <code>0</code> or <code>false</code>.</li>
 	<li><code>autoplay</code> <em>(bool)</em> Enable autoplay of first video in YTC video stack by setting this option to <code>1</code> or <code>true</code></li>
 	<li><code>mute</code> <em>(bool)</em> Set this option to <code>1</code> or <code>true</code> to mute videos set to autoplay on load</li>
@@ -85,9 +84,9 @@ printf(
 			<li>&bullet; <code>inside_b</code> to show bottom aligned title inside thumbnail; if <code>display</code> is not <code>thumbnail</code> then treat as <code>below</code></li>
 		</ul>
 	</li>
+	<li><code>linktitle</code> <em>(bool)</em> Set to <code>1</code> or <code>true</code> to link title to vlideo.</li>
 	<li><code>showdesc</code> <em>(bool)</em> Set to <code>1</code> or <code>true</code> to show video description.</li>
 	<li><code>desclen</code> <em>(int)</em> Set number of characters to cut down length of video description. Set to <code>0</code> to use full length description.</li>
-	<li><code>noinfo</code> <em>(bool)</em> Set to <code>1</code> or <code>true</code> to hide overlay video infos (from embedded player)</li>
 	<li><code>noanno</code> <em>(bool)</em> Set to <code>1</code> or <code>true</code> to hide overlay video annotations (from embedded player)</li>
 </ul>
 </div>

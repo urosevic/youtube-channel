@@ -249,13 +249,6 @@
 								},
 								{
 									type: 'checkbox',
-									name: 'themelight',
-									label: 'Use light theme',
-									tooltip: 'Default theme is dark',
-									checked: false
-								},
-								{
-									type: 'checkbox',
 									name: 'controls',
 									label: 'Hide player controls',
 									checked: false
@@ -308,6 +301,12 @@
 									value : 'none'
 								},
 								{
+									type: 'checkbox',
+									name: 'linktitle',
+									label: 'Link outside title to video',
+									checked: false
+								},
+								{
 									type: 'listbox',
 									name: 'titletag',
 									label: 'Title HTML tag',
@@ -339,12 +338,6 @@
 									type: 'checkbox',
 									name: 'noanno',
 									label: 'Hide annotations',
-									checked: true
-								},
-								{
-									type: 'checkbox',
-									name: 'noinfo',
-									label: 'Hide video info',
 									checked: true
 								},
 							]
@@ -403,7 +396,6 @@
 						if ( e.data.thumb_quality ) shortcode += ' thumb_quality=' + e.data.thumb_quality + '';
 						// if ( e.data.cols ) shortcode += ' cols=' + e.data.cols + '';
 						if ( e.data.no_thumb_title ) shortcode += ' no_thumb_title=1';
-						if ( e.data.themelight ) shortcode += ' themelight=1';
 						if ( e.data.controls ) shortcode += ' controls=1';
 						if ( e.data.autoplay ) shortcode += ' autoplay=1';
 						if ( e.data.mute ) shortcode += ' mute=1';
@@ -414,11 +406,11 @@
 
 						// Content Layout
 						if ( e.data.showtitle ) shortcode += ' showtitle=' + e.data.showtitle + '';
+						if ( e.data.linktitle ) shortcode += ' linktitle=1';
 						if ( e.data.titletag ) shortcode += ' titletag=' + e.data.titletag + '';
 						if ( e.data.showdesc ) shortcode += ' showdesc=1';
 						if ( e.data.desclen ) shortcode += ' desclen=' + e.data.desclen.replace(/[^0-9.]/g, '') + '';
 						if ( e.data.noanno ) shortcode += ' noanno=1';
-						if ( e.data.noinfo ) shortcode += ' noinfo=1';
 
 						// Link to Channel
 						if ( e.data.link_to ) shortcode += ' link_to=' + e.data.link_to + '';

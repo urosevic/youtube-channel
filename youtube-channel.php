@@ -3,7 +3,7 @@
  * Plugin Name: YouTube Channel
  * Plugin URI:  https://urosevic.net/wordpress/plugins/youtube-channel/
  * Description: Quick and easy embed latest or random videos from YouTube channel (user uploads, liked or favourited videos) or playlist. Use <a href="widgets.php">widget</a> for sidebar or shortcode for content. Works with <em>YouTube Data API v3</em>.
- * Version:     3.0.11.8
+ * Version:     3.0.12
  * Author:      Aleksandar Urošević
  * Author URI:  https://urosevic.net/
  * License:     GPLv3
@@ -20,7 +20,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 	class WPAU_YOUTUBE_CHANNEL {
 
 		const DB_VER = 23;
-		const VER = '3.0.11.8';
+		const VER = '3.0.12';
 
 		public $plugin_name   = 'YouTube Channel';
 		public $plugin_slug   = 'youtube-channel';
@@ -120,7 +120,6 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 				'responsive'     => 1,
 				'display'        => 'thumbnail', // thumbnail, iframe, iframe2, playlist (deprecated: chromeless, object)
 				'thumb_quality'  => 'hqdefault', // default, mqdefault, hqdefault, sddefault, maxresdefault
-				'themelight'     => 0,
 				'fullscreen'     => 0,
 				'controls'       => 0,
 				'autoplay'       => 0,
@@ -128,12 +127,12 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 				'norel'          => 0,
 				'playsinline'    => 0, // play video on mobile devices inline instead in native device player
 				'showtitle'      => 'none', // above, below, inside, inside_b
+				'linktitle'      => 0,
 				'titletag'       => 'h3',
 				'showdesc'       => 0,
 				'desclen'        => 0,
 				'modestbranding' => 0,
 				'hideanno'       => 0,
-				'hideinfo'       => 0,
 
 				'goto_txt'       => 'Visit our channel',
 				'popup_goto'     => 0, // 0 same window, 1 new window JS, 2 new window target
@@ -322,12 +321,15 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 							'<p><strong>%1$s v3</strong> require <strong>%2$s</strong> set on plugin <a href="%6$s">%7$s</a>. You can generate your own key on <a href="%3$s" target="_blank">%4$s</a> by following <a href="%5$s" target="_blank">this tutorial</a>.</p>',
 							'youtube-channel'
 						),
-						array(
-							'a' => array( 'href' => array(), 'target' => array( '_blank' ) ),
-							'p' => array(),
-							'strong' => array(),
-							'br' => array(),
-						)
+						[
+							'a'      => [
+								'href'   => [],
+								'target' => [ '_blank' ],
+							],
+							'p'      => [],
+							'strong' => [],
+							'br'     => [],
+						]
 					),
 					$this->plugin_name,
 					__( 'YouTube Data API Key', 'youtube-channel' ),
@@ -463,13 +465,14 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			} // END if ( empty($this->defaults['nolightbox']) )
 
 			if ( ! empty( $js ) ) {
-				$js = sprintf('
-				<!-- YouTube Channel 3 -->
-				<script type="text/javascript">%2$s%1$s%3$s</script>
-				',
-				$js,
-				$this->defaults['js_ev_listener'] ? "window.addEventListener('DOMContentLoaded', function() {" : '',
-				$this->defaults['js_ev_listener'] ? "});" : ''
+				$js = sprintf(
+					'
+					<!-- YouTube Channel 3 -->
+					<script type="text/javascript">%2$s%1$s%3$s</script>
+					',
+					$js,
+					$this->defaults['js_ev_listener'] ? "window.addEventListener('DOMContentLoaded', function() {" : '',
+					$this->defaults['js_ev_listener'] ? '});' : ''
 				);
 
 				if ( WP_DEBUG ) {
@@ -492,7 +495,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 
 			// Extract shortcode parameters
 			$atts = shortcode_atts(
-				array(
+				[
 					'vanity'         => $instance['vanity'],
 					'channel'        => $instance['channel'],
 					'username'       => $instance['username'],
@@ -516,7 +519,6 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 					'display'        => $instance['display'],
 					'thumb_quality'  => $instance['thumb_quality'],
 					'no_thumb_title' => 0,
-					'themelight'     => $instance['themelight'],
 					'controls'       => $instance['controls'],
 					'autoplay'       => $instance['autoplay'],
 					'mute'           => $instance['autoplay_mute'],
@@ -524,11 +526,11 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 					'playsinline'    => $instance['playsinline'], // play video on mobile devices inline instead in native device player
 
 					'showtitle'      => $instance['showtitle'], // none, above, below, inside, inside_b
+					'linktitle'      => ! empty( $instance['linktitle'] ) ? $instance['linktitle'] : '0',
 					'titletag'       => $instance['titletag'], // h3, h4, h5, div, span, strong
 					'showdesc'       => $instance['showdesc'], // ex showvidesc
 					'nobrand'        => ! empty( $instance['modestbranding'] ) ? $instance['modestbranding'] : '0',
 					'desclen'        => $instance['desclen'], // ex videsclen
-					'noinfo'         => $instance['hideinfo'],
 					'noanno'         => $instance['hideanno'],
 
 					'goto_txt'       => $instance['goto_txt'],
@@ -540,7 +542,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 					'nolightbox'     => ! empty( $instance['nolightbox'] ) ? $instance['nolightbox'] : '0',
 					'target'         => '',
 					'skip'           => 0, // how many items to skip
-					),
+				],
 				$atts
 			);
 
@@ -577,7 +579,6 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			$instance['thumb_quality']  = $atts['thumb_quality']; // default, mqdefault, hqdefault, sddefault, maxresdefault
 			$instance['no_thumb_title'] = $atts['no_thumb_title']; // hide tooltip for thumbnails
 
-			$instance['themelight']     = $atts['themelight']; // use light theme, dark by default
 			$instance['controls']       = $atts['controls']; // hide controls, false by default
 			$instance['autoplay']       = $atts['autoplay']; // autoplay disabled by default
 			$instance['autoplay_mute']  = $atts['mute']; // mute sound on autoplay - disabled by default
@@ -586,11 +587,11 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 
 			// Content Layout
 			$instance['showtitle']      = $atts['showtitle']; // show video title, disabled by default
+			$instance['linktitle']      = $atts['linktitle']; // link title to video, disabled by default
 			$instance['titletag']       = $atts['titletag']; // title HTML tag wrapper, h3 by default
 			$instance['showdesc']       = $atts['showdesc']; // show video description, disabled by default
 			$instance['modestbranding'] = $atts['nobrand']; // hide YT logo
 			$instance['desclen']        = (int) $atts['desclen']; // cut video description, number of characters
-			$instance['hideinfo']       = $atts['noinfo']; // hide info by default
 			$instance['hideanno']       = $atts['noanno']; // hide annotations, false by default
 
 			// Link to Channel
@@ -728,8 +729,11 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 
 				// Get max items for random video
 				$fetch = ( empty( $instance['fetch'] ) ) ? $this->defaults['fetch'] : $instance['fetch'];
-				if ( $fetch < 1 ) { $fetch = 10; } // default 10
-				elseif ( $fetch > 50 ) { $fetch = 50; } // max 50
+				if ( $fetch < 1 ) {
+					$fetch = 10;
+				} elseif ( $fetch > 50 ) {
+					$fetch = 50;
+				}
 
 				// How many items to skip?
 				$skip = 0;
@@ -737,7 +741,9 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 					$skip = intval( $instance['skip'] ) > 49 ? 49 : intval( $instance['skip'] );
 				}
 				// If we have to skip more items than we have in fetch, set skip to $fetch-1
-				if ( $skip >= $fetch ) { $skip = $fetch - 1; }
+				if ( $skip >= $fetch ) {
+					$skip = $fetch - 1;
+				}
 
 				$resource_key = "{$resource_id}_{$fetch}";
 
@@ -755,7 +761,8 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 					}
 
 					// get/set transient cache
-					if ( false === ( $json = get_transient( $cache_key ) ) || empty( $json ) ) {
+					$json = get_transient( $cache_key );
+					if ( false === $json || empty( $json ) ) {
 
 						// no cached JSON, get new
 						$json = $this->fetch_youtube_feed( $resource_id, $fetch );
@@ -786,7 +793,8 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 				// if current feed is messed up, try to get it from fallback cache
 				if ( is_wp_error( $json_output ) && ! is_object( $json_output ) && empty( $json_output->items ) ) {
 					// do we have fallback cache?!
-					if ( true === ( $json_fallback = get_transient( $cache_key_fallback ) ) && ! empty( $json_fallback ) ) {
+					$json_fallback = get_transient( $cache_key_fallback );
+					if ( true === $json_fallback && ! empty( $json_fallback ) ) {
 						$json_output = json_decode( base64_decode( $json_fallback ) );
 						// and free memory
 						unset( $json_fallback );
@@ -800,7 +808,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 				if ( is_wp_error( $json_output ) ) {
 					$output .= $this->front_debug( $json_output->get_error_message() );
 					return $output;
-				} elseif ( isset( $json_output->items ) &&  0 == sizeof( $json_output->items ) ) {
+				} elseif ( isset( $json_output->items ) && 0 == sizeof( $json_output->items ) ) {
 					$output .= $this->front_debug( sprintf( __( 'You have set to display videos from %1$s [resource list ID: %2$s], but there have no public videos in that resouce.' ), $resource_nice_name, $resource_id ) );
 					return $output;
 				} elseif ( empty( $json_output ) ) {
@@ -816,7 +824,9 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 					$json_entry = $json_output->items;
 
 					$num = ( empty( $instance['num'] ) ) ? $this->defaults['num'] : $instance['num'];
-					if ( $num > $fetch ) { $fetch = $num; }
+					if ( $num > $fetch ) {
+						$fetch = $num;
+					}
 					$max_items = ( $fetch > sizeof( $json_entry ) ) ? sizeof( $json_entry ) : $fetch;
 
 					if ( ! empty( $instance['random'] ) ) {
@@ -913,7 +923,6 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 					unset( $random_used, $random_item, $json );
 
 				} // END if ($max_items == 0)
-
 			} // single playlist or ytc way
 
 			// Append link to channel on bootom of the widget
@@ -1184,11 +1193,21 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 					// for thubmanil only if it's `below`
 					( 'thumbnail' == $instance['display'] && 'above' == $instance['showtitle'] )
 				) {
-					$output .= sprintf(
-						'<%1$s class="ytc_title ytc_title_above">%2$s</%1$s>',
-						$title_tag,
-						$yt_title
-					);
+					if ( ! empty( $instance['linktitle'] ) ) {
+						$output .= sprintf(
+							'<%1$s class="ytc_title ytc_title_above"><a href="https://%3$s/watch/?v=%4$s" target="youtube">%2$s</a></%1$s>',
+							$title_tag,
+							$yt_title,
+							$youtube_domain,
+							$yt_id
+						);
+					} else {
+						$output .= sprintf(
+							'<%1$s class="ytc_title ytc_title_above">%2$s</%1$s>',
+							$title_tag,
+							$yt_title
+						);
+					}
 				}
 			}
 
@@ -1202,14 +1221,25 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 
 				$output .= "<iframe title=\"YouTube Video Player\" width=\"{$instance['width']}\" height=\"{$height}\" src=\"//{$youtube_domain}/embed/{$yt_id}?wmode=opaque";
 
-				if ( ! empty( $instance['norel'] ) ) { $output .= '&amp;rel=0'; } // disable related videos
-				if ( ! empty( $instance['controls'] ) ) { $output .= '&amp;controls=0'; }
-				if ( ! empty( $instance['hideinfo'] ) ) { $output .= '&amp;showinfo=0'; }
-				if ( ! empty( $instance['autoplay'] ) && 1 == $y ) { $output .= '&amp;autoplay=1'; }
-				if ( ! empty( $instance['hideanno'] ) ) { $output .= '&amp;iv_load_policy=3'; }
-				if ( ! empty( $instance['themelight'] ) ) { $output .= '&amp;theme=light'; }
-				if ( ! empty( $instance['modestbranding'] ) ) { $output .= '&amp;modestbranding=1'; }
-				if ( ! empty( $instance['playsinline'] ) ) { $output .= '&amp;playsinline=1'; }
+				// disable related vides
+				if ( ! empty( $instance['norel'] ) ) {
+					$output .= '&amp;rel=0';
+				}
+				if ( ! empty( $instance['controls'] ) ) {
+					$output .= '&amp;controls=0';
+				}
+				if ( ! empty( $instance['autoplay'] ) && 1 == $y ) {
+					$output .= '&amp;autoplay=1';
+				}
+				if ( ! empty( $instance['hideanno'] ) ) {
+					$output .= '&amp;iv_load_policy=3';
+				}
+				if ( ! empty( $instance['modestbranding'] ) ) {
+					$output .= '&amp;modestbranding=1';
+				}
+				if ( ! empty( $instance['playsinline'] ) ) {
+					$output .= '&amp;playsinline=1';
+				}
 
 				$output .= "\" style=\"border:0;\" allowfullscreen id=\"ytc_{$yt_id}\"></iframe>";
 
@@ -1223,9 +1253,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 				$js_vars = '';
 				$js_vars .= ( ! empty( $instance['norel'] ) ) ? 'rel:0,' : '';
 				$js_vars .= ( ! empty( $instance['autoplay'] ) && 1 == $y ) ? 'autoplay:1,' : '';
-				$js_vars .= ( ! empty( $instance['hideinfo'] ) ) ? 'showinfo:0,' : '';
 				$js_vars .= ( ! empty( $instance['controls'] ) ) ? 'controls:0,' : '';
-				$js_vars .= ( ! empty( $instance['themelight'] ) ) ? "theme:'light'," : '';
 				$js_vars .= ( ! empty( $instance['modestbranding'] ) ) ? 'modestbranding:1,' : '';
 				$js_vars .= ( ! empty( $instance['playsinline'] ) ) ? 'playsinline:1,' : '';
 				$js_vars .= "wmmode:'opaque'";
@@ -1268,13 +1296,24 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 					$title = sprintf( __( 'Watch video %1$s published on %2$s', 'youtube-channel' ), $yt_title, $yt_date );
 				}
 
-				$p = $target = '';
+				$p = '';
+				$target = '';
 				if ( empty( $instance['nolightbox'] ) ) {
-					if ( ! empty( $instance['norel'] ) ) { $p .= '&amp;rel=0'; }
-					if ( ! empty( $instance['modestbranding'] ) ) { $p .= '&amp;modestbranding=1'; }
-					if ( ! empty( $instance['controls'] ) ) { $p .= '&amp;controls=0'; }
-					if ( ! empty( $instance['playsinline'] ) ) { $p .= '&amp;playsinline=1'; }
-					if ( ! empty( $instance['privacy'] ) ) { $p .= '&amp;enhanceprivacy=1'; }
+					if ( ! empty( $instance['norel'] ) ) {
+						$p .= '&amp;rel=0';
+					}
+					if ( ! empty( $instance['modestbranding'] ) ) {
+						$p .= '&amp;modestbranding=1';
+					}
+					if ( ! empty( $instance['controls'] ) ) {
+						$p .= '&amp;controls=0';
+					}
+					if ( ! empty( $instance['playsinline'] ) ) {
+						$p .= '&amp;playsinline=1';
+					}
+					if ( ! empty( $instance['privacy'] ) ) {
+						$p .= '&amp;enhanceprivacy=1';
+					}
 					$lightbox_class = 'ytc-lightbox';
 				} else {
 					$lightbox_class = 'ytc-nolightbox';
@@ -1323,11 +1362,22 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 					// for thubmanil only if it's `below`
 					( 'thumbnail' == $instance['display'] && 'below' == $instance['showtitle'] )
 				) {
-					$output .= sprintf(
-						'<%1$s class="ytc_title ytc_title_below">%2$s</%1$s>',
-						$title_tag,
-						$yt_title
-					);
+					if ( ! empty( $instance['linktitle'] ) ) {
+
+						$output .= sprintf(
+							'<%1$s class="ytc_title ytc_title_below"><a href="https://%3$s/watch/?v=%4$s" target="youtube">%2$s</a></%1$s>',
+							$title_tag,
+							$yt_title,
+							$youtube_domain,
+							$yt_id
+						);
+					} else {
+						$output .= sprintf(
+							'<%1$s class="ytc_title ytc_title_below">%2$s</%1$s>',
+							$title_tag,
+							$yt_title
+						);
+					}
 				}
 			}
 
@@ -1367,7 +1417,6 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			$width          = empty( $instance['width'] ) ? 306 : $instance['width'];
 			$height         = self::height_ratio( $width, $instance['ratio'] );
 			$autoplay       = empty( $instance['autoplay'] ) ? '' : '&autoplay=1';
-			$theme          = empty( $instance['themelight'] ) ? '' : '&theme=light';
 			$modestbranding = empty( $instance['modestbranding'] ) ? '' : '&modestbranding=1';
 			$rel            = empty( $instance['norel'] ) ? '' : '&rel=0';
 			$playsinline    = empty( $instance['playsinline'] ) ? '' : '&playsinline=1';
@@ -1381,8 +1430,10 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 
 			$output .= "<div class=\"ytc_video_container ytc_video_1 ytc_video_single ytc_playlist_only {$arclass}\">";
 			$output .= '<div class="fluid-width-video-wrapper">';
-			$output .= "<iframe src=\"//{$youtube_domain}/embed/videoseries?list={$resource_id}{$autoplay}{$theme}{$modestbranding}{$rel}\"";
-			if ( ! empty( $instance['fullscreen'] ) ) { $output .= ' allowfullscreen'; }
+			$output .= "<iframe src=\"//{$youtube_domain}/embed/videoseries?list={$resource_id}{$autoplay}{$modestbranding}{$rel}\"";
+			if ( ! empty( $instance['fullscreen'] ) ) {
+				$output .= ' allowfullscreen';
+			}
 			$output .= " width=\"{$width}\" height=\"{$height}\" frameborder=\"0\"></iframe>";
 			$output .= '</div><!-- .fluid-width-video-wrapper -->';
 			$output .= '</div><!-- .ytc_video_container -->';
@@ -1486,11 +1537,11 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 				$resource_nice_name = 'Unknown resource';
 			}
 			return $resource_nice_name;
-		}
+		} // END function resource_nice_name( $resource_id )
 
 		function youtube_domain( $instance ) {
-			return empty( $instance['privacy'] ) ?  'www.youtube.com' : 'www.youtube-nocookie.com';
-		} // end function youtube_domain
+			return empty( $instance['privacy'] ) ? 'www.youtube.com' : 'www.youtube-nocookie.com';
+		} // END function youtube_domain
 
 		function arclass( $instance ) {
 			return ! empty( $instance['ratio'] ) && 1 == $instance['ratio'] ? 'ar4_3' : 'ar16_9';

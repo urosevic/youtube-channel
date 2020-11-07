@@ -521,20 +521,6 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 				) // args
 			);
 
-			// Light Theme
-			add_settings_field(
-				$this->option_name . 'themelight', // id
-				__( 'Light Theme', 'youtube-channel' ), // Title
-				array( &$this, 'settings_field_checkbox' ), // Callback
-				$this->slug . '_video', // Page
-				'ytc_video', // section
-				array(
-					'field'       => $this->option_name . '[themelight]',
-					'description' => __( 'Enable this option to use light theme for playback controls instead dark.', 'youtube-channel' ),
-					'class'       => 'checkbox',
-					'value'       => isset( $this->defaults['themelight'] ) ? $this->defaults['themelight'] : '0',
-				) // args
-			);
 			// No Player Controls
 			add_settings_field(
 				$this->option_name . 'controls', // id
@@ -578,16 +564,16 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 					'value'       => isset( $this->defaults['autoplay_mute'] ) ? $this->defaults['autoplay_mute'] : '0',
 				) // args
 			);
-			// No related videos
+			// Only channel related videos
 			add_settings_field(
 				$this->option_name . 'norel', // id
-				__( 'No related videos', 'youtube-channel' ), // Title
+				__( 'Only channel related videos', 'youtube-channel' ), // Title
 				array( &$this, 'settings_field_checkbox' ), // Callback
 				$this->slug . '_video', // Page
 				'ytc_video', // section
 				array(
 					'field'       => $this->option_name . '[norel]',
-					'description' => __( 'Enable this option to hide related videos after finished playback', 'youtube-channel' ),
+					'description' => __( 'Enable this option to show after finished playback only related videos that come from the same channel as the video that was just played', 'youtube-channel' ),
 					'class'       => 'checkbox',
 					'value'       => isset( $this->defaults['norel'] ) ? $this->defaults['norel'] : '0',
 				) // args
@@ -604,20 +590,6 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 					'description' => __( 'Enable this option to hide video annotations (custom text set by uploader over video during playback)', 'youtube-channel' ),
 					'class'       => 'checkbox',
 					'value'       => isset( $this->defaults['hideanno'] ) ? $this->defaults['hideanno'] : '0',
-				) // args
-			);
-			// Hide Video Info
-			add_settings_field(
-				$this->option_name . 'hideinfo', // id
-				__( 'No video info', 'youtube-channel' ), // Title
-				array( &$this, 'settings_field_checkbox' ), // Callback
-				$this->slug . '_video', // Page
-				'ytc_video', // section
-				array(
-					'field'       => $this->option_name . '[hideinfo]',
-					'description' => __( 'Enable this option to hide informations about video before play start (video title and uploader in overlay)', 'youtube-channel' ),
-					'class'       => 'checkbox',
-					'value'       => isset( $this->defaults['hideinfo'] ) ? $this->defaults['hideinfo'] : '0',
 				) // args
 			);
 			// Hide YT logo
@@ -672,6 +644,21 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 					),
 				) // args
 			);
+			// Link Video Title
+			add_settings_field(
+				$this->option_name . 'linktitle', // id
+				__( 'Link Title to Video', 'youtube-channel' ), // Title
+				array( &$this, 'settings_field_checkbox' ), // Callback
+				$this->slug . '_content', // Page
+				'ytc_content', // section
+				array(
+					'field'       => $this->option_name . '[linktitle]',
+					'description' => __( 'Enable this option to link outside title to video.', 'youtube-channel' ),
+					'class'       => 'checkbox',
+					'value'       => isset( $this->defaults['linktitle'] ) ? $this->defaults['linktitle'] : '0',
+				) // args
+			);
+
 			// Video Title HTML Tag
 			add_settings_field(
 				$this->option_name . 'titletag', // id
@@ -1110,19 +1097,18 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 					$sanitized['playsinline']    = ( ! empty( $options['playsinline'] ) && $options['playsinline'] ) ? 1 : 0;
 					$sanitized['nolightbox']     = ( ! empty( $options['nolightbox'] ) && $options['nolightbox'] ) ? 1 : 0;
 					$sanitized['fullscreen']     = ( ! empty( $options['fullscreen'] ) && $options['fullscreen'] ) ? 1 : 0;
-					$sanitized['themelight']     = ( ! empty( $options['themelight'] ) && $options['themelight'] ) ? 1 : 0;
 					$sanitized['controls']       = ( ! empty( $options['controls'] ) && $options['controls'] ) ? 1 : 0;
 					$sanitized['autoplay']       = ( ! empty( $options['autoplay'] ) && $options['autoplay'] ) ? 1 : 0;
 					$sanitized['autoplay_mute']  = ( ! empty( $options['autoplay_mute'] ) && $options['autoplay_mute'] ) ? 1 : 0;
 					$sanitized['norel']          = ( ! empty( $options['norel'] ) && $options['norel'] ) ? 1 : 0;
 					$sanitized['modestbranding'] = ( ! empty( $options['modestbranding'] ) && $options['modestbranding'] ) ? 1 : 0;
 					$sanitized['hideanno']       = ( ! empty( $options['hideanno'] ) && $options['hideanno'] ) ? 1 : 0;
-					$sanitized['hideinfo']       = ( ! empty( $options['hideinfo'] ) && $options['hideinfo'] ) ? 1 : 0;
 				break; // Video
 
 				// --- Content ---
 				case 'ytc_content':
 					$sanitized['showtitle']  = ( ! empty( $options['showtitle'] ) ) ? $options['showtitle'] : $this->defaults['showtitle'];
+					$sanitized['linktitle']  = ( ! empty( $options['linktitle'] ) && $options['linktitle'] ) ? 1 : 0;
 					$sanitized['titletag']   = ( ! empty( $options['titletag'] ) ) ? strtolower( $options['titletag'] ) : strtolower( $this->defaults['titletag'] );
 					$sanitized['showdesc']   = ( ! empty( $options['showdesc'] ) && $options['showdesc'] ) ? 1 : 0;
 					$sanitized['desclen']    = ( ! empty( $options['desclen'] ) ) ? intval( $options['desclen'] ) : $this->defaults['desclen'];
