@@ -444,8 +444,10 @@ If you don't wish to pay for enhancements (then you don't care would that be imp
 
 == Changelog ==
 
-= 3.0.12 (20201014) =
-* Add: shortcode parameter `skip` to skip requested number of items
+= 3.0.12 (20201107) =
+* Improve: code for widget
+* Add: widget parameter `skip`
+* (20201014) Add: shortcode parameter `skip` to skip requested number of items
 
 = 3.0.11.8 (20200810) =
 * Tested: WordPress 5.5-RC2-48768 and PHP 7.4.1

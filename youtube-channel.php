@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 	class WPAU_YOUTUBE_CHANNEL {
 
-		const DB_VER = 22;
+		const DB_VER = 23;
 		const VER = '3.0.11.8';
 
 		public $plugin_name   = 'YouTube Channel';
@@ -112,6 +112,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 				'cache'          => 300, // 5 minutes // ex cache_time
 				'fetch'          => 25, // ex maxrnd
 				'num'            => 1, // ex vidqty
+				'skip'           => 0,
 				'privacy'        => 0,
 
 				'ratio'          => 3, // 3 - 16:9, 1 - 4:3 (deprecated: 2 - 16:10)
@@ -731,7 +732,10 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 				elseif ( $fetch > 50 ) { $fetch = 50; } // max 50
 
 				// How many items to skip?
-				$skip = $instance['skip'] > 49 ? 49 : $instance['skip'];
+				$skip = 0;
+				if ( ! empty( $instance['skip'] ) ) {
+					$skip = intval( $instance['skip'] ) > 49 ? 49 : intval( $instance['skip'] );
+				}
 				// If we have to skip more items than we have in fetch, set skip to $fetch-1
 				if ( $skip >= $fetch ) { $skip = $fetch - 1; }
 
