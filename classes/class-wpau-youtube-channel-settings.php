@@ -21,13 +21,13 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 			global $wpau_youtube_channel;
 
 			// get default values
-			$this->slug = $wpau_youtube_channel->plugin_slug;
+			$this->slug        = $wpau_youtube_channel->plugin_slug;
 			$this->option_name = $wpau_youtube_channel->plugin_option;
-			$this->defaults = get_option( $this->option_name );
+			$this->defaults    = get_option( $this->option_name );
 
 			// register actions
-			add_action( 'admin_init', array( &$this, 'register_settings' ) );
-			add_action( 'admin_menu', array( &$this, 'add_menu' ) );
+			add_action( 'admin_init', array( $this, 'register_settings' ) );
+			add_action( 'admin_menu', array( $this, 'add_menu' ) );
 
 		} // END public function __construct
 
@@ -61,6 +61,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 						$this->settings_description_global(),
 						sprintf(
 							wp_kses(
+								// translators: %1$s is replaced with Google Developers Console Project page, %2$s with label of it
 								__(
 									'Your YouTube Data API Key (get it from <a href="%1$s" target="_blank">%2$s</a>)',
 									'youtube-channel'
@@ -76,7 +77,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 							__( 'Google Developers Console', 'youtube-channel' )
 						)
 					),
-					'class'       => 'regular-text password',
+					'class'       => 'regular-text password blur-on-lose-focus',
 					'value'       => isset( $this->defaults['apikey'] ) ? $this->defaults['apikey'] : '',
 				) // args
 			);
@@ -94,6 +95,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 						$this->settings_description_required(),
 						sprintf(
 							wp_kses(
+								// translators: %1$s is replaced with link to Advanded YouTube Account settings, %2$s with label for it
 								__(
 									'Your YouTube Channel ID (get it from <a href="%1$s" target="_blank">%2$s</a>)',
 									'youtube-channel'
@@ -106,14 +108,50 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 								)
 							),
 							esc_url( 'https://www.youtube.com/account_advanced' ),
-							__( 'YouTube Account Overview', 'youtube-channel' )
+							__( 'YouTube Advanced Settings', 'youtube-channel' )
 						)
 					),
 					'class'       => 'regular-text',
 					'value'       => isset( $this->defaults['channel'] ) ? $this->defaults['channel'] : '',
 				) // args
 			);
-			// Vanity
+
+			// Handle (new in 2022)
+			add_settings_field(
+				$this->option_name . 'handle', // id
+				__( 'YouTube Handle', 'youtube-channel' ), // Title
+				array( &$this, 'settings_field_input_text' ), // Callback
+				$this->slug . '_general', // Page
+				'ytc_general', // section
+				array(
+					'field'       => $this->option_name . '[handle]',
+					'description' => sprintf(
+						'%s %s',
+						$this->settings_description_optional(),
+						sprintf(
+							wp_kses(
+								// translators: %1$s is replaced with @ sign, %2$s with link to YouTube handle, %3$s with label for it
+								__(
+									'Your YouTube Handle (handle including %1$s from <a href="%2$s" target="_blank">%3$s</a>)',
+									'youtube-channel'
+								),
+								array(
+									'a' => array(
+										'href'   => array(),
+										'target' => array( '_blank' ),
+									),
+								)
+							),
+							'@',
+							esc_url( 'https://www.youtube.com/handle' ),
+							__( 'Your handle', 'youtube-channel' )
+						)
+					),
+					'class'       => 'regular-text',
+					'value'       => isset( $this->defaults['handle'] ) ? $this->defaults['handle'] : '',
+				) // args
+			);
+			// Vanity (deprecated in 2022)
 			add_settings_field(
 				$this->option_name . 'vanity', // id
 				__( 'YouTube Vanity Name', 'youtube-channel' ), // Title
@@ -124,33 +162,21 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 					'field'       => $this->option_name . '[vanity]',
 					'description' => sprintf(
 						'%s %s',
-						$this->settings_description_optional(),
+						$this->settings_description_deprecated(),
 						sprintf(
-							wp_kses(
-								__(
-									'Your YouTube Custom Name (get only part after %1$s instead whole URL from <a href="%2$s" target="_blank">%3$s</a>)',
-									'youtube-channel'
-								),
-								array(
-									'a' => array(
-										'href'   => array(),
-										'target' => array( '_blank' ),
-									),
-								)
-							),
-							'www.youtube.com/c/',
-							esc_url( 'https://www.youtube.com/account_advanced' ),
-							__( 'YouTube Account Overview', 'youtube-channel' )
-						)
+							// translators: %s is replaced with www.youtube.com/c/
+							__( 'Your YouTube Custom Name used to be part of %s', 'youtube-channel' ),
+							'www.youtube.com/c/'
+						),
 					),
-					'class'       => 'regular-text',
+					'class'       => 'regular-text deprecated',
 					'value'       => isset( $this->defaults['vanity'] ) ? $this->defaults['vanity'] : '',
 				) // args
 			);
 			// Username
 			add_settings_field(
 				$this->option_name . 'username', // id
-				__( 'Legacy YouTube Username', 'youtube-channel' ), // Title
+				__( 'YouTube Username', 'youtube-channel' ), // Title
 				array( &$this, 'settings_field_input_text' ), // Callback
 				$this->slug . '_general', // Page
 				'ytc_general', // section
@@ -158,10 +184,10 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 					'field'       => $this->option_name . '[username]',
 					'description' => sprintf(
 						'%s %s',
-						$this->settings_description_optional(),
+						$this->settings_description_deprecated(),
 						__( 'Your YouTube legacy username', 'youtube-channel' )
 					),
-					'class'       => 'regular-text',
+					'class'       => 'regular-text deprecated',
 					'value'       => isset( $this->defaults['username'] ) ? $this->defaults['username'] : '',
 				) // args
 			);
@@ -192,7 +218,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 				'ytc_general', // section
 				array(
 					'field'       => $this->option_name . '[resource]',
-					'label' => __( 'Resource:', 'youtube-channel' ),
+					'label'       => __( 'Resource:', 'youtube-channel' ),
 					'description' => __( 'What to use as resource for feeds', 'youtube-channel' ),
 					'class'       => 'regular-text',
 					'value'       => isset( $this->defaults['resource'] ) ? $this->defaults['resource'] : '0',
@@ -207,7 +233,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 			// Cache
 			add_settings_field(
 				$this->option_name . 'cache', // id
-				__( 'Cache Timeout','youtube-channel' ),
+				__( 'Cache Timeout', 'youtube-channel' ),
 				array( &$this, 'settings_field_select' ),
 				$this->slug . '_general',
 				'ytc_general',
@@ -297,7 +323,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 				array(
 					'field'       => $this->option_name . '[js_ev_listener]',
 					'label'       => __( 'Enable', 'youtube-channel' ),
-					'description' => __( 'If YTC block fail to render on your website because of async/defer loading of java script, try to enable this option to wrap YTC code within DOMContentLoaded event listener', 'youtube-channel' ),
+					'description' => __( 'If YTC block fail to render on your website because of async/defer loading of JavaScript, try to enable this option to wrap YTC code within DOMContentLoaded event listener', 'youtube-channel' ),
 					'class'       => 'checkbox',
 					'value'       => isset( $this->defaults['js_ev_listener'] ) ? $this->defaults['js_ev_listener'] : '0',
 				) // args
@@ -315,6 +341,9 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 					'label'       => __( 'Enable', 'youtube-channel' ),
 					'description' => sprintf(
 						wp_kses(
+							/* translators: %1$s is replaced with link to Enhanced Priovacy article
+							 * %2%s is replaced with translated label Learn more here
+							 */
 							__(
 								'Enable this option to protect your visitors privacy. <a href="%1$s" target="_blank">%2$s</a>',
 								'youtube-channel'
@@ -344,14 +373,33 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 					'field'       => $this->option_name . '[tinymce]',
 					'label'       => __( 'Enable', 'youtube-channel' ),
 					'description' => sprintf(
+						// translators: %s is replaced with plugin name
 						__( 'Disable this option to hide %s button from TinyMCE toolbar on post and page editor.', 'youtube-channel' ),
-						__( 'YouTube Channel', 'youtube-channel' )
+						'<strong>' . __( 'YouTube Channel', 'youtube-channel' ) . '</strong>'
 					),
 					'class'       => 'checkbox',
 					'value'       => isset( $this->defaults['tinymce'] ) ? $this->defaults['tinymce'] : '0',
 				) // args
 			);
-
+			// Widget Preview
+			add_settings_field(
+				$this->option_name . 'block_preview', // id
+				__( 'Preview Widget in Block Editor', 'youtube-channel' ), // Title
+				array( &$this, 'settings_field_checkbox' ), // Callback
+				$this->slug . '_general', // Page
+				'ytc_general', // section
+				array(
+					'field'       => $this->option_name . '[block_preview]',
+					'label'       => __( 'Enable', 'youtube-channel' ),
+					'description' => sprintf(
+						// translators: %s is replaced with plugin name
+						__( 'Disable this option to prevent %s Widget Preview gets rendered on Block Editor.', 'youtube-channel' ),
+						'<strong>' . __( 'YouTube Channel', 'youtube-channel' ) . '</strong>'
+					),
+					'class'       => 'checkbox',
+					'value'       => isset( $this->defaults['block_preview'] ) ? boolval( $this->defaults['block_preview'] ) : true,
+				) // args
+			);
 			// --- Register setting General so $_POST handling is done ---
 			register_setting(
 				'ytc_general', // Setting group
@@ -473,6 +521,9 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 					'field'       => $this->option_name . '[playsinline]',
 					'description' => sprintf(
 						wp_kses(
+							/* translators: %1$s is replaced with link to YouTube IFrame Player API article
+							 * %2$s is replaced with translated label Learn more here
+							 */
 							__(
 								'Enable this option to override fullscreen playback on iOS, and force inline playback on page and in lightbox. <a href="%1$s" target="_blank">%2$s</a>',
 								'youtube-channel'
@@ -743,9 +794,10 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 					'value'       => isset( $this->defaults['link_to'] ) ? $this->defaults['link_to'] : 'none',
 					'items'       => array(
 						'none'    => __( 'Hide link', 'youtube-channel' ),
-						'vanity'  => __( 'Vanity custom URL', 'youtube-channel' ),
+						'handle'  => __( 'YouTube handle URL', 'youtube-channel' ),
 						'channel' => __( 'Channel page URL', 'youtube-channel' ),
-						'legacy'  => __( 'Legacy username page', 'youtube-channel' ),
+						'vanity'  => __( 'Vanity custom URL (deprecated)', 'youtube-channel' ),
+						'legacy'  => __( 'Legacy username page (deprecated)', 'youtube-channel' ),
 					),
 				) // args
 			);
@@ -779,7 +831,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 					'field'       => $this->option_name . '[goto_txt]',
 					'class'       => 'regular-text',
 					'description' => __( 'Set default title for link', 'youtube-channel' ),
-					'value'       => isset( $this->defaults['goto_txt'] ) ? $this->defaults['goto_txt'] : '',
+					'value'       => isset( $this->defaults['goto_txt'] ) ? esc_html( $this->defaults['goto_txt'] ) : '',
 				) // args
 			);
 
@@ -800,7 +852,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 			// Add a page to manage this plugin's settings
 			add_options_page(
 				__( 'YouTube Channel', 'youtube-channel' ),
-				__( 'YouTube Channel','youtube-channel' ),
+				__( 'YouTube Channel', 'youtube-channel' ),
 				'manage_options',
 				$this->slug,
 				array( &$this, 'plugin_settings_page' )
@@ -830,65 +882,54 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 				__( 'Optional', 'youtube-channel' )
 			);
 		}
+		public function settings_description_deprecated() {
+			return sprintf(
+				'<strong title="%1$s" style="cursor:help;">[%2$s]</strong>',
+				__( 'YouTube deprecated this option. You can use it if you know it, but you cannot get it anymore from YouTube.', 'youtube-channel' ),
+				__( 'Deprecated', 'youtube-channel' )
+			);
+		}
 
 		// --- Section desciptions ---
 		public function settings_general_section_description() {
-
-			echo '<p>' .
-			sprintf(
-				wp_kses(
-					__(
-						'Configure general defaults for %1$s used as fallback options for shortcodes. Only some options are fallback for widget (Channel ID, Vanity Name, Legacy Username, Default Playlist), while other options are just initial set of settings for new widget. To get %2$s and %3$s visit <a href="%4$s" target="_blank">%5$s</a>.',
-						'youtube-channel'
-					),
-					array(
-						'a' => array(
-							'href'   => array(),
-							'target' => array( '_blank' ),
-						),
-					)
-				),
-				__( 'YouTube Channel', 'youtube-channel' ),
-				__( 'Channel ID', 'youtube-channel' ),
-				__( 'Vanity URL', 'youtube-channel' ),
-				esc_url( 'https://www.youtube.com/account_advanced' ),
-				__( 'YouTube Account Overview', 'youtube-channel' )
-			) .
-			'<p>';
-
+			printf(
+				// translators: %s is replaced with plugin name
+				'<p>' . __(
+					'Configure general defaults for the %1$s used as fallback options for shortcodes and initial values for new widget(s).<br />Only some options are fallback for widget (Channel ID, Handle, Vanity Name, Legacy Username, Default Playlist), while other options are just initial set of settings for new widget.',
+					'youtube-channel'
+				) . '</p>',
+				'<strong>' . __( 'YouTube Channel', 'youtube-channel' ) . '</strong>'
+			);
 		} // END public function settings_general_section_description()
 
 		public function settings_video_section_description() {
-			echo '<p>' .
-			sprintf(
-				__( 'Configure video specific defaults for %s used as fallback options for shortcodes and initial set of options for new widget.', 'youtube-channel' ),
-				__( 'YouTube Channel', 'youtube-channel' )
-			) .
-			'</p>';
+			printf(
+				// translators: %s is replaced with plugin name
+				'<p>' . __( 'Configure video specific defaults for %s used as fallback options for shortcodes and initial set of options for new widget.', 'youtube-channel' ) . '</p>',
+				'<strong>' . __( 'YouTube Channel', 'youtube-channel' ) . '</strong>'
+			);
 		} // END public function  settings_video_section_description()
 
 		public function settings_content_section_description() {
-			echo '<p>' .
 			sprintf(
-				__( 'Configure defaults of content around and over videos for %s used as fallback options for shortcodes and initial set of options for new widget.', 'youtube-channel' ),
+				// translators: %s is replaced with plugin name
+				'<p>' . __( 'Configure defaults of content around and over videos for %s used as fallback options for shortcodes and initial set of options for new widget.', 'youtube-channel' ) . '</p>',
 				__( 'YouTube Channel', 'youtube-channel' )
-			) .
-			'</p>';
+			);
 		} // END public function settings_content_section_description()
 
 		public function settings_link_section_description() {
-			echo '<p>' .
 			sprintf(
-				__( 'Configure defaults for link to channel below %s block used as fallback options for shortcodes and initial set of options for new widget.', 'youtube-channel' ),
+				// translators: %s is replaced with plugin name
+				'<p>' . __( 'Configure defaults for link to channel below %s block used as fallback options for shortcodes and initial set of options for new widget.', 'youtube-channel' ) . '</p>',
 				__( 'YouTube Channel', 'youtube-channel' )
-			) .
-			'</p>';
+			);
 		} // END public function settings_link_section_description()
 
 		/**
 		 * This function provides separator for settings fields
 		 */
-		public function settings_field_separator( $args = null ) {
+		public function settings_field_separator() {
 			echo '<hr>';
 		} // END public function settings_field_input_text()
 
@@ -946,8 +987,8 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 
 			$html = sprintf( '<select id="%1$s" name="%1$s">', $args['field'] );
 			foreach ( $args['items'] as $key => $val ) {
-				$selected = ( $args['value'] == $key ) ? 'selected="selected"' : '';
-				$html .= sprintf( '<option %1$s value="%2$s">%3$s</option>', $selected, $key, $val );
+				$selected = ( $args['value'] === $key ) ? 'selected="selected"' : '';
+				$html    .= sprintf( '<option %1$s value="%2$s">%3$s</option>', $selected, $key, $val );
 			}
 			$html .= sprintf( '</select><p class="description">%s</p>', $args['description'] );
 
@@ -961,14 +1002,14 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 		public function settings_field_checkbox( $args ) {
 
 			$checked = ! empty( $args['value'] ) ? 'checked="checked"' : '';
-			$html = sprintf(
+			$html    = sprintf(
 				'<label for="%1$s"><input type="checkbox" name="%1$s" id="%1$s" value="1" class="%2$s" %3$s />%4$s</label>',
 				$args['field'],
 				$args['class'],
 				$checked,
 				isset( $args['label'] ) ? $args['label'] : ''
 			);
-			$html .= sprintf( '<p class="description">%s</p>', $args['description'] );
+			$html   .= sprintf( '<p class="description">%s</p>', $args['description'] );
 			echo $html;
 
 		} // END public function settings_field_checkbox()
@@ -1049,7 +1090,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 			}
 
 			// Render the settings template
-			require_once( 'settings-template.php' );
+			require_once( YTC_DIR_TEMPLATES . '/settings.php' );
 
 		} // eom plugin_settings_page()
 
@@ -1070,27 +1111,29 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 
 				// --- General ---
 				case 'ytc_general':
-					$apikey = ( defined( 'YOUTUBE_DATA_API_KEY' ) ) ? YOUTUBE_DATA_API_KEY : '';
-					$sanitized['apikey']         = ( ! empty( $options['apikey'] ) ) ? trim( $options['apikey'] ) : $apikey;
-					$sanitized['channel']        = ( ! empty( $options['channel'] ) ) ? trim( $options['channel'] ) : '';
-					$sanitized['vanity']         = ( ! empty( $options['vanity'] ) ) ? trim( $options['vanity'] ) : '';
-					$sanitized['username']       = ( ! empty( $options['username'] ) ) ? trim( $options['username'] ) : '';
-					$sanitized['playlist']       = ( ! empty( $options['playlist'] ) ) ? trim( $options['playlist'] ) : '';
-					$sanitized['resource']       = ( isset( $options['resource'] ) ) ? intval( $options['resource'] ) : $this->defaults['resource'];
-					$sanitized['cache']          = ( isset( $options['cache'] ) ) ? intval( $options['cache'] ) : $this->defaults['cache'];
-					$sanitized['fetch']          = ( ! empty( $options['fetch'] ) ) ? intval( $options['fetch'] ) : $this->defaults['fetch'];
-					$sanitized['num']            = ( ! empty( $options['num'] ) ) ? intval( $options['num'] ) : $this->defaults['num'];
-					$sanitized['privacy']        = ( ! empty( $options['privacy'] ) && $options['privacy'] ) ? 1 : 0;
-					$sanitized['tinymce']        = ( ! empty( $options['tinymce'] ) && $options['tinymce'] ) ? 1 : 0;
-					$sanitized['sslverify']      = ( ! empty( $options['sslverify'] ) && $options['sslverify'] ) ? 1 : 0;
-					$sanitized['js_ev_listener'] = ( ! empty( $options['js_ev_listener'] ) && $options['js_ev_listener'] ) ? 1 : 0;
-					$sanitized['timeout']        = ( ! empty( $options['timeout'] ) ) ? intval( $options['timeout'] ) : $this->defaults['timeout'];
-				break; // General
+					// $apikey                      = defined( 'YOUTUBE_DATA_API_KEY' ) ? YOUTUBE_DATA_API_KEY : '';
+					$sanitized['apikey']         = ! empty( $options['apikey'] ) ? ytc_sanitize_api_key( $options['apikey'] ) : '';
+					$sanitized['channel']        = ! empty( $options['channel'] ) ? ytc_sanitize_api_key( $options['channel'] ) : '';
+					$sanitized['handle']         = ! empty( $options['handle'] ) ? sanitize_user( $options['handle'], true ) : '';
+					$sanitized['vanity']         = ! empty( $options['vanity'] ) ? sanitize_user( $options['vanity'], true ) : '';
+					$sanitized['username']       = ! empty( $options['username'] ) ? sanitize_user( $options['username'], true ) : '';
+					$sanitized['playlist']       = ! empty( $options['playlist'] ) ? ytc_sanitize_api_key( $options['playlist'] ) : '';
+					$sanitized['resource']       = isset( $options['resource'] ) ? intval( $options['resource'] ) : intval( $this->defaults['resource'] );
+					$sanitized['cache']          = isset( $options['cache'] ) ? intval( $options['cache'] ) : intval( $this->defaults['cache'] );
+					$sanitized['fetch']          = ! empty( $options['fetch'] ) ? intval( $options['fetch'] ) : intval( $this->defaults['fetch'] );
+					$sanitized['num']            = ! empty( $options['num'] ) ? intval( $options['num'] ) : intval( $this->defaults['num'] );
+					$sanitized['privacy']        = ! empty( $options['privacy'] ) && $options['privacy'] ? 1 : 0;
+					$sanitized['tinymce']        = ! empty( $options['tinymce'] ) && $options['tinymce'] ? 1 : 0;
+					$sanitized['sslverify']      = ! empty( $options['sslverify'] ) && $options['sslverify'] ? 1 : 0;
+					$sanitized['js_ev_listener'] = ! empty( $options['js_ev_listener'] ) && $options['js_ev_listener'] ? 1 : 0;
+					$sanitized['timeout']        = ! empty( $options['timeout'] ) ? intval( $options['timeout'] ) : intval( $this->defaults['timeout'] );
+					$sanitized['block_preview']  = ! empty( $options['block_preview'] ) && $options['block_preview'] ? 1 : 0;
+					break; // General
 
 				// --- Video ---
 				case 'ytc_video':
-					$sanitized['width']          = ( ! empty( $options['width'] ) ) ? intval( $options['width'] ) : $this->defaults['width'];
-					$sanitized['ratio']          = ( isset( $options['ratio'] ) ) ? intval( $options['ratio'] ) : $this->defaults['ratio'];
+					$sanitized['width']          = ( ! empty( $options['width'] ) ) ? intval( $options['width'] ) : intval( $this->defaults['width'] );
+					$sanitized['ratio']          = ( isset( $options['ratio'] ) ) ? intval( $options['ratio'] ) : intval( $this->defaults['ratio'] );
 					$sanitized['display']        = ( ! empty( $options['display'] ) ) ? trim( $options['display'] ) : $this->defaults['display'];
 					$sanitized['thumb_quality']  = ( ! empty( $options['thumb_quality'] ) ) ? trim( $options['thumb_quality'] ) : $this->defaults['thumb_quality'];
 					$sanitized['responsive']     = ( ! empty( $options['responsive'] ) && $options['responsive'] ) ? 1 : 0;
@@ -1103,23 +1146,23 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 					$sanitized['norel']          = ( ! empty( $options['norel'] ) && $options['norel'] ) ? 1 : 0;
 					$sanitized['modestbranding'] = ( ! empty( $options['modestbranding'] ) && $options['modestbranding'] ) ? 1 : 0;
 					$sanitized['hideanno']       = ( ! empty( $options['hideanno'] ) && $options['hideanno'] ) ? 1 : 0;
-				break; // Video
+					break; // Video
 
 				// --- Content ---
 				case 'ytc_content':
-					$sanitized['showtitle']  = ( ! empty( $options['showtitle'] ) ) ? $options['showtitle'] : $this->defaults['showtitle'];
-					$sanitized['linktitle']  = ( ! empty( $options['linktitle'] ) && $options['linktitle'] ) ? 1 : 0;
-					$sanitized['titletag']   = ( ! empty( $options['titletag'] ) ) ? strtolower( $options['titletag'] ) : strtolower( $this->defaults['titletag'] );
-					$sanitized['showdesc']   = ( ! empty( $options['showdesc'] ) && $options['showdesc'] ) ? 1 : 0;
-					$sanitized['desclen']    = ( ! empty( $options['desclen'] ) ) ? intval( $options['desclen'] ) : $this->defaults['desclen'];
-				break; // Content
+					$sanitized['showtitle'] = ! empty( $options['showtitle'] ) && in_array( $options['showtitle'], array( 'none', 'above', 'below', 'inside', 'inside_b' ), true ) ? $options['showtitle'] : $this->defaults['showtitle']; // string
+					$sanitized['linktitle'] = ! empty( $options['linktitle'] ) && $options['linktitle'] ? 1 : 0; // bool
+					$sanitized['titletag']  = ! empty( $options['titletag'] ) && in_array( strtolower( $options['titletag'] ), array( 'h3', 'h4', 'h5', 'div', 'span', 'strong' ), true ) ? strtolower( $options['titletag'] ) : strtolower( $this->defaults['titletag'] ); // string
+					$sanitized['showdesc']  = ! empty( $options['showdesc'] ) && $options['showdesc'] ? 1 : 0; // bool
+					$sanitized['desclen']   = ! empty( $options['desclen'] ) ? intval( $options['desclen'] ) : $this->defaults['desclen']; // integer
+					break; // Content
 
 				// --- Link to Channel ---
 				case 'ytc_link':
-					$sanitized['link_to']    = ( isset( $options['link_to'] ) ) ? $options['link_to'] : $this->defaults['link_to'];
-					$sanitized['goto_txt']   = ( ! empty( $options['goto_txt'] ) ) ? $options['goto_txt'] : $this->defaults['goto_txt'];
-					$sanitized['popup_goto'] = ( isset( $options['popup_goto'] ) ) ? intval( $options['popup_goto'] ) : $this->defaults['popup_goto'];
-				break; // Link to Channel
+					$sanitized['link_to']    = isset( $options['link_to'] ) && in_array( $options['link_to'], array( 'none', 'handle', 'vanity', 'channel', 'legacy' ), true ) ? $options['link_to'] : $this->defaults['link_to']; // string
+					$sanitized['goto_txt']   = ! empty( $options['goto_txt'] ) ? sanitize_text_field( $options['goto_txt'], true ) : $this->defaults['goto_txt']; // text
+					$sanitized['popup_goto'] = isset( $options['popup_goto'] ) && in_array( intval( $options['popup_goto'] ), array( 0, 1, 2 ), true ) ? intval( $options['popup_goto'] ) : $this->defaults['popup_goto']; // integer 0, 1 or 2
+					break; // Link to Channel
 
 			} // switch
 

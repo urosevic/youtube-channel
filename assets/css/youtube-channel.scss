@@ -129,9 +129,9 @@
 
 	/* link */
 	& .ytc_link {
-		position: relative;
 		clear: both;
 		float: left;
+		position: relative;
 		width: 100%;
 
 		&>p {
@@ -142,7 +142,7 @@
 
 	/* Debug Errors */
 	& p.ytc_error {
-		color: #DD0000;
+		color: #d00;
 	}
 
 } // .youtube_channel
@@ -150,10 +150,9 @@
 .clearfix:after,
 .widget_youtube-channel:after,
 .youtube_channel:after {
+	clear: both;
 	content: " "; /* Older browser do not support empty content */
-	visibility: hidden;
 	display: block;
 	height: 0;
-	clear: both;
+	visibility: hidden;
 }
-

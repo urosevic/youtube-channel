@@ -17,7 +17,7 @@ function au_youtube_channel_update() {
 	$current_db_ver = get_option( 'youtube_channel_db_ver', 0 );
 
 	// this is the target version that we need to reach
-	$target_db_ver = WPAU_YOUTUBE_CHANNEL::DB_VER;
+	$target_db_ver = YTC_VER_DB;
 
 	// run update routines one by one until the current version number
 	// reaches the target version number
@@ -38,7 +38,7 @@ function au_youtube_channel_update() {
 	}
 
 	// Update plugin version number
-	update_option( 'youtube_channel_version', WPAU_YOUTUBE_CHANNEL::VER );
+	update_option( 'youtube_channel_version', YTC_VER );
 
 } // END function au_youtube_channel_update()
 
@@ -47,7 +47,8 @@ function au_youtube_channel_update() {
  */
 function au_youtube_channel_update_routine_2() {
 
-	if ( $old = get_option( 'widget_youtube_channel_widget' ) ) {
+	$old = get_option( 'widget_youtube_channel_widget' );
+	if ( $old ) {
 
 		// get new YTC widgets
 		$new = get_option( 'widget_youtube-channel' );
@@ -61,14 +62,14 @@ function au_youtube_channel_update_routine_2() {
 			if ( '_multiwidget' !== $k ) {
 				// option for resource
 				$v['use_res'] = 0;
-				if ( 'on' == $v['usepl'] ) {
+				if ( 'on' === $v['usepl'] ) {
 					$v['use_res'] = 2;
 				}
 
 				$v['popup_goto'] = 0;
-				if ( 'on' == $v['popupgoto'] ) {
+				if ( 'on' === $v['popupgoto'] ) {
 					$v['popup_goto'] = 1;
-				} elseif ( 'on' == $v['target'] ) {
+				} elseif ( 'on' === $v['target'] ) {
 					$v['popup_goto'] = 2;
 				}
 				unset( $v['usepl'], $v['popupgoto'], $v['target'] );
@@ -87,14 +88,14 @@ function au_youtube_channel_update_routine_2() {
 					$ytc_widget_id = 'youtube-channel-' . end( array_keys( $new ) );
 				} else {
 					// set as current widget ID
-					$new[ $k ] = $v;
+					$new[ $k ]     = $v;
 					$ytc_widget_id = "youtube-channel-$k";
 				}
 
 				$ytc_widget_added = 0;
 				foreach ( $widget_areas as $wak => $wav ) {
 					// check if here we have this widget
-					if ( is_array( $wav ) && in_array( $ytc_widget_id, $wav ) ) {
+					if ( is_array( $wav ) && in_array( $ytc_widget_id, $wav, true ) ) {
 						++$ytc_widget_added;
 					}
 				}
@@ -102,7 +103,7 @@ function au_youtube_channel_update_routine_2() {
 				unset( $wak, $wav );
 
 				// if YTC widget has not present in any widget area, add it to inactive widgets ;)
-				if ( 0 == $ytc_widget_added ) {
+				if ( 0 === $ytc_widget_added ) {
 					array_push( $widget_areas['wp_inactive_widgets'], $ytc_widget_id );
 				}
 			} // add to inactive widgets if don't belong to any widget area
@@ -186,14 +187,16 @@ function au_youtube_channel_update_routine_3() {
 	global $_wp_using_ext_object_cache, $wpdb;
 	if ( ! $_wp_using_ext_object_cache ) {
 
-		$clean = $wpdb->query( $wpdb->prepare("
-			DELETE FROM `$wpdb->options`
-			WHERE option_name LIKE %s
-			OR option_name LIKE %s
-			",
-			'_transient_ytc_%',
-			'_transient_timeout_ytc_%'
-		) );
+		$clean = $wpdb->query(
+			$wpdb->prepare(
+				"DELETE FROM `$wpdb->options`
+				WHERE option_name LIKE %s
+				OR option_name LIKE %s
+				",
+				'_transient_ytc_%',
+				'_transient_timeout_ytc_%'
+			)
+		);
 
 		// optimize wp_options table
 		$wpdb->query( "OPTIMIZE TABLE $wpdb->options" );
@@ -202,7 +205,7 @@ function au_youtube_channel_update_routine_3() {
 	$ytc_widgets = get_option( 'widget_youtube-channel' );
 	foreach ( $ytc_widgets as $widget_id => $widget_data ) {
 		// process widget arrays, not _multiwidget bool
-		if ( '_multiwidget' != $widget_id ) {
+		if ( '_multiwidget' !== $widget_id ) {
 
 			foreach ( $widget_data as $key => $val ) {
 				// if old key is in matrix
@@ -236,7 +239,6 @@ function au_youtube_channel_update_routine_5() {
 	}
 
 	if ( defined( 'YOUTUBE_DATA_API_KEY' ) ) {
-
 		if ( empty( $defaults['apikey'] ) ) {
 			$defaults['apikey'] = YOUTUBE_DATA_API_KEY;
 		}
@@ -342,7 +344,7 @@ function au_youtube_channel_update_routine_11() {
 	$ytc_widgets = get_option( 'widget_youtube-channel' );
 	foreach ( $ytc_widgets as $widget_id => $widget_data ) {
 		// Process widget arrays, not _multiwidget bool
-		if ( '_multiwidget' != $widget_id ) {
+		if ( '_multiwidget' !== $widget_id ) {
 
 			// migrate only_pl to display
 			if ( isset( $widget_data['only_pl'] ) && ! empty( $widget_data['only_pl'] ) ) {
@@ -364,11 +366,11 @@ function au_youtube_channel_update_routine_11() {
 			if ( ! empty( $widget_data['showgoto'] ) ) {
 
 				if ( isset( $widget_data['link_to'] ) ) {
-					if ( 0 == $widget_data['link_to'] || 'legacy' == $widget_data['link_to'] ) {
+					if ( 0 === $widget_data['link_to'] || 'legacy' === $widget_data['link_to'] ) {
 						$ytc_widgets[ $widget_id ]['link_to'] = 'legacy';
-					} elseif ( 1 == $widget_data['link_to'] || 'channel' == $widget_data['link_to'] ) {
+					} elseif ( 1 === $widget_data['link_to'] || 'channel' === $widget_data['link_to'] ) {
 						$ytc_widgets[ $widget_id ]['link_to'] = 'channel';
-					} elseif ( 2 == $widget_data['link_to'] || 'vanity' == $widget_data['link_to'] ) {
+					} elseif ( 2 === $widget_data['link_to'] || 'vanity' === $widget_data['link_to'] ) {
 						$ytc_widgets[ $widget_id ]['link_to'] = 'vanity';
 					}
 				} else {
@@ -557,3 +559,25 @@ function au_youtube_channel_update_routine_23() {
 	}
 
 } // END function au_youtube_channel_update_routine_23()
+
+
+/**
+ * Add default value for new option handle and block_preview
+ */
+function au_youtube_channel_update_routine_24() {
+
+	// get options from DB
+	$defaults = get_option( 'youtube_channel_defaults' );
+
+	if ( ! isset( $defaults['handle'] ) ) {
+		$defaults['handle'] = '';
+	}
+	if ( ! isset( $defaults['blockpreview'] ) ) {
+		$defaults['block_preview'] = true;
+	}
+	if ( isset( $defaults ) ) {
+		update_option( 'youtube_channel_defaults', $defaults );
+		unset( $defaults );
+	}
+
+} // END function au_youtube_channel_update_routine_24()

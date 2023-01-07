@@ -1,5 +1,45 @@
 == ChangeLog for old releases ==
 
+= 3.0.11.8 (20200810) =
+* Tested: WordPress 5.5-RC2-48768 and PHP 7.4.1
+* (20190719) Fix: referrer is wrong for protected API keys (thanks to @hmmux)
+
+= 3.0.11.7 (20180906) =
+* Add: Global option `sslverify` to disable SSL Verification
+* Add: Global option `js_ev_listener` to enable Event Listener DOMContentLoaded
+* (20180826) Add: Override video block template by 3rd party theme or plugin with filter `ytc_print_video`
+* Add: Customizable timeout for wp_remote_get()
+* Improve: Disable LastPass altering settings fields
+
+= 3.0.11.6 (20180826) =
+* Add compatibility with async/defer optimization (thanks to @lordbass)
+
+= 3.0.11.5 (20180721) =
+* Add: Missing `titletag` parameter for shortcode, shortcode TinyMCE wizard and widget
+* Fix: Missing video title for `thubmbnail` display with `above` or `below` positioning (thanks @nimeldk)
+
+= 3.0.11.4 (20180622) =
+* Improvement: add `showtitle` options `inside` and `inside_b`.
+* (20180213) Update: section descriptions on plugin settings.
+
+= 3.0.11.3 (20171001) =
+* Fix: Default values in dropdown lists does not preselect in TinyMCE shortcode selector
+* Add: new option for thumbnail quality for TinyMCE shortcode selector
+
+= 3.0.11.2 (20171001) =
+* (20171001) Fix: Undefined index: option_page in youtube-channel/inc/settings.php on line 1006
+* Add: Support for custom thumbnail quality
+* (20170716) Add: native error message from Google for cases not covered by common errors (like `accessNotConfigured`)
+
+= 3.0.11.1 (20170530) =
+* Fix: cut description in the middle of multy-byte characters (reported by @funfrog)
+* (20170509) Fix: undefined variable `nolightbox`
+* Fix: add `nolightbox` shortcode parameter and fix typos on Help section
+
+= 3.0.11 (20170424) =
+* Fix: added all 3 parameters to `widget_title` filter (reported by @squarestar)
+* (20170301) Add: New shortcode options `nolightbox` and `target`, to make available opening thumbnail anchors in new tab/window (requested by @bakercreative)
+
 = 3.0.10.5 (20170225) =
 * Remove: FMVD opt-in because of general plugin guideline violation rule #9
 

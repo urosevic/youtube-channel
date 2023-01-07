@@ -42,15 +42,22 @@
 								},
 								{
 									type: 'textbox',
-									name: 'vanity',
-									label: 'Vanity/Custom ID',
+									name: 'channel',
+									label: 'YouTube Channel ID',
 									value: '',
 									// tooltip: ''
 								},
 								{
 									type: 'textbox',
-									name: 'channel',
-									label: 'YouTube Channel ID',
+									name: 'handle',
+									label: 'Handle',
+									value: '',
+									// tooltip: ''
+								},
+								{
+									type: 'textbox',
+									name: 'vanity',
+									label: 'Vanity/Custom ID',
 									value: '',
 									// tooltip: ''
 								},
@@ -354,8 +361,9 @@
 									// tooltip: '',
 									values : [
 										{text: 'Hide link', value: 'none'},
-										{text: 'Vanity/Custom URL', value: 'vanity'}, // ex 2
 										{text: 'Channel page URL', value: 'channel'}, // ex 1
+										{text: 'Handle URL', value: 'handle'}, // new 2023
+										{text: 'Vanity/Custom URL', value: 'vanity'}, // ex 2
 										{text: 'Legacy username URL', value: 'legacy'}, // ex 0
 									],
 									value : 'none'
@@ -376,6 +384,7 @@
 						var shortcode = '[youtube_channel';
 
 						// General Settings
+						if ( e.data.handle ) shortcode += ' handle=' + e.data.handle +'';
 						if ( e.data.vanity ) shortcode += ' vanity=' + e.data.vanity +'';
 						if ( e.data.channel ) shortcode += ' channel=' + e.data.channel +'';
 						if ( e.data.legacy ) shortcode += ' legacy=' + e.data.legacy +'';

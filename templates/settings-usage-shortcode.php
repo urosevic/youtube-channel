@@ -1,12 +1,16 @@
 <h3><?php _e( 'How to use shortcode', 'youtube-channel' ); ?></h3>
-<p><?php
-printf(
-	__(
-		'You can use shortcode %s with options listed below (all options are optional if you have set defaults in global plugin settings).',
-		'youtube-channel'
-	),
-	'<code>[youtube_channel]</code>'
-); ?></p>
+<p>
+	<?php
+	printf(
+		// translators: %s is replaced with plugin shortcode
+		__(
+			'You can use shortcode %s with options listed below (all options are optional if you have set defaults in global plugin settings).',
+			'youtube-channel'
+		),
+		'<code>[youtube_channel]</code>'
+	);
+	?>
+</p>
 
 <h3 class="nav-tab-wrapper subnav-tab-wrapper">
 	<a href="#ytc-general-settings" class="nav-tab nav-tab-active"><?php _e( 'General Settings', 'youtube-channel' ); ?></a>
@@ -104,33 +108,42 @@ printf(
 	<li><code>link_to</code> <em>(string)</em> URL to link:
 	<ul>
 		<li>&bullet; <code>none</code> hide link (default)</li>
-		<li>&bullet; <code>vanity</code> Vanity custom URL</li>
 		<li>&bullet; <code>channel</code> Channel page</li>
-		<li>&bullet; <code>legacy</code> Legacy username page</li>
+		<li>&bullet; <code>handle</code> YouTube Handle URL</li>
+		<li>&bullet; <code>vanity</code> <strong>DEPRECATED</strong> Vanity custom URL</li>
+		<li>&bullet; <code>legacy</code> <strong>DEPRECATED</strong> Legacy username page</li>
 	</ul>
 	</li>
 </ul>
 </div>
 
-<p><?php
-printf(
-	__(
-		'Please note, you can omit all options listed above, and then will be used plugin defaults customized on tabs %1$s, %2$s, %3$s and %4$s.',
-		'youtube-chanel'
-	),
-	__( 'General', 'youtube-channel' ),
-	__( 'Video', 'youtube-channel' ),
-	__( 'Content', 'youtube-channel' ),
-	__( 'Link to Channel', 'youtube-channel' )
-); ?></p>
-<p><?php
-printf(
-	__(
-		'Important note: %s blocks inserted through widget have their own settings.',
-		'youtube-channel'
-	),
-	__( 'YouTube Channel', 'youtube-channel' )
-); ?></p>
+<p>
+	<?php
+	printf(
+		// translators: %1$s is replaced with translated word for General, %2$s for Video, %3$s for Content and %4$s for Link to Channel
+		__(
+			'Please note, you can omit all options listed above, and then will be used plugin defaults customized on tabs %1$s, %2$s, %3$s and %4$s.',
+			'youtube-chanel'
+		),
+		__( 'General', 'youtube-channel' ),
+		__( 'Video', 'youtube-channel' ),
+		__( 'Content', 'youtube-channel' ),
+		__( 'Link to Channel', 'youtube-channel' )
+	);
+	?>
+</p>
+<p>
+	<?php
+	printf(
+		// translators: %s is replaced with plugin name
+		__(
+			'Important note: %s blocks inserted through widget have their own settings.',
+			'youtube-channel'
+		),
+		__( 'YouTube Channel', 'youtube-channel' )
+	);
+	?>
+</p>
 
 <script>
 jQuery(document).ready(function($){

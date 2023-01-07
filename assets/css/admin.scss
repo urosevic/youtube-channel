@@ -1,0 +1,159 @@
+i.mce-i-ytc {
+	font: normal 20px/1 'dashicons';
+	padding: 0;
+	vertical-align: top;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	margin-left: -2px;
+	padding-right: 2px;
+
+	&:before {
+		content: '\f236';
+	}
+}
+
+div[id*='_youtube-channel-'] .widget-content,
+.widget-content:has([for*="widget-youtube-channel"]) {
+	&, .halfs, .thirds {
+		display: flex;
+		gap: 0 1rem;
+
+	}
+	flex-direction: column;
+
+	.halfs {
+		p {
+			width: 50%;
+		}
+	}
+	.thirds {
+		p {
+			width: 33%;
+		}
+	}
+	.checkboxes {
+		flex-direction: column;
+		p {
+			display: flex;
+			flex-direction: column;
+			label {
+				display: inline;
+			}
+		}
+	}
+	h4 {
+		font-size: 1rem;
+		margin: 1rem 0 0 0;
+	}
+	label {
+		display: flex;
+		flex-direction: column;
+
+		.description {
+			font-style: italic;
+			/*
+			&::before {
+				content: "(";
+			}
+			&::after {
+				content: ")";
+			}
+			*/
+		}
+	}
+	p {
+		width: 100%;
+		clear: both;
+		&:has(label.hidden) {
+			display: none;
+		}
+
+		&.half {
+			width: 49%;
+
+			&.left {
+				float: left;
+				clear: left;
+			}
+			&.right {
+				float: right;
+				clear: right;
+			}
+		}
+		/*
+		&.third {
+			width: 33%;
+		}
+		*/
+
+		&.glue-top {
+			margin-top: 0;
+		}
+		&.hidden {
+			display: none;
+		}
+		&.visible {
+			display: block;
+		}
+		.hidden {
+			display: none;
+		}
+		&.deprecated {
+			opacity: 0.4;
+		}
+	}
+}
+@media screen and (max-width: 782px) {
+	div[id*='_youtube-channel-'] .widget-content p.half.left,
+	div[id*='_youtube-channel-'] .widget-content p.half.right {
+		width: 100%;
+		float: none;
+		clear: none;
+	}
+}
+
+#youtube_channel_settings {
+	.ver {
+		font-size: 0.8rem;
+		line-height: 2rem;
+	}
+	tr.deprecated {
+		text-decoration: line-through;
+		opacity: 0.4;
+	}
+	input.blur-on-lose-focus:not(:focus) {
+		color: transparent;
+		text-shadow: 0 0 5px rgb(0 0 0 / 50%);
+	}
+}
+
+/* Settings tabs */
+.nav-tab.nav-tab-hidden {
+	display: none;
+}
+.subnav-tab-wrapper {
+	margin-bottom: 0;
+
+	& .nav-tab {
+		-webkit-user-select: none;  /* Chrome all / Safari all */
+		-moz-user-select: none;     /* Firefox all */
+		-ms-user-select: none;      /* IE 10+ */
+		user-select: none;          /* Likely future */
+
+		&:focus {
+			-webkit-box-shadow: initial;
+			box-shadow: initial;
+		}
+	}
+}
+.tab-content-ytc {
+	display: none;
+
+	&.tab-content-active {
+		display: block;
+		border-color: #ccc;
+		border-width: 0 1px 1px 1px;
+		border-style: solid;
+		padding: 10px;
+	}
+}

@@ -2,10 +2,10 @@
 Contributors: urkekg, techwebux
 Donate link: https://urosevic.net/wordpress/donate/?donate_for=youtube-channel
 Tags: youtube, channel, playlist, widget, video
-Requires at least: 4.9
-Tested up to: 5.6.2
-Stable tag: 3.0.12.1
-Requires PHP: 5.6
+Requires at least: 5.0
+Tested up to: 6.1.1
+Stable tag: 3.23.0
+Requires PHP: 7.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -89,8 +89,9 @@ Along with Widget, you can add YouTube Channel block inline by using shortcode `
 
 * `class` (string) Set custom class if you wish to target special styling for specific YTC block
 * `channel` (string) ID of preferred YouTube channel. Do not set full URL to channel, but just last part from URL - ID (name)
-* `vanity` (string) part after www.youtube.com/c/ from [Custom URL](https://support.google.com/youtube/answer/2657968?hl=en)
-* `username` (string) Optional legacy YouTube username.
+* `handle` (string) defined custom handle from [YouTube handle](https://www.youtube.com/handle)
+* `vanity` (string) *DEPRECATED* part after www.youtube.com/c/ from [Custom URL](https://support.google.com/youtube/answer/2657968?hl=en)
+* `username` (string) *DEPRECATED* Optional legacy YouTube username.
 * `playlist` (string) ID of preferred YouTube playlist.
 * `resource` (int) Resource to use for feed:
   * `0` Channel (User uploads)
@@ -153,9 +154,10 @@ Along with Widget, you can add YouTube Channel block inline by using shortcode `
   * `2` open link in new window with target="_blank" anchor attribute
 * `link_to` (string) URL to link:
   * `none` Hide link (defult)
-  * `vanity` Vanity custom URL
   * `channel` Channel page
-  * `legacy` Legacy username page
+  * `handle` YouTube handle URL
+  * `vanity` *DEPRECATED* Vanity custom URL
+  * `legacy` *DEPRECATED* Legacy username page
 
 *Please note, to enhance plugin functionality, we can change some shortcode parameters in future.*
 
@@ -172,8 +174,9 @@ Four parameters are provided:
   * `shippet->description` - YouTube video description
   * `snippet->resourceId->videoId` -> YouTube video ID
 * `instance` - Current YouTUbe Channel Block parameters, including global settings:
-  * `vanity`
+  * `handle`
   * `channel`
+  * `vanity`
   * `username`
   * `playlist`
   * `resource`
@@ -442,6 +445,13 @@ If you are in a hurry, please find a developer to do it for you or [request a qu
 
 == Changelog ==
 
+= 3.23.0 (20230105) =
+* Security: fix XSS and Authorization Bypass vulnerability (thanks to WPScan)
+* Tested: WordPress 6.1.1 on PHP 8.1.7
+* Add: Support for YouTube Handle
+* Add: General option to prevent YTC Widet Preview gets rendered in Block Editor
+* Improve: Coding standard and instructions for translators
+
 = 3.0.12.1 (20210227) =
 * Tested: WordPress 5.6.2 on PHP 7.4.15 and 8.0.2
 * Add: compatibility with PHP 8
@@ -456,50 +466,11 @@ If you are in a hurry, please find a developer to do it for you or [request a qu
 * Add: widget parameter `skip`
 * (20201014) Add: shortcode parameter `skip` to skip requested number of items
 
-= 3.0.11.8 (20200810) =
-* Tested: WordPress 5.5-RC2-48768 and PHP 7.4.1
-* (20190719) Fix: referrer is wrong for protected API keys (thanks to @hmmux)
-
-= 3.0.11.7 (20180906) =
-* Add: Global option `sslverify` to disable SSL Verification
-* Add: Global option `js_ev_listener` to enable Event Listener DOMContentLoaded
-* (20180826) Add: Override video block template by 3rd party theme or plugin with filter `ytc_print_video`
-* Add: Customizable timeout for wp_remote_get()
-* Improve: Disable LastPass altering settings fields
-
-= 3.0.11.6 (20180826) =
-* Add compatibility with async/defer optimization (thanks to @lordbass)
-
-= 3.0.11.5 (20180721) =
-* Add: Missing `titletag` parameter for shortcode, shortcode TinyMCE wizard and widget
-* Fix: Missing video title for `thubmbnail` display with `above` or `below` positioning (thanks @nimeldk)
-
-= 3.0.11.4 (20180622) =
-* Improvement: add `showtitle` options `inside` and `inside_b`.
-* (20180213) Update: section descriptions on plugin settings.
-
-= 3.0.11.3 (20171001) =
-* Fix: Default values in dropdown lists does not preselect in TinyMCE shortcode selector
-* Add: new option for thumbnail quality for TinyMCE shortcode selector
-
-= 3.0.11.2 (20171001) =
-* (20171001) Fix: Undefined index: option_page in youtube-channel/inc/settings.php on line 1006
-* Add: Support for custom thumbnail quality
-* (20170716) Add: native error message from Google for cases not covered by common errors (like `accessNotConfigured`)
-
-= 3.0.11.1 (20170530) =
-* Fix: cut description in the middle of multy-byte characters (reported by @funfrog)
-* (20170509) Fix: undefined variable `nolightbox`
-* Fix: add `nolightbox` shortcode parameter and fix typos on Help section
-
-= 3.0.11 (20170424) =
-* Fix: added all 3 parameters to `widget_title` filter (reported by @squarestar)
-* (20170301) Add: New shortcode options `nolightbox` and `target`, to make available opening thumbnail anchors in new tab/window (requested by @bakercreative)
-
 == Upgrade Notice ==
 
-= 3.0.11.7 =
-There is new option to disable SSL verification on host which have a problem to verify Google SSL keys
+= 3.23.0 =
+
+An XSS vulnerability is fixed, update ASAP!
 
 == Screenshots ==
 
