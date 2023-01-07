@@ -118,7 +118,12 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 					'Get your %1$s and %2$s from <a href="%3$s" target="_blank">here</a>.',
 					'youtube-channel'
 				),
-				array( 'a' => array( 'href' => array(), 'target' => [] ) )
+				[
+					'a' => [
+						'href'   => [],
+						'target' => [],
+					],
+				]
 			),
 			__( 'Channel ID', 'youtube-channel' ),
 			__( 'Custom ID', 'youtube-channel' ),
@@ -153,7 +158,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 		<p class="half left glue-top">
 			<label for="<?php echo $this->get_field_id( 'resource' ); ?>">
 				<?php _e( 'Resource to use', 'youtube-channel' ); ?>
-				<select class="widefat" id="<?php echo $this->get_field_id( 'resource' ); ?>" name="<?php echo $this->get_field_name( 'resource' ); ?>">
+				<select class="widefat" id="<?php echo $this->get_field_id( 'resource' ); ?>" name="<?php echo $this->get_field_name( 'resource' ); ?>" onchange="ytcToggle('resource', '<?php echo $this->get_field_id( '' ); ?>');">
 					<option value="0"<?php selected( $resource, 0 ); ?>><?php _e( 'Channel (User Uploads)', 'youtube-channel' ); ?></option>
 					<option value="1"<?php selected( $resource, 1 ); ?>><?php _e( 'Favourites', 'youtube-channel' ); ?></option>
 					<option value="3"<?php selected( $resource, 3 ); ?>><?php _e( 'Liked Videos', 'youtube-channel' ); ?></option>
@@ -197,7 +202,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 				<?php printf( __( 'Enable <a href="%s" target="_blank">privacy-enhanced mode</a>', 'youtube-channel' ), 'https://support.google.com/youtube/bin/answer.py?hl=en-GB&answer=171780' ); ?>
 			</label>
 			<br />
-			<label for="<?php echo $this->get_field_id( 'random' ); ?>">
+			<label for="<?php echo $this->get_field_id( 'random' ); ?>" <?php echo 2 === $resource ? 'class="hidden"' : ''; ?>>
 				<input class="checkbox" type="checkbox" <?php checked( (bool) $random, true ); ?> id="<?php echo $this->get_field_id( 'random' ); ?>" name="<?php echo $this->get_field_name( 'random' ); ?>" title="<?php _e( 'Get random videos of all fetched from channel or playlist', 'youtube-channel' ); ?>" />
 				<?php _e( 'Show random video from resource', 'youtube-channel' ); ?>
 				<br />
@@ -216,12 +221,12 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 			</label>
 			<br />
 			<label for="<?php echo $this->get_field_id( 'responsive' ); ?>">
-				<input class="checkbox" type="checkbox" <?php checked( (bool) $responsive, true ); ?> id="<?php echo $this->get_field_id( 'responsive' ); ?>" name="<?php echo $this->get_field_name( 'responsive' ); ?>" />
+				<input class="checkbox" type="checkbox" <?php checked( (bool) $responsive, true ); ?> id="<?php echo $this->get_field_id( 'responsive' ); ?>" name="<?php echo $this->get_field_name( 'responsive' ); ?>" onchange="ytcToggle('responsive', '<?php echo $this->get_field_id( '' ); ?>');" />
 				<?php _e( 'Responsive video <small>(distribute one full width item per row)</small>', 'youtube-channel' ); ?>
 			</label>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'width' ); ?>">
+			<label for="<?php echo $this->get_field_id( 'width' ); ?>" <?php echo $responsive ? 'class="hidden"' : ''; ?>>
 				<?php _e( 'Initial width', 'youtube-channel' ); ?>
 				<input class="small-text" id="<?php echo $this->get_field_id( 'width' ); ?>" name="<?php echo $this->get_field_name( 'width' ); ?>" type="number" min="32" value="<?php echo $width; ?>" title="<?php _e( 'Set video width in pixels', 'youtube-channel' ); ?>" />
 				<small>px (<?php _e( 'default', 'youtube-channel' ); ?> 306)</small>
@@ -230,7 +235,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( 'display' ); ?>">
 				<?php _e( 'What to display?', 'youtube-channel' ); ?>
-				<select class="widefat" id="<?php echo $this->get_field_id( 'display' ); ?>" name="<?php echo $this->get_field_name( 'display' ); ?>" onchange="ytcToggle('display', '<?php echo $this->get_field_id(''); ?>');">
+				<select class="widefat" id="<?php echo $this->get_field_id( 'display' ); ?>" name="<?php echo $this->get_field_name( 'display' ); ?>" onchange="ytcToggle('display', '<?php echo $this->get_field_id( '' ); ?>');">
 					<option value="thumbnail"<?php selected( $display, 'thumbnail' ); ?>><?php _e( 'Thumbnail', 'youtube-channel' ); ?></option>
 					<option value="iframe"<?php selected( $display, 'iframe' ); ?>><?php _e( 'HTML5 (iframe)', 'youtube-channel' ); ?></option>
 					<option value="iframe2"<?php selected( $display, 'iframe2' ); ?>><?php _e( 'HTML5 (iframe) Asynchronous', 'youtube-channel' ); ?></option>
@@ -265,7 +270,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 			</label>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'thumb_quality' ); ?>">
+			<label for="<?php echo $this->get_field_id( 'thumb_quality' ); ?>" <?php echo 'thumbnail' !== $display ? 'class="hidden"' : ''; ?>>
 				<?php _e( 'Thumbnail Quality', 'youtube-channel' ); ?>
 				<select class="widefat" id="<?php echo $this->get_field_id( 'thumb_quality' ); ?>" name="<?php echo $this->get_field_name( 'thumb_quality' ); ?>">
 					<option value="default"<?php selected( $thumb_quality, 'default' ); ?>><?php _e( 'Default Quality (120x90px)', 'youtube-channel' ); ?></option>
@@ -277,7 +282,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 			</label>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'no_thumb_title' ); ?>">
+			<label for="<?php echo $this->get_field_id( 'no_thumb_title' ); ?>" <?php echo 'thumbnail' !== $display ? 'class="hidden"' : ''; ?>>
 				<input class="checkbox" type="checkbox" <?php checked( (bool) $no_thumb_title, true ); ?> id="<?php echo $this->get_field_id( 'no_thumb_title' ); ?>" name="<?php echo $this->get_field_name( 'no_thumb_title' ); ?>" />
 				<?php _e( 'Disable thumbnail tooltip', 'youtube-channel' ); ?>
 			</label>
@@ -287,7 +292,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( 'showtitle' ); ?>">
 				<?php _e( 'Show video title', 'youtube-channel' ); ?>
-				<select class="widefat" id="<?php echo $this->get_field_id( 'showtitle' ); ?>" name="<?php echo $this->get_field_name( 'showtitle' ); ?>" onchange="ytcToggle('title', '<?php echo $this->get_field_id(''); ?>');">
+				<select class="widefat" id="<?php echo $this->get_field_id( 'showtitle' ); ?>" name="<?php echo $this->get_field_name( 'showtitle' ); ?>" onchange="ytcToggle('showtitle', '<?php echo $this->get_field_id( '' ); ?>');">
 					<option value="none"<?php selected( $showtitle, 'none' ); ?>><?php _e( 'Hide title', 'youtube-channel' ); ?></option>
 					<option value="above"<?php selected( $showtitle, 'above' ); ?>><?php _e( 'Above video/thumbnail', 'youtube-channel' ); ?></option>
 					<option value="below"<?php selected( $showtitle, 'below' ); ?>><?php _e( 'Below video/thumbnail', 'youtube-channel' ); ?></option>
@@ -296,13 +301,13 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 				</select>
 			</label>
 			<br />
-			<label for="<?php echo $this->get_field_id( 'linktitle' ); ?>">
+			<label for="<?php echo $this->get_field_id( 'linktitle' ); ?>" <?php echo 'none' == $showtitle ? 'class="hidden"' : ''; ?>>
 				<input class="checkbox" type="checkbox" <?php checked( (bool) $linktitle, true ); ?> id="<?php echo $this->get_field_id( 'linktitle' ); ?>" name="<?php echo $this->get_field_name( 'linktitle' ); ?>" title="<?php _e( 'Enable this option to link outside title to video', 'youtube-channel' ); ?>" />
 				<?php _e( 'Link outside title to video', 'youtube-channel' ); ?>
 			</label>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'titletag' ); ?>">
+			<label for="<?php echo $this->get_field_id( 'titletag' ); ?>" <?php echo 'none' == $showtitle ? 'class="hidden"' : ''; ?>>
 				<?php _e( 'Title HTML tag', 'youtube-channel' ); ?>
 				<select class="widefat" id="<?php echo $this->get_field_id( 'titletag' ); ?>" name="<?php echo $this->get_field_name( 'titletag' ); ?>">
 					<?php
@@ -324,12 +329,12 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 			</label>
 			<br />
 			<label for="<?php echo $this->get_field_id( 'showdesc' ); ?>">
-				<input class="checkbox" type="checkbox" <?php checked( (bool) $showdesc, true ); ?> id="<?php echo $this->get_field_id( 'showdesc' ); ?>" name="<?php echo $this->get_field_name( 'showdesc' ); ?>" />
+				<input class="checkbox" type="checkbox" <?php checked( (bool) $showdesc, true ); ?> id="<?php echo $this->get_field_id( 'showdesc' ); ?>" name="<?php echo $this->get_field_name( 'showdesc' ); ?>" onchange="ytcToggle('showdesc', '<?php echo $this->get_field_id( '' ); ?>');" />
 				<?php _e( 'Show video description', 'youtube-channel' ); ?>
 			</label>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'desclen' ); ?>">
+			<label for="<?php echo $this->get_field_id( 'desclen' ); ?>" <?php echo ! $showdesc ? 'class="hidden"' : ''; ?>>
 				<?php _e( 'Description length', 'youtube-channel' ); ?>
 				<input class="small-text" id="<?php echo $this->get_field_id( 'desclen' ); ?>" name="<?php echo $this->get_field_name( 'desclen' ); ?>" type="number" value="<?php echo $desclen; ?>" title="<?php _e( 'Set number of characters to cut down video description to (0 means full length)', 'youtube-channel' ); ?>" />
 				<small>(0 = full)</small>
@@ -337,16 +342,10 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 		</p>
 
 		<h4><?php _e( 'Link to Channel', 'youtube-channel' ); ?></h4>
-		<p class="glue-top">
-			<label for="<?php echo $this->get_field_id( 'goto_txt' ); ?>">
-				<?php _e( 'Link text', 'youtube-channel' ); ?>
-				<input class="widefat" id="<?php echo $this->get_field_id( 'goto_txt' ); ?>" name="<?php echo $this->get_field_name( 'goto_txt' ); ?>" type="text" value="<?php echo $goto_txt; ?>" title="<?php sprintf( __( 'Default: Visit our YouTube channel. You can use placeholders %1$s, %2$s and %3$s.', 'youtube-channel' ), '%vanity%', '%channel%', '%username%' ); ?>" placeholder="<?php _e( 'Visit our YouTube channel', 'youtube-channel' ); ?>" />
-			</label>
-		</p>
 		<p class="half left glue-top">
 			<label for="<?php echo $this->get_field_id( 'link_to' ); ?>">
 				<?php _e( 'Link type', 'youtube-channel' ); ?>
-				<select class="widefat" id="<?php echo $this->get_field_id( 'link_to' ); ?>" name="<?php echo $this->get_field_name( 'link_to' ); ?>">
+				<select class="widefat" id="<?php echo $this->get_field_id( 'link_to' ); ?>" name="<?php echo $this->get_field_name( 'link_to' ); ?>" onchange="ytcToggle('link_to', '<?php echo $this->get_field_id( '' ); ?>');" >
 					<option value="none"<?php selected( $link_to, 'none' ); ?>><?php _e( 'Hide link', 'youtube-channel' ); ?></option>
 					<option value="vanity"<?php selected( $link_to, 'vanity' ); ?>><?php _e( 'Link to Vanity customized URL', 'youtube-channel' ); ?></option>
 					<option value="channel"<?php selected( $link_to, 'channel' ); ?>><?php _e( 'Link to Channel page URL', 'youtube-channel' ); ?></option>
@@ -355,13 +354,19 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 			</label>
 		</p>
 		<p class="half right glue-top">
-			<label for="<?php echo $this->get_field_id( 'popup_goto' ); ?>">
+			<label for="<?php echo $this->get_field_id( 'popup_goto' ); ?>" <?php echo 'none' == $link_to ? 'class="hidden"' : ''; ?>>
 				<?php _e( 'Link behaviour', 'youtube-channel' ); ?>
 				<select class="widefat" id="<?php echo $this->get_field_id( 'popup_goto' ); ?>" name="<?php echo $this->get_field_name( 'popup_goto' ); ?>">
 					<option value="0"<?php selected( $popup_goto, 0 ); ?>><?php _e( 'Open link in same window', 'youtube-channel' ); ?></option>
 					<option value="1"<?php selected( $popup_goto, 1 ); ?>><?php _e( 'Open link in new window (JavaScript)', 'youtube-channel' ); ?></option>
 					<option value="2"<?php selected( $popup_goto, 2 ); ?>><?php _e( 'Open link in new window (target="blank")', 'youtube-channel' ); ?></option>
 				</select>
+			</label>
+		</p>
+		<p class="glue-top">
+			<label for="<?php echo $this->get_field_id( 'goto_txt' ); ?>" <?php echo 'none' == $link_to ? 'class="hidden"' : ''; ?>>
+				<?php _e( 'Link text', 'youtube-channel' ); ?>
+				<input class="widefat" id="<?php echo $this->get_field_id( 'goto_txt' ); ?>" name="<?php echo $this->get_field_name( 'goto_txt' ); ?>" type="text" value="<?php echo $goto_txt; ?>" title="<?php sprintf( __( 'Default: Visit our YouTube channel. You can use placeholders %1$s, %2$s and %3$s.', 'youtube-channel' ), '%vanity%', '%channel%', '%username%' ); ?>" placeholder="<?php _e( 'Visit our YouTube channel', 'youtube-channel' ); ?>" />
 			</label>
 		</p>
 
@@ -377,15 +382,21 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 					),
 					array( 'a' => array( 'href' => array() ) )
 				),
-				'https://wordpress.org/plugins/youtube-channel/faq/',
+				'https://wordpress.org/plugins/youtube-channel/#faq',
 				__( 'FAQ', 'youtube-channel' ),
 				"?ytc_debug_json_for={$this->number}",
-				'https://wordpress.org/support/plugin/youtube-channel',
+				'https://wordpress.org/support/plugin/youtube-channel/',
 				'https://wordpress.org/support/topic/ytc3-read-before-you-post-support-question-or-report-bug'
 			);
 			?>
 			</small>
 		</p>
+		<?php if ( $this->get_field_id( '' ) > 0 ) : ?>
+		<script>
+			window.ytcWidgets = window.ytcWidgets || [];
+			ytcWidgets.push('<?php echo $this->get_field_id( '' ); ?>');
+		</script>
+		<?php endif; ?>
 		<?php
 	} // END public function form()
 

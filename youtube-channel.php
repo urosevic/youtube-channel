@@ -3,7 +3,7 @@
  * Plugin Name: YouTube Channel
  * Plugin URI:  https://urosevic.net/wordpress/plugins/youtube-channel/
  * Description: Quick and easy embed latest or random videos from YouTube channel (user uploads, liked or favourited videos) or playlist. Use <a href="widgets.php">widget</a> for sidebar or shortcode for content. Works with <em>YouTube Data API v3</em>.
- * Version:     3.0.12
+ * Version:     3.0.12.1
  * Author:      Aleksandar Urošević
  * Author URI:  https://urosevic.net/
  * License:     GPLv3
@@ -20,7 +20,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 	class WPAU_YOUTUBE_CHANNEL {
 
 		const DB_VER = 23;
-		const VER = '3.0.12';
+		const VER = '3.0.12.1';
 
 		public $plugin_name   = 'YouTube Channel';
 		public $plugin_slug   = 'youtube-channel';
@@ -43,36 +43,36 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			}
 
 			// Clear all YTC cache
-			add_action( 'wp_ajax_ytc_clear_all_cache', array( &$this, 'clear_all_cache' ) );
+			add_action( 'wp_ajax_ytc_clear_all_cache', [ &$this, 'clear_all_cache' ] );
 
 			// Activation hook and maybe update trigger
-			register_activation_hook( __FILE__, array( $this, 'activate' ) );
-			add_action( 'plugins_loaded', array( $this, 'maybe_update' ) );
+			register_activation_hook( __FILE__, [ $this, 'activate' ] );
+			add_action( 'plugins_loaded', [ $this, 'maybe_update' ] );
 
 			$this->defaults = self::defaults();
 
 			// TinyMCE AddOn
 			if ( ! empty( $this->defaults['tinymce'] ) ) {
-				add_filter( 'mce_external_plugins', array( $this, 'mce_external_plugins' ), 998 );
-				add_filter( 'mce_buttons', array( $this, 'mce_buttons' ), 999 );
+				add_filter( 'mce_external_plugins', [ $this, 'mce_external_plugins' ], 998 );
+				add_filter( 'mce_buttons', [ $this, 'mce_buttons' ], 999 );
 			}
 
 			if ( is_admin() ) {
 
 				// Initialize Plugin Settings Magic
-				add_action( 'init', array( $this, 'admin_init' ) );
+				add_action( 'init', [ $this, 'admin_init' ] );
 
 				// Add various Dashboard notices (if needed)
-				add_action( 'admin_notices', array( $this, 'admin_notices' ) );
+				add_action( 'admin_notices', [ $this, 'admin_notices' ] );
 
 				// Enqueue scripts and styles for Widgets page
-				add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
+				add_action( 'admin_enqueue_scripts', [ $this, 'admin_scripts' ] );
 
 			} else { // ELSE if ( is_admin() )
 
 				// Enqueue frontend scripts
-				add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-				add_action( 'wp_footer', array( $this, 'footer_scripts' ) );
+				add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
+				add_action( 'wp_footer', [ $this, 'footer_scripts' ] );
 
 			} // END if ( is_admin() )
 
@@ -80,8 +80,8 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			require_once( 'inc/widget.php' );
 
 			// Register shortcodes `youtube_channel` and `ytc`
-			add_shortcode( 'youtube_channel', array( $this, 'shortcode' ) );
-			add_shortcode( 'ytc', array( $this, 'shortcode' ) );
+			add_shortcode( 'youtube_channel', [ $this, 'shortcode' ] );
+			add_shortcode( 'ytc', [ $this, 'shortcode' ] );
 
 		} // END function __construct()
 
@@ -103,7 +103,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 		 */
 		public function init_options() {
 
-			$init = array(
+			$init = [
 				'vanity'         => '', // $this->vanity_id,
 				'channel'        => '', // $this->channel_id,
 				'username'       => '', // $this->username_id,
@@ -142,7 +142,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 				'timeout'        => 5, // timeout for wp_remote_get()
 				'sslverify'      => true,
 				'js_ev_listener' => false,
-			);
+			];
 
 			add_option( 'youtube_channel_version', self::VER, '', 'no' );
 			add_option( 'youtube_channel_db_ver', self::DB_VER, '', 'no' );
@@ -172,9 +172,9 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 		 */
 		function admin_init() {
 
-			add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'add_settings_link' ) );
+			add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), [ $this, 'add_settings_link' ] );
 			// Add row on Plugins page
-			add_filter( 'plugin_row_meta', array( $this, 'add_plugin_meta_links' ), 10, 2 );
+			add_filter( 'plugin_row_meta', [ $this, 'add_plugin_meta_links' ], 10, 2 );
 
 			require_once( 'inc/settings.php' );
 
@@ -211,12 +211,12 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			if ( 'youtube-channel/youtube-channel.php' === $file ) {
 				return array_merge(
 					$links,
-					array(
+					[
 						sprintf(
-							'<a href="https://wordpress.org/support/plugin/youtube-channel" target="_blank">%s</a>',
+							'<a href="https://wordpress.org/support/plugin/youtube-channel/" target="_blank">%s</a>',
 							__( 'Support' )
 						),
-					)
+					]
 				);
 			}
 			return $links;
@@ -231,22 +231,32 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			global $pagenow;
 
 			// Enqueue only on widget or post pages
-			if ( ! in_array( $pagenow, array( 'widgets.php', 'customize.php', 'options-general.php', 'post.php', 'post-new.php' ) ) ) {
+			if ( ! in_array( $pagenow, [ 'widgets.php', 'customize.php', 'options-general.php', 'post.php', 'post-new.php' ] ) ) {
 				return;
 			}
 
 			// Enqueue on post page only if tinymce is enabled
-			if ( in_array( $pagenow, array( 'post.php', 'post-new.php' ) ) && empty( $this->defaults['tinymce'] ) ) {
+			if ( in_array( $pagenow, [ 'post.php', 'post-new.php' ] ) && empty( $this->defaults['tinymce'] ) ) {
 				return;
 			}
 
 			wp_enqueue_style(
 				$this->plugin_slug . '-admin',
 				plugins_url( 'assets/css/admin.css', __FILE__ ),
-				array(),
+				[],
 				self::VER
 			);
 
+			// Enqueue script for widget in admin
+			if ( in_array( $pagenow, [ 'widgets.php', 'customize.php' ] ) ) {
+				wp_enqueue_script(
+					$this->plugin_slug . '-admin',
+					plugins_url( 'assets/js/admin.min.js', __FILE__ ),
+					[ 'jquery' ],
+					self::VER,
+					true
+				);
+			}
 		} // END function admin_scripts()
 
 		/**
@@ -278,11 +288,11 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 
 			// Prepare vars for notices
 			$settings_page = 'options-general.php?page=youtube-channel';
-			$notice = array(
+			$notice = [
 				'error'   => '',
 				'warning' => '',
 				'info'    => '',
-			);
+			];
 
 			// Inform if PHP version is lower than 5.3
 			if (
@@ -389,13 +399,13 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 				wp_enqueue_style(
 					'magnific-popup-au',
 					plugins_url( 'assets/lib/magnific-popup/magnific-popup.min.css', __FILE__ ),
-					array(),
+					[],
 					self::VER
 				);
 				wp_enqueue_script(
 					'magnific-popup-au',
 					plugins_url( 'assets/lib/magnific-popup/jquery.magnific-popup.min.js', __FILE__ ),
-					array( 'jquery' ),
+					[ 'jquery' ],
 					self::VER,
 					true
 				);
@@ -404,7 +414,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			wp_enqueue_style(
 				'youtube-channel',
 				plugins_url( 'assets/css/youtube-channel.css', __FILE__ ),
-				array(),
+				[],
 				self::VER
 			);
 
@@ -812,7 +822,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 					$output .= $this->front_debug( sprintf( __( 'You have set to display videos from %1$s [resource list ID: %2$s], but there have no public videos in that resouce.' ), $resource_nice_name, $resource_id ) );
 					return $output;
 				} elseif ( empty( $json_output ) ) {
-					$output .= $this->front_debug( sprintf( __( 'We have empty record for this feed. Please read <a href="%1$s" target="_blank">FAQ</a> and if that does not help, contact <a href="%2$s" target="_blank">support</a>.' ), 'https://wordpress.org/plugins/youtube-channel/faq/', 'https://wordpress.org/support/plugin/youtube-channel' ) );
+					$output .= $this->front_debug( sprintf( __( 'We have empty record for this feed. Please read <a href="%1$s" target="_blank">FAQ</a> and if that does not help, contact <a href="%2$s" target="_blank">support</a>.' ), 'https://wordpress.org/plugins/youtube-channel#faq', 'https://wordpress.org/support/plugin/youtube-channel/' ) );
 					return $output;
 				}
 
@@ -855,14 +865,14 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 							if ( 'playlist' == $resource_name ) {
 								$error_msg = "Please check did you set existing <em>Playlist ID</em>. You set to show videos from {$resource_nice_name}, but YouTube does not recognize <strong>{$resource_id}</strong> as existing and public playlist.";
 							} else {
-								$error_msg = "Please check did you set proper <em>Channel ID</em>. You set to show videos from {$resource_nice_name}, but YouTube does not recognize <strong>{$channel}</strong> as existing and public channel.";
+								$error_msg = "Please check did you set the proper <em>Channel ID</em>. You set to show videos from {$resource_nice_name}, but YouTube does not recognize <strong>{$channel}</strong> as an existing or public channel.";
 							}
 						} elseif ( 'keyInvalid' == $json_output->error->errors[0]->reason ) {
 							// Invalid YouTube Data API Key
 							$error_msg = sprintf( __( "Double check <em>YouTube Data API Key</em> on <em>General</em> plugin tab and make sure it's correct. Read <a href=\"%s\" target=\"_blank\">Installation</a> document." ), 'https://wordpress.org/plugins/youtube-channel/installation/' );
 						} elseif ( 'ipRefererBlocked' == $json_output->error->errors[0]->reason ) {
 							// Restricted access YouTube Data API Key
-							$error_msg = 'Check <em>YouTube Data API Key</em> restrictions, empty cache if enabled by appending in browser address bar parameter <em>?ytc_force_recache=1</em>';
+							$error_msg = 'Check <em>YouTube Data API Key</em> restrictions, empty cache if enabled by appending in the browser address bar parameter <em>?ytc_force_recache=1</em>';
 						} elseif ( 'invalidChannelId' == $json_output->error->errors[0]->reason ) {
 							// (deprecated?) Non existing Channel ID set
 							$error_msg = sprintf( __( 'You have set wrong Channel ID. Fix that in General plugin settings, Widget and/or shortcode. Read <a href="%s" target="_blank">FAQ</a> document.' ), 'https://wordpress.org/plugins/youtube-channel/faq/' );
@@ -891,7 +901,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 
 					// set array for unique random item
 					if ( ! empty( $instance['random'] ) ) {
-						$random_used = array();
+						$random_used = [];
 					}
 
 					/* AU:20141230 reduce number of videos if requested > available */
@@ -954,11 +964,11 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			$feed_url .= "&maxResults={$items}";
 			$feed_url .= "&key={$this->defaults['apikey']}";
 
-			$wparg = array(
-				'timeout' => $this->defaults['timeout'],
+			$wparg = [
+				'timeout'   => $this->defaults['timeout'],
 				'sslverify' => $this->defaults['sslverify'] ? true : false,
-				'headers' => array( 'referer' => site_url() ),
-			);
+				'headers'   => [ 'referer' => site_url() ],
+			];
 
 			$response = wp_remote_get( $feed_url, $wparg );
 
@@ -1012,14 +1022,12 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 		 * @param  integer $ratio Selected aspect ratio (1 for 4:3, other for 16:9)
 		 * @return integer        Calculated height in pixels
 		 */
-		function height_ratio( $width = 306, $ratio ) {
+		function height_ratio( $width = 306, $ratio = 2 ) {
 
 			switch ( $ratio ) {
 				case 1:
 					$height = round( ( $width / 4 ) * 3 );
 					break;
-				case 2:
-				case 3:
 				default:
 					$height = round( ( $width / 16 ) * 9 );
 			}
@@ -1189,7 +1197,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			if ( ! empty( $instance['showtitle'] ) ) {
 				if (
 					// for non-thumbnail for `above` and `inside`
-					( 'thumbnail' != $instance['display'] && in_array( $instance['showtitle'], array( 'above', 'inside' ) ) ) ||
+					( 'thumbnail' != $instance['display'] && in_array( $instance['showtitle'], [ 'above', 'inside' ] ) ) ||
 					// for thubmanil only if it's `below`
 					( 'thumbnail' == $instance['display'] && 'above' == $instance['showtitle'] )
 				) {
@@ -1341,7 +1349,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 
 				// Show video title inside video?
 				$title_inside = '';
-				if ( ! empty( $instance['showtitle'] ) && in_array( $instance['showtitle'], array( 'inside', 'inside_b' ) ) ) {
+				if ( ! empty( $instance['showtitle'] ) && in_array( $instance['showtitle'], [ 'inside', 'inside_b' ] ) ) {
 					$title_inside = sprintf(
 						'<%1$s class="ytc_title ytc_title_inside %3$s">%2$s</%1$s>',
 						$title_tag,
@@ -1358,7 +1366,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			if ( ! empty( $instance['showtitle'] ) ) {
 				if (
 					// for non-thumbnail for `below` and `inside_b`
-					( 'thumbnail' != $instance['display'] && in_array( $instance['showtitle'], array( 'below', 'inside_b' ) ) ) ||
+					( 'thumbnail' != $instance['display'] && in_array( $instance['showtitle'], [ 'below', 'inside_b' ] ) ) ||
 					// for thubmanil only if it's `below`
 					( 'thumbnail' == $instance['display'] && 'below' == $instance['showtitle'] )
 				) {
@@ -1461,7 +1469,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 		 */
 		public static function cache_times_arr() {
 
-			return array(
+			return [
 				'0'       => __( 'Do not cache', 'youtube-channel' ),
 				'60'      => __( '1 minute', 'youtube-channel' ),
 				'300'     => __( '5 minutes', 'youtube-channel' ),
@@ -1483,7 +1491,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 				'1209600' => __( '2 weeks', 'youtube-channel' ),
 				'1814400' => __( '3 weeks', 'youtube-channel' ),
 				'2419200' => __( '1 month', 'youtube-channel' ),
-			);
+			];
 
 		} // END public static function cache_times_arr()
 
@@ -1607,7 +1615,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 
 			// prepare debug data with settings of current widget
 			$data = array_merge(
-				array(
+				[
 					'date'   => date( 'r' ),
 					'server' => $_SERVER['SERVER_SOFTWARE'],
 					'php'    => PHP_VERSION,
@@ -1615,7 +1623,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 					'ytc'    => self::VER,
 					'url'    => get_site_url(),
 					'for'    => $for,
-				),
+				],
 				$options
 			);
 

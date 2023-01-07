@@ -216,9 +216,7 @@ function au_youtube_channel_update_routine_3() {
 					unset( $ytc_widgets[ $widget_id ][ $key ] );
 				}
 			} // END foreach ( $widget_data as $key => $val )
-
 		} // END if ( $widget_id != '_multiwidget' )
-
 	}
 	update_option( 'widget_youtube-channel', $ytc_widgets );
 	unset( $options_matrix, $init, $ytc_widgets, $widget_id, $widget_data );
@@ -387,7 +385,6 @@ function au_youtube_channel_update_routine_11() {
 				}
 			}
 		} // END if ( $widget_id != '_multiwidget' )
-
 	} // END 	foreach ( $ytc_widgets as $widget_id => $widget_data )
 
 	update_option( 'widget_youtube-channel', $ytc_widgets );

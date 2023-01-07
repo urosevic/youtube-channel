@@ -25,5 +25,5 @@ jQuery(document).ready(function($){
 </script>
 
 <h3>Export global settings to JSON</h3>
-<p>If you experienced any error while you using shortcode <code>[youtube_channel]</code> please provide to <a href="https://wordpress.org/support/plugin/youtube-channel" target="_blank">support forum</a> exact shortcode syntax and JSON of global settings.</p>
+<p>If you experienced any error while you using shortcode <code>[youtube_channel]</code> please provide to <a href="https://wordpress.org/support/plugin/youtube-channel/" target="_blank">support forum</a> exact shortcode syntax and JSON of global settings.</p>
 <a href="?ytc_debug_json_for=global" class="button">Download YTC global settings</a>
