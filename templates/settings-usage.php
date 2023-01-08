@@ -1,5 +1,5 @@
-<h3><?php _e( 'How to use YouTube Channel', 'youtube-channel' ); ?></h3>
-<p><?php _e( 'You can insert YouTube Channel in couple different ways.', 'youtube-channel' ); ?></p>
+<h3><?php _e( 'How to use My YouTube Channel', 'wpau-yt-channel' ); ?></h3>
+<p><?php _e( 'You can insert My YouTube Channel in couple different ways.', 'wpau-yt-channel' ); ?></p>
 <ol>
 <li>
 	<?php
@@ -8,15 +8,15 @@
 		 * %2$s is replaced with translated label Widget Area
 		 * %3$s is replaced with link to WordPress Widgets page
 		 */
-		__(
+		esc_html__(
 			'Add %1$s to preferred %2$s on %3$s, and configure it there.',
-			'youtube-channel'
+			'wpau-yt-channel'
 		),
-		__( 'YouTube Channel Widget', 'youtube-channel' ),
-		__( 'Widget Area', 'youtube-channel' ),
+		esc_html__( 'My YouTube Channel Widget', 'wpau-yt-channel' ),
+		esc_html__( 'Widget Area', 'wpau-yt-channel' ),
 		sprintf(
 			'<a href="widgets.php">%s</a>',
-			__( 'Widgets', 'youtube-channel' )
+			esc_html__( 'Widgets', 'wpau-yt-channel' )
 		)
 	);
 	?>
@@ -25,7 +25,7 @@
 	<?php
 	printf(
 		// translators: %s is replaced with plugin shortcode
-		__(
+		esc_html__(
 			'Insert shortcode %s to your page or text widget, and even modify default settings by shortcode parameters listed in section below.',
 			'youtube_channel'
 		),

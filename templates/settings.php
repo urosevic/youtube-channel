@@ -3,32 +3,32 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
-global $wpau_youtube_channel;
 ?>
 <div class="wrap" id="youtube_channel_settings">
 	<h2>
-		<?php echo $wpau_youtube_channel->plugin_name . __( ' Settings', 'youtube-channel' ); ?>
-		<span class="ver">v. <?php echo YTC_VER; ?></span>
+		<?php echo esc_html( YTC_PLUGIN_NAME . ' ' . __( 'Settings', 'wpau-yt-channel' ) ); ?>
+		<span class="ver">v. <?php echo esc_html( YTC_VER ); ?></span>
 	</h2>
 	<?php
-	$active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'general';
+	$active_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'general';
 
 	// define available tabs
 	$tabs = array(
-		'general' => __( 'General', 'youtube-channel' ),
-		'video'   => __( 'Video', 'youtube-channel' ),
-		'content' => __( 'Content', 'youtube-channel' ),
-		'link'    => __( 'Link to Channel', 'youtube-channel' ),
-		'tools'   => __( 'Tools', 'youtube-channel' ),
-		'help'    => __( 'Help', 'youtube-channel' ),
-		'support' => __( 'Support', 'youtube-channel' ),
+		'general' => __( 'General', 'wpau-yt-channel' ),
+		'video'   => __( 'Video', 'wpau-yt-channel' ),
+		'content' => __( 'Content', 'wpau-yt-channel' ),
+		'link'    => __( 'Link to Channel', 'wpau-yt-channel' ),
+		'tools'   => __( 'Tools', 'wpau-yt-channel' ),
+		'help'    => __( 'Help', 'wpau-yt-channel' ),
+		'support' => __( 'Support', 'wpau-yt-channel' ),
 	);
 	?>
 	<h2 class="nav-tab-wrapper">
 	<?php
 	foreach ( $tabs as $tab_name => $tab_title ) {
-		echo '<a href="?page=' . $wpau_youtube_channel->plugin_slug . '&tab=' . $tab_name . '" class="nav-tab' . ( ( $active_tab === $tab_name ) ? ' nav-tab-active' : '' ) . '">' . $tab_title . '</a>';
+		$tab_url   = '?page=' . YTC_PLUGIN_SLUG . '&tab=' . $tab_name;
+		$tab_class = $active_tab === $tab_name ? ' nav-tab-active' : '';
+		echo '<a href="' . esc_url( $tab_url ) . '" class="nav-tab ' . esc_attr( $tab_class ) . '">' . esc_html( $tab_title ) . '</a>';
 	}
 	?>
 	</h2>
@@ -40,8 +40,8 @@ global $wpau_youtube_channel;
 
 			echo '<form method="post" action="options.php">';
 
-			settings_fields( 'ytc_' . $active_tab );
-			do_settings_sections( $wpau_youtube_channel->plugin_slug . '_' . $active_tab );
+			settings_fields( sanitize_key( 'ytc_' . $active_tab ) );
+			do_settings_sections( sanitize_key( YTC_PLUGIN_SLUG . '_' . $active_tab ) );
 
 			submit_button();
 

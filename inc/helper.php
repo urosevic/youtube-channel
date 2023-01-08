@@ -42,11 +42,11 @@ function ytc_environment_info( $for = 'widget' ) {
 
 	return array(
 		'date'   => gmdate( 'r' ),
-		'server' => $_SERVER['SERVER_SOFTWARE'],
+		'server' => sanitize_text_field( $_SERVER['SERVER_SOFTWARE'] ),
 		'php'    => PHP_VERSION,
 		'wp'     => $wp_version,
 		'ytc'    => YTC_VER,
 		'url'    => get_site_url(),
-		'for'    => $for,
+		'for'    => sanitize_key( $for ),
 	);
 }

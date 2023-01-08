@@ -1,11 +1,11 @@
-<h3><?php _e( 'How to use shortcode', 'youtube-channel' ); ?></h3>
+<h3><?php _e( 'How to use shortcode', 'wpau-yt-channel' ); ?></h3>
 <p>
 	<?php
 	printf(
 		// translators: %s is replaced with plugin shortcode
 		__(
 			'You can use shortcode %s with options listed below (all options are optional if you have set defaults in global plugin settings).',
-			'youtube-channel'
+			'wpau-yt-channel'
 		),
 		'<code>[youtube_channel]</code>'
 	);
@@ -13,10 +13,10 @@
 </p>
 
 <h3 class="nav-tab-wrapper subnav-tab-wrapper">
-	<a href="#ytc-general-settings" class="nav-tab nav-tab-active"><?php _e( 'General Settings', 'youtube-channel' ); ?></a>
-	<a href="#ytc-video-settings" class="nav-tab"><?php _e( 'Video Settings', 'youtube-channel' ); ?></a>
-	<a href="#ytc-content-settings" class="nav-tab"><?php _e( 'Content Layout', 'youtube-channel' ); ?></a>
-	<a href="#ytc-link-settings" class="nav-tab"><?php _e( 'Link to Channel', 'youtube-channel' ); ?></a>
+	<a href="#ytc-general-settings" class="nav-tab nav-tab-active"><?php _e( 'General Settings', 'wpau-yt-channel' ); ?></a>
+	<a href="#ytc-video-settings" class="nav-tab"><?php _e( 'Video Settings', 'wpau-yt-channel' ); ?></a>
+	<a href="#ytc-content-settings" class="nav-tab"><?php _e( 'Content Layout', 'wpau-yt-channel' ); ?></a>
+	<a href="#ytc-link-settings" class="nav-tab"><?php _e( 'Link to Channel', 'wpau-yt-channel' ); ?></a>
 </h3>
 
 <div class="tab-content-ytc tab-content-active" id="ytc-general-settings">
@@ -125,10 +125,10 @@
 			'Please note, you can omit all options listed above, and then will be used plugin defaults customized on tabs %1$s, %2$s, %3$s and %4$s.',
 			'youtube-chanel'
 		),
-		__( 'General', 'youtube-channel' ),
-		__( 'Video', 'youtube-channel' ),
-		__( 'Content', 'youtube-channel' ),
-		__( 'Link to Channel', 'youtube-channel' )
+		__( 'General', 'wpau-yt-channel' ),
+		__( 'Video', 'wpau-yt-channel' ),
+		__( 'Content', 'wpau-yt-channel' ),
+		__( 'Link to Channel', 'wpau-yt-channel' )
 	);
 	?>
 </p>
@@ -138,9 +138,9 @@
 		// translators: %s is replaced with plugin name
 		__(
 			'Important note: %s blocks inserted through widget have their own settings.',
-			'youtube-channel'
+			'wpau-yt-channel'
 		),
-		__( 'YouTube Channel', 'youtube-channel' )
+		__( 'YouTube Channel', 'wpau-yt-channel' )
 	);
 	?>
 </p>

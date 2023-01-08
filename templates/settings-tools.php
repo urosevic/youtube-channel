@@ -7,20 +7,20 @@
 
 <script type="text/javascript">
 jQuery(document).ready(function($){
-    $('#ytc_clear_all_cache').on('click', function(ev){
-        ev.preventDefault();
+	$('#ytc_clear_all_cache').on('click', function(ev){
+		ev.preventDefault();
 
-        $.post(
-            ajaxurl,
-            {
-                'action': 'ytc_clear_all_cache'
-            },
-            function(response){
-                alert(response);
-            }
-        );
+		$.post(
+			ajaxurl,
+			{
+				'action': 'ytc_clear_all_cache'
+			},
+			function(response){
+				alert(response);
+			}
+		);
 
-    });
+	});
 });
 </script>
 
