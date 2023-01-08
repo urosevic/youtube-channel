@@ -20,7 +20,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 		'link'    => __( 'Link to Channel', 'wpau-yt-channel' ),
 		'tools'   => __( 'Tools', 'wpau-yt-channel' ),
 		'help'    => __( 'Help', 'wpau-yt-channel' ),
-		'support' => __( 'Support', 'wpau-yt-channel' ),
 	);
 	?>
 	<h2 class="nav-tab-wrapper">
@@ -35,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php
 	if ( ! empty( $tabs[ $active_tab ] ) ) {
 
-		if ( ! in_array( $active_tab, array( 'tools', 'help', 'support' ), true ) ) {
+		if ( ! in_array( $active_tab, array( 'tools', 'help' ), true ) ) {
 			// for all tabs except tools and help
 
 			echo '<form method="post" action="options.php">';
@@ -52,8 +51,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 		} elseif ( 'help' === $active_tab ) {
 			include_once( YTC_DIR_TEMPLATES . '/settings-usage.php' );
 			include_once( YTC_DIR_TEMPLATES . '/settings-usage-shortcode.php' );
-		} elseif ( 'support' === $active_tab ) {
-			include_once( YTC_DIR_TEMPLATES . '/settings-support.php' );
 		} // $active_tab != 'tools|help|support'
 
 	} // ! empty ( $tabs[$active_tab] )

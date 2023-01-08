@@ -55,9 +55,6 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			// Load widget
 			require_once( 'class-wpau-youtube-channel-widget.php' );
 
-			// Generate debug JSON
-			add_action( 'init', array( $this, 'generate_debug_json' ), 10 );
-
 			// Register shortcodes `youtube_channel` and `ytc`
 			add_shortcode( 'youtube_channel', array( $this, 'shortcode' ) );
 			add_shortcode( 'ytc', array( $this, 'shortcode' ) );
@@ -1585,49 +1582,6 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			return $buttons;
 
 		} // END function mce_buttons()
-
-		public function generate_debug_json() {
-
-			// Proceed only if global is requested (widget is abandoned)
-			if ( empty( $_GET['ytc_debug_json_for'] ) || 'global' !== $_GET['ytc_debug_json_for'] ) {
-				return;
-			}
-
-			if ( empty( $_REQUEST['_ytc_dbg_nonce'] ) || ! wp_verify_nonce( $_REQUEST['_ytc_dbg_nonce'], 'ytc_debug_json_for' ) ) {
-				wp_die( __( 'Oops, insufficient permissions to access My YouTube Channel debug info.' ), __( 'My YouTube Channel' ) );
-			}
-
-			// global settings
-			$options = get_option( 'youtube_channel_defaults' );
-
-			if ( ! is_array( $options ) ) {
-				return;
-			}
-
-			// Remove YouTube Data API Key from config JSON
-			$options['apikey'] = '*** REDACTED ***';
-
-			// Prepare data with current plugin settings
-			$data = array_merge(
-				array(
-					'date'   => gmdate( 'r' ),
-					'server' => sanitize_text_field( $_SERVER['SERVER_SOFTWARE'] ),
-					'php'    => PHP_VERSION,
-					'wp'     => get_bloginfo( 'version', 'display' ),
-					'ytc'    => YTC_VER,
-					'url'    => get_site_url(),
-				),
-				$options
-			);
-
-			// Return JSON file
-			header( 'Content-disposition: attachment; filename=' . sanitize_file_name( 'ytc3_' . $_SERVER['HTTP_HOST'] . '_' . gmdate( 'ymdHis' ) . '.json' ) );
-			header( 'Content-Type: application/json' );
-			echo json_encode( $data );
-
-			// Exit now, because we need only debug data in JSON file, not settings or any other page
-			exit;
-		} // End function generate_debug_json()
 
 	} // End class
 } // End class check

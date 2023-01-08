@@ -1,1 +1,0 @@
-<p>For all questions, feature request and communication with author and users of this plugin, use our <a href="https://wordpress.org/support/plugin/youtube-channel/" target="_blank">support forum</a>.</p>

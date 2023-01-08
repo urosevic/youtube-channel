@@ -23,8 +23,3 @@ jQuery(document).ready(function($){
 	});
 });
 </script>
-
-<h3>Export global settings to JSON</h3>
-<p>If you experienced any error while you using shortcode <code>[youtube_channel]</code> please provide to <a href="https://wordpress.org/support/plugin/youtube-channel/" target="_blank">support forum</a> exact shortcode syntax and JSON of global settings.</p>
-<?php $ytc_dbg_nonce = wp_create_nonce( 'ytc_debug_json_for' ); ?>
-<a href="?ytc_debug_json_for=global&_ytc_dbg_nonce=<?php echo $ytc_dbg_nonce; ?>" class="button">Download YTC global settings</a>

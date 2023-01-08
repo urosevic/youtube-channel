@@ -581,30 +581,6 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 			</label>
 		</p>
 
-		<h4><?php esc_html_e( 'Does not work?', 'wpau-yt-channel' ); ?></h4>
-		<p class="description">
-			<?php
-			printf(
-				wp_kses(
-					/* translators: %1$s is replaced link to official plugin FAQ page
-					* %2$s with link to official community support forum
-					*/
-					__(
-						'Carefully read %1$s before you contact us on %2$s.',
-						'wpau-yt-channel'
-					),
-					array(
-						'a' => array(
-							'href'   => array(),
-							'target' => array(),
-						),
-					)
-				),
-				'<a href="https://wordpress.org/plugins/youtube-channel/#faq" target="_faq">' . esc_html__( 'FAQ', 'wpau-yt-channel' ) . '</a>',
-				'<a href="https://wordpress.org/support/plugin/youtube-channel/" target="_support">' . esc_html__( 'community support forum', 'wpau-yt-channel' ) . '</a>'
-			);
-			?>
-		</p>
 		<?php if ( $this->get_field_id( '' ) > 0 ) : ?>
 		<script>
 			window.ytcWidgets = window.ytcWidgets || [];
