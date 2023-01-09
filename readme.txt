@@ -426,8 +426,9 @@ If you are in a hurry, please find a developer to do it for you or [request a qu
 
 == Changelog ==
 
-= 3.23.0 (20230108) =
-* Remove settings export to JSON as now we have Site Health info
+= 3.23.0 (20230109) =
+* Replace Magnific Popup with BiggerPicture
+* (20230108) Remove settings export to JSON as now we have Site Health info
 * Improve: Code improvements and simplification
 * Changed plugin name to `My YouTube Channel` to resolve Misusing trademarks - The Display Name
 * Change Text Domain to `wpau-yt-channel` to resolve Misusing trademarks - The URL

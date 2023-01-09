@@ -315,15 +315,15 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			// Check do we need our own lightbox?
 			if ( empty( $this->defaults['nolightbox'] ) ) {
 				wp_enqueue_style(
-					'magnific-popup-au',
-					esc_url( YTC_URL . '/assets/lib/magnific-popup/css/magnific-popup.min.css' ),
+					'bigger-picture',
+					esc_url( YTC_URL . '/assets/lib/bigger-picture/css/bigger-picture.min.css' ),
 					array(),
 					YTC_VER
 				);
 				wp_enqueue_script(
-					'magnific-popup-au',
-					esc_url( YTC_URL . '/assets/lib/magnific-popup/jquery.magnific-popup.min.js' ),
-					array( 'jquery' ),
+					'bigger-picture',
+					esc_url( YTC_URL . '/assets/lib/bigger-picture/bigger-picture.min.js' ),
+					array(),
 					YTC_VER,
 					true
 				);
@@ -347,8 +347,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 
 			$js = '';
 
-			// Print YT API only if we have set ytc_html5_js in $_SESSION
-			// if ( ! empty( $_SESSION['ytc_html5_js'] ) ) {
+			// Print YT API only if we have set ytc_html5_js
 			if ( ! empty( $this->ytc_html5_js ) ) {
 				$js .= "
 					if (!window['YT']) {
@@ -368,28 +367,31 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 					}
 					function ytc_mute(event){event.target.mute();}
 				";
-			} // END if ( ! empty($_SESSION['ytc_html5_js']) )
+			} // END if ( ! empty( $this->ytc_html5_js ) )
 
-			// Print Magnific Popup if not disabled
+			// Print BiggerPicture if not disabled
 			if ( empty( $this->defaults['nolightbox'] ) ) {
+
+				// https://github.com/henrygd/bigger-picture
 				$js .= "
-					function ytc_init_MPAU() {
-						jQuery('.ytc-lightbox').magnificPopupAU({
-							disableOn:320,
-							type:'iframe',
-							mainClass:'ytc-mfp-lightbox',
-							removalDelay:160,
-							preloader:false,
-							fixedContentPos:false
-						});
-					}
-					jQuery(window).on('load',function(){
-						ytc_init_MPAU();
+				// initialize BiggerPicture
+				let bp = BiggerPicture({
+					target: document.body
+				});
+				document.addEventListener('click', function(event) {
+					// If the clicked element doesn't have the right selector, bail
+					if (!event.target.parentElement.matches('.ytc-lightbox')) return;
+					// Don't follow the link
+					event.preventDefault();
+					// Trigger BiggerPicture
+					bp.open({
+						items: event.target.parentElement,
+						el: event.target.parentElement,
+						scale: 0.80
 					});
-					jQuery(document).ajaxComplete(function(){
-						ytc_init_MPAU();
-					});
+				}, false);
 				";
+
 			} // END if ( empty($this->defaults['nolightbox']) )
 
 			if ( ! empty( $js ) ) {
@@ -1173,10 +1175,9 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 				) {
 					if ( ! empty( $instance['linktitle'] ) ) {
 						$output .= sprintf(
-							'<%1$s class="ytc_title ytc_title_above"><a href="https://%3$s/watch/?v=%4$s" target="youtube">%2$s</a></%1$s>',
+							'<%1$s class="ytc_title ytc_title_above"><a href="https://www.youtube.com/watch?v=%3$s" target="youtube">%2$s</a></%1$s>',
 							$title_tag,
 							esc_html( $yt_title ),
-							$youtube_domain,
 							$yt_id
 						);
 					} else {
@@ -1291,24 +1292,28 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 				}
 			} else { // default is thumbnail
 
-				$params = '';
+				$params = array();
 				$target = '';
 				if ( empty( $instance['nolightbox'] ) ) {
 					if ( ! empty( $instance['norel'] ) ) {
-						$params .= '&amp;rel=0';
+						$params['rel'] = 0;
 					}
 					if ( ! empty( $instance['modestbranding'] ) ) {
-						$params .= '&amp;modestbranding=1';
+						$params['modestbranding'] = 1;
 					}
 					if ( ! empty( $instance['controls'] ) ) {
-						$params .= '&amp;controls=0';
+						$params['controls'] = 0;
 					}
 					if ( ! empty( $instance['playsinline'] ) ) {
-						$params .= '&amp;playsinline=1';
+						$params['playsinline'] = 1;
 					}
 					if ( ! empty( $instance['privacy'] ) ) {
-						$params .= '&amp;enhanceprivacy=1';
+						$params['enhanceprivacy'] = 1;
 					}
+					if ( ! empty( $instance['autoplay'] ) ) {
+						$params['autoplay'] = 1;
+					}
+					$http_query     = http_build_query( $params );
 					$lightbox_class = 'ytc-lightbox';
 				} else {
 					$lightbox_class = 'ytc-nolightbox';
@@ -1337,16 +1342,20 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 					);
 				}
 				$output .= sprintf(
-					'<a href="https://www.youtube.com/watch?v=%1$s%2$s" %3$s class="ytc_thumb %4$s" %5$s><span style="background-image: url(%6$s);" %3$s id="ytc_%1$s">%7$s</span></a>',
+					'<a href="https://www.youtube.com/watch?v=%1$s&%2$s" class="ytc_thumb %4$s" %5$s %3$s
+						data-iframe="https://%8$s/embed/%1$s?%2$s"
+						data-title="%9$s"
+					><span style="background-image: url(%6$s);" %3$s id="ytc_%1$s">%7$s</span></a>',
 					$yt_id, // 1
-					$params, //2
+					$http_query, //2
 					$tag_title, // 3
 					"$lightbox_class $arclass", // 4
 					$target, // 5
 					$yt_thumb, // 6
-					esc_html( $title_inside ) // 7
+					esc_html( $title_inside ), // 7
+					$youtube_domain, // 8
+					esc_html( $yt_title )
 				);
-
 			} // what to show conditions
 
 			// Show video title below video?
