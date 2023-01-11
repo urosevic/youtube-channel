@@ -4,7 +4,7 @@ Donate link: https://urosevic.net/wordpress/donate/?donate_for=youtube-channel
 Tags: youtube, channel, playlist, widget, video
 Requires at least: 5.3
 Tested up to: 6.1.1
-Stable tag: 3.23.0
+Stable tag: 3.23.1
 Requires PHP: 7.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -24,18 +24,18 @@ For a manually picked set of videos from YouTube, check out [Easy YouTube Galler
 = Features =
 
 * Show latest videos from My YouTube Channel (ordered in reverse chronological order related to the creation date), or from Playlist
-* Option to get a random video from any of 4 resources
+* Option to get a random video from any of two resources
 * Responsive (one full-width video per row) or non-responsive
 * Preferred aspect ratio relative to width (16:9 and 4:3)
 * Custom width for video embeded object (default is 306px)
-* Three modes to display video: **thumbnail** (`default`), **HTML5** (`iframe`) and **HTML5 Asynchronous** (`iframe2`)
+* Four modes to display video: **thumbnail** (`default`), **HTML5** (`iframe`), **HTML5 Asynchronous** (`iframe2`) abd **Playlist Embed** (`playlist`)
 * Thumbnail mode opens the video in lightbox
 * Enhanced Privacy - please note that display mode **HTML5 (IFRAME) Asynchronous** (shortcode parameter `iframe2`) does not support Enhanced Privacy due to YouTube API limitations
-* Hide or show video title above/below video wrapped to HTML tag by your choice (h3, h4, h5, span or div)
+* Hide or show video title above/below/inside video wrapped to HTML tag by your choice (h3, h4, h5, span or div)
 * Custom feed caching timeout
 * Optional video autoplay with optional muted audio
 * (Optional) *TinyMCE button* on post/page edit (can be disabled on General plugin settings page), which open a shortcode GUI generator to help you build a shortcode
-* Show link to channel/vanity/legacy username below videos
+* Show link to channel/handle below videos (vanity and legacy username are deprecated since v3.23.0)
 * Final look is highly customisable thanks to classes for each element of YTC block!
 
 = Requirements =
@@ -71,15 +71,13 @@ Use Customizer, `style.css` from the child theme or [Head & Footer Code](https:/
 
 * Video title and description for embedded playlist mode do not work.
 * Removing the YouTube logo from the playback control bar does not work for all videos.
-* Async HTML5 video does not work for 2nd same video on the same page (two YTC blocks set to Async HTML5)
+* Autoplay does not work always
 
 If WordFence or other malware scan tool detect My YouTube Channel file `youtube-channel.php` as a potential risk because `base64_encode()` and `base64_decode()` functions, remember that we use this two functions to store and restore JSON feeds to transient cache, so potential detection is false positive.
 
 = Credits =
 
-* For playing videos in lightbox we use enhanced [Magnific Popup](https://github.com/dimsemenov/Magnific-Popup).
-* Initial textdomain adds done by [dimadin](https://profiles.wordpress.org/dimadin/).
-* Federico Bozo reminded me to fix z-index problem
+* For playing videos in lightbox we use [Bigger Picture](https://github.com/henrygd/bigger-picture).
 
 = Shortcode =
 
@@ -159,7 +157,7 @@ Along with Widget, you can add My YouTube Channel block inline by using shortcod
   * `vanity` **DEPRECATED** Vanity custom URL
   * `legacy` **DEPRECATED** Legacy username page
 
-*Please note, to enhance plugin functionality, we can change some shortcode parameters in future.*
+*Please note, to enhance plugin functionality, we can change or deprecate some shortcode parameters in future.*
 
 == Filter hooks ==
 
@@ -237,6 +235,7 @@ Use **Plugins / Add New** in WordPress or install the plugin manually:
 If you have to upgrade manually, repeat the installation steps and re-enable the plugin.
 
 = YouTube Data API Key =
+
 To make My YouTube Channel work you have to generate [YouTube Data API Key v3](https://developers.google.com/youtube/v3/getting-started) and insert it to General plugin settings.
 
 Learn more about [Obtaining authorization credentials](https://developers.google.com/youtube/registering_an_application) and for detailed instructions on how to generate your own API Key follow instructions below.
@@ -296,11 +295,9 @@ Do what the message says - check and correct Channel ID in default settings/widg
 If there is no `YTC ERROR` code in HTML source, visit [Google API Explorer](https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.playlistItems.list?part=snippet&maxResults=5&playlistId=) and append to the end of URL one of resource ID’s based on your Channel ID:
 
 * for videos from channel replace **UC** with **UU** in Channel ID (so *UCRPqmcpGcJ_gFtTmN_a4aVA* becomes *UURPqmcpGcJ_gFtTmN_a4aVA*)
-* for videos from Favourited videos replace **UC** with **FL** (so *UCRPqmcpGcJ_gFtTmN_a4aVA* becomes *FLRPqmcpGcJ_gFtTmN_a4aVA*)
-* for videos from Liked Videos replace **UC** with **LL** (so *UCRPqmcpGcJ_gFtTmN_a4aVA* becomes *LLRPqmcpGcJ_gFtTmN_a4aVA*)
 * for videos from Playlist simply use Playlist ID (like *PLEC850BE962234400* or *RDMMjUe8uoKdHao*)
 
-Note that all four resources are *playlists* (including uploads to channel), so append mentioned ID to field **playlistId** (not to **id**), and click **Execute** button at the bottom of that page.
+Note that both resources are *playlists* (including uploads to channel), so append mentioned ID to field **playlistId** (not to **id**), and click **Execute** button at the bottom of that page.
 
 1. If you receive some error in results, tune parameters in APIs Explorer.
 1. If there is no error while the response is empty, and you are sure that there are public videos in selected resource – contact Google Support.
@@ -425,6 +422,10 @@ Please note, we cannot guarantee an ETA to implement the requested feature.
 If you are in a hurry, please find a developer to do it for you or [request a quote from us](https://urosevic.net/wordpress/contact/?subject=YouTube%20Channel).
 
 == Changelog ==
+
+= 3.23.1 (20230111) =
+* Fix: allow multiple classes defined in Widget and Shortcode
+* Fix: over-escaped content break customized layouts and styling
 
 = 3.23.0 (20230111) =
 * Tested: WordPress 6.1.1 on PHP 8.1.7

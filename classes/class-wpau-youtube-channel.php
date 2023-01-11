@@ -157,7 +157,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 				'popup_goto'     => 0, // 0 same window, 1 new window JS, 2 new window target
 				'link_to'        => 'none', // 0 legacy username, 1 channel, 2 vanity
 				'tinymce'        => 1, // show TinyMCE button by default
-				'nolightbox'     => 0, // do not use lightbox global setting
+				'nolightbox'     => false, // do not use lightbox global setting
 				'timeout'        => 5, // timeout for wp_remote_get()
 				'sslverify'      => true,
 				'js_ev_listener' => false,
@@ -523,7 +523,6 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 
 					'class'          => ! empty( $instance['class'] ) ? $instance['class'] : '',
 
-					'nolightbox'     => ! empty( $instance['nolightbox'] ) ? $instance['nolightbox'] : '0',
 					'target'         => '',
 					'skip'           => 0, // how many items to skip
 				),
@@ -582,10 +581,9 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			$instance['link_to']    = $atts['link_to']; // link to: none, vanity, legacy, channel
 
 			// Customization
-			$instance['class']      = sanitize_html_class( $atts['class'] ); // custom additional class for container
-			$instance['nolightbox'] = $atts['nolightbox']; // custom usage of lightbox
-			$instance['target']     = $atts['target'];     // custom target for thumbnails w/o lightbox (empty, _blank or custom)
-			$instance['skip']       = (int) $atts['skip'];
+			$instance['class']  = sanitize_html_classes( $atts['class'] ); // custom additional class for container
+			$instance['target'] = $atts['target']; // should use target for thumbnails w/o lightbox (`0` || `1`|`2`)
+			$instance['skip']   = (int) $atts['skip'];
 
 			return $this->generate_ytc_block( $instance );
 		} // END public function shortcode()
@@ -675,12 +673,12 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			/* OK, we have required resource (Playlist or Channel ID), so we can proceed to real job */
 
 			// Set custom class and responsive if needed
-			$class = ( ! empty( $instance['class'] ) ) ? $instance['class'] : 'default';
+			$class = ( ! empty( $instance['class'] ) ) ? sanitize_html_classes( $instance['class'] ) : 'default';
 			if ( ! empty( $instance['responsive'] ) ) {
 				$class .= ' responsive';
 			}
 			if ( ! empty( $instance['display'] ) ) {
-				$class .= " ytc_display_{$instance['display']}";
+				$class .= ' ytc_display_' . esc_attr( $instance['display'] );
 			}
 
 			switch ( $resource ) {
@@ -696,7 +694,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			// Start output string
 			$output = '';
 
-			$output .= '<div class="youtube_channel ' . esc_attr( $class ) . '">';
+			$output .= '<div class="youtube_channel ' . $class . '">';
 
 			if ( empty( $instance['display'] ) ) {
 				$instance['display'] = $this->defaults['display'];
@@ -1155,7 +1153,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			switch ( $instance['popup_goto'] ) {
 				case 1: // JavaScript is deprecated in 3.24.0
 				case 2:
-					$output .= '<a href="' . esc_url( $goto_url ) . '" target="_blank" title="' . esc_html( "$goto_txt $newtab" ) . '">' . esc_html( $goto_txt ) . '</a>';
+					$output .= '<a href="' . esc_url( $goto_url ) . '" target="youtube" title="' . esc_html( "$goto_txt $newtab" ) . '">' . esc_html( $goto_txt ) . '</a>';
 					break;
 				default:
 					$output .= '<a href="' . esc_url( $goto_url ) . '" title="' . esc_html( $goto_txt ) . '">' . esc_html( $goto_txt ) . '</a>';
@@ -1206,7 +1204,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			$yt_id = ytc_sanitize_api_key( $item->snippet->resourceId->videoId );
 
 			/**
-			* @var string yt_title Sanitized Title of YouTube video
+			* @var string $yt_title Sanitized Title of YouTube video
 			*/
 			$yt_title = sanitize_text_field( $item->snippet->title );
 			// $yt_date  = $item->snippet->publishedAt;
@@ -1218,7 +1216,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			$youtube_domain = $this->get_youtube_domain( $instance );
 
 			/**
-			 * @var string $vnumclass HTML class first | mid | last
+			 * @var string $vnumclass HTML class `first` | `mid` | `last`
 			 */
 			$vnumclass = 'mid';
 			switch ( $y ) {
@@ -1229,25 +1227,25 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 					// $autoplay  = false;
 					$vnumclass = 'last';
 					break;
-					/*
 				default:
 					$vnumclass = 'mid';
-					$autoplay  = false;
+					// $autoplay  = false;
 					break;
-					*/
 			}
 
-			// Set proper class for responsive thumbs per selected aspect ratio
 			/**
+			 * Aspect ratio class
+			 *
+			 * @todo deprecate and always use ar16_9
+			 *
 			 * @var string $arclass HTML class for aspect ratio ar4_3 | ar16_9
 			 */
 			$arclass = $this->get_ar_class( $instance );
 
 			/**
-			 * Prepare HTML tag for title (H3, etc)
-			 * @var string $title_tag HTML tag for title
+			 * @var string $title_html_tag HTML tag for title (eg. `h3`, `div`, `span`, `strong`, etc)
 			 */
-			$title_tag = isset( $instance['titletag'] ) ? sanitize_key( $instance['titletag'] ) : sanitize_key( $this->defaults['titletag'] );
+			$title_html_tag = isset( $instance['titletag'] ) ? sanitize_key( $instance['titletag'] ) : sanitize_key( $this->defaults['titletag'] );
 
 			$output .= '<div class="ytc_video_container ytc_video_' . intval( $y ) . ' ytc_video_' . $vnumclass . ' ' . $arclass . '" style="width:' . $width . 'px">';
 
@@ -1262,14 +1260,14 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 					if ( ! empty( $instance['linktitle'] ) ) {
 						$output .= sprintf(
 							'<%1$s class="ytc_title ytc_title_above"><a href="https://www.youtube.com/watch?v=%3$s" target="youtube">%2$s</a></%1$s>',
-							$title_tag,
+							$title_html_tag,
 							esc_html( $yt_title ),
 							$yt_id
 						);
 					} else {
 						$output .= sprintf(
 							'<%1$s class="ytc_title ytc_title_above">%2$s</%1$s>',
-							$title_tag,
+							$title_html_tag,
 							esc_html( $yt_title ),
 						);
 					}
@@ -1377,9 +1375,21 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 
 			} else { // default is thumbnail
 
-				$params = array();
+				/**
+				 * Target atribute for thumbnail anchor
+				 *
+				 * @var string $target Empty if lightbox is used or `target="youtube"` tag attribute
+				 */
 				$target = '';
-				if ( empty( $instance['nolightbox'] ) ) {
+
+				/**
+				 * URL query with YouTube Video parameters
+				 *
+				 * @var string $http_query Empty or safe URL parameters
+				 */
+				$http_query = '';
+				if ( empty( $this->defaults['nolightbox'] ) ) {
+					$params = array();
 					if ( ! empty( $instance['norel'] ) ) {
 						$params['rel'] = 0;
 					}
@@ -1402,26 +1412,38 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 					$lightbox_class = 'ytc-lightbox';
 				} else {
 					$lightbox_class = 'ytc-nolightbox';
-					if ( ! empty( $instance['target'] ) ) {
-						$target = 'target="' . sanitize_key( $instance['target'] ) . '"';
+					if ( ! empty( $instance['popup_goto'] ) ) {
+						$target = 'target="youtube"';
 					}
 				}
 
-				// Do we need thumbnail w/ or w/o tooltip
-				$tag_title = empty( $instance['no_thumb_title'] ) ? $tag_title = 'title="' . esc_html( $yt_title ) . '"' : '';
+				/**
+				 * Title parameter for anchor tag
+				 *
+				 * @var string $tag_title Empty or `title="YouTube Video Sanitized Title"` tag attribute
+				 */
+				$tag_title = empty( $instance['no_thumb_title'] ) ? 'title="' . esc_html( $yt_title ) . '"' : '';
 
 				// Define video thumbnail
 				if ( empty( $instance['thumb_quality'] ) || ! in_array( $instance['thumb_quality'], array( 'default', 'mqdefault', 'hqdefault', 'sddefault', 'maxresdefault' ), true ) ) {
 					$instance['thumb_quality'] = 'hqdefault';
 				}
+				/**
+				 * @var string $yt_thumb Sanitized URL to video thumbnail
+				 */
 				$yt_thumb = 'https://img.youtube.com/vi/' . $yt_id . '/' . esc_attr( $instance['thumb_quality'] ) . '.jpg';
 
 				// Show video title inside video?
-				$title_inside = '';
+				/**
+				 * HTML code of video title inside the thumbnail
+				 *
+				 * @var string $title_inside_html HTML element for video title inside thumbnail
+				 */
+				$title_inside_html = '';
 				if ( ! empty( $instance['showtitle'] ) && in_array( $instance['showtitle'], array( 'inside', 'inside_b' ), true ) ) {
-					$title_inside = sprintf(
+					$title_inside_html = sprintf(
 						'<%1$s class="ytc_title ytc_title_inside %3$s">%2$s</%1$s>',
-						$title_tag,
+						$title_html_tag,
 						esc_html( $yt_title ),
 						'inside_b' === $instance['showtitle'] ? 'ytc_title_inside_bottom' : ''
 					);
@@ -1434,10 +1456,10 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 					$yt_id, // 1
 					$http_query, //2
 					$tag_title, // 3
-					"$lightbox_class $arclass", // 4
+					$lightbox_class . ' ' . $arclass, // 4
 					$target, // 5
 					$yt_thumb, // 6
-					esc_html( $title_inside ), // 7
+					$title_inside_html, // 7
 					$youtube_domain, // 8
 					esc_html( $yt_title )
 				);
@@ -1452,17 +1474,16 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 					( 'thumbnail' === $instance['display'] && 'below' === $instance['showtitle'] )
 				) {
 					if ( ! empty( $instance['linktitle'] ) ) {
-
 						$output .= sprintf(
 							'<%1$s class="ytc_title ytc_title_below"><a href="https://www.youtube.com/watch/?v=%3$s" target="youtube">%2$s</a></%1$s>',
-							$title_tag,
+							$title_html_tag,
 							esc_html( $yt_title ),
 							$yt_id
 						);
 					} else {
 						$output .= sprintf(
 							'<%1$s class="ytc_title ytc_title_below">%2$s</%1$s>',
-							$title_tag,
+							$title_html_tag,
 							esc_html( $yt_title )
 						);
 					}
@@ -1472,25 +1493,29 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			// do we need to show video description?
 			if ( ! empty( $instance['showdesc'] ) ) {
 
+				/**
+				 * YouTube Video description
+				 *
+				 * @todo If description should not be shortened, print HTML formatted desc
+				 *
+				 * @var string $video_description Raw HTML of YouTube video description
+				 */
 				$video_description = $item->snippet->description;
-				$etcetera          = '';
-				##TODO: If description should not be shortened, print HTML formatted desc
+
 				if ( $instance['desclen'] > 0 ) {
 					if ( function_exists( 'mb_strlen' ) && function_exists( 'mb_substr' ) ) {
 						if ( mb_strlen( $video_description ) > $instance['desclen'] ) {
-							$video_description = mb_substr( $video_description, 0, $instance['desclen'] );
-							$etcetera          = '&hellip;';
+							$video_description = mb_substr( $video_description, 0, $instance['desclen'] ) . '&hellip;';
 						}
 					} else {
 						if ( strlen( $video_description ) > $instance['desclen'] ) {
-							$video_description = substr( $video_description, 0, $instance['desclen'] );
-							$etcetera          = '&hellip;';
+							$video_description = substr( $video_description, 0, $instance['desclen'] ) . '&hellip;';
 						}
 					}
 				}
 
 				if ( ! empty( $video_description ) ) {
-					$output .= '<p class="ytc_description">' . esc_html( $video_description . $etcetera ) . '</p>';
+					$output .= '<p class="ytc_description">' . esc_html( $video_description ) . '</p>';
 				}
 			}
 

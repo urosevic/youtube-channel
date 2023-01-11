@@ -52,7 +52,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 
 		// General Options
 		$title    = ! empty( $instance['title'] ) ? sanitize_text_field( $instance['title'] ) : '';
-		$class    = ! empty( $instance['class'] ) ? sanitize_html_class( $instance['class'] ) : '';
+		$class    = ! empty( $instance['class'] ) ? sanitize_html_classes( $instance['class'] ) : '';
 		$handle   = ! empty( $instance['handle'] ) ? sanitize_text_field( $instance['handle'] ) : $defaults['handle'];
 		$vanity   = ! empty( $instance['vanity'] ) ? sanitize_text_field( $instance['vanity'] ) : $defaults['vanity']; // deprecated
 		$channel  = ! empty( $instance['channel'] ) ? ytc_sanitize_api_key( $instance['channel'] ) : $defaults['channel'];
@@ -112,7 +112,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 					class="widefat"
 					id="<?php echo esc_attr( $this->get_field_id( 'class' ) ); ?>"
 					name="<?php echo esc_attr( $this->get_field_name( 'class' ) ); ?>"
-					value="<?php echo esc_attr( $class ); ?>"
+					value="<?php echo sanitize_html_classes( $class ); ?>"
 					title="<?php esc_html_e( 'Enter custom class for YTC block, if you wish to target block styling', 'wpau-yt-channel' ); ?>"
 					/>
 			</label>
@@ -359,7 +359,9 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 		</p>
 		<div class="checkboxes">
 			<p>
-				<label for="<?php echo esc_attr( $this->get_field_id( 'controls' ) ); ?>">
+				<label for="<?php echo esc_attr( $this->get_field_id( 'controls' ) ); ?>"
+					title="<?php esc_html_e( 'This option indicates whether the video player controls are displayed', 'wpau-yt-channel' ); ?>"
+				>
 					<input type="checkbox"
 						class="checkbox"
 						id="<?php echo esc_attr( $this->get_field_id( 'controls' ) ); ?>"
@@ -377,7 +379,16 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 						name="<?php echo esc_attr( $this->get_field_name( 'modestbranding' ) ); ?>"
 						<?php checked( (bool) $modestbranding, true ); ?>
 						/>
-					<?php esc_html_e( 'Hide YouTube Logo (does not work for all videos)', 'wpau-yt-channel' ); ?>
+					<?php esc_html_e( 'Hide YouTube Logo', 'wpau-yt-channel' ); ?>
+				</label>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'hideanno' ) ); ?>">
+					<input type="checkbox"
+						class="checkbox"
+						id="<?php echo esc_attr( $this->get_field_id( 'hideanno' ) ); ?>"
+						name="<?php echo esc_attr( $this->get_field_name( 'hideanno' ) ); ?>"
+						<?php checked( (bool) $hideanno, true ); ?>
+						/>
+					<?php esc_html_e( 'Hide annotations from video', 'wpau-yt-channel' ); ?>
 				</label>
 				<label for="<?php echo esc_attr( $this->get_field_id( 'norel' ) ); ?>"
 					title="<?php esc_html_e( 'Enable this option to show after finished playback only related videos that come from the same channel as the video that was just played', 'wpau-yt-channel' ); ?>"
@@ -390,7 +401,9 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 						/>
 					<?php esc_html_e( 'Allow only channel related videos', 'wpau-yt-channel' ); ?>
 				</label>
-				<label for="<?php echo esc_attr( $this->get_field_id( 'autoplay' ) ); ?>">
+				<label for="<?php echo esc_attr( $this->get_field_id( 'autoplay' ) ); ?>"
+					title="<?php esc_html_e( 'If you enable Autoplay, playback will occur without any user interaction with the player if video is muted on autoplay and visitors browser allows that', 'wpau-yt-channel' ); ?>"
+					>
 					<input type="checkbox"
 						class="checkbox"
 						id="<?php echo esc_attr( $this->get_field_id( 'autoplay' ) ); ?>"
@@ -492,15 +505,6 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 			</div><!-- .checkboxes -->
 			<div class="checkboxes">
 			<p>
-				<label for="<?php echo esc_attr( $this->get_field_id( 'hideanno' ) ); ?>">
-					<input type="checkbox"
-						class="checkbox"
-						id="<?php echo esc_attr( $this->get_field_id( 'hideanno' ) ); ?>"
-						name="<?php echo esc_attr( $this->get_field_name( 'hideanno' ) ); ?>"
-						<?php checked( (bool) $hideanno, true ); ?>
-						/>
-					<?php esc_html_e( 'Hide annotations from video', 'wpau-yt-channel' ); ?>
-				</label>
 				<label for="<?php echo esc_attr( $this->get_field_id( 'showdesc' ) ); ?>">
 					<input class="checkbox"
 						type="checkbox"
@@ -594,7 +598,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 		// processes widget options to be saved
 		$instance                   = $old_instance;
 		$instance['title']          = sanitize_text_field( $new_instance['title'] );
-		$instance['class']          = sanitize_html_class( $new_instance['class'] );
+		$instance['class']          = sanitize_html_classes( $new_instance['class'] );
 		$instance['channel']        = ytc_sanitize_api_key( $new_instance['channel'] );
 		$instance['handle']         = sanitize_user( $new_instance['handle'] );
 		$instance['username']       = sanitize_user( $new_instance['username'] );

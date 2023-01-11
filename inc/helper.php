@@ -29,3 +29,37 @@ function ytc_sanitize_api_key( $key ) {
 
 	return $key;
 }
+
+/**
+ * Sanitizes an HTML classnames to ensure it only contains valid characters.
+ *
+ * Strips the string down to A-Z,a-z,0-9,_,-, . If this results in an empty
+ * string then it will return the alternative value supplied.
+ *
+ * @param string $classes    The classnames to be sanitized (multiple classnames separated by space)
+ * @param string $fallback   Optional. The value to return if the sanitization ends up as an empty string.
+ *                           Defaults to an empty string.
+ *
+ * @return string            The sanitized value
+ */
+if ( ! function_exists( 'sanitize_html_classes' ) ) {
+	function sanitize_html_classes( $classes, $fallback = '' ) {
+		// Strip out any %-encoded octets.
+		$sanitized = preg_replace( '|%[a-fA-F0-9][a-fA-F0-9]|', '', $classes );
+
+		// Limit to A-Z, a-z, 0-9, '_', '-' and ' ' (for multiple classes).
+		$sanitized = trim( preg_replace( '/[^A-Za-z0-9\_\ \-]/', '', $sanitized ) );
+
+		if ( '' === $sanitized && $fallback ) {
+			return sanitize_html_classes( $fallback );
+		}
+		/**
+		 * Filters a sanitized HTML class string.
+		 *
+		 * @param string $sanitized The sanitized HTML class.
+		 * @param string $classse   HTML class before sanitization.
+		 * @param string $fallback  The fallback string.
+		 */
+		return apply_filters( 'sanitize_html_classes', $sanitized, $classes, $fallback );
+	}
+}
