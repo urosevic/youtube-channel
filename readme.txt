@@ -426,14 +426,14 @@ If you are in a hurry, please find a developer to do it for you or [request a qu
 
 == Changelog ==
 
-= 3.23.0 (20230109) =
-* Replace Magnific Popup with BiggerPicture
-* (20230108) Remove settings export to JSON as now we have Site Health info
-* Improve: Code improvements and simplification
-* Changed plugin name to `My YouTube Channel` to resolve Misusing trademarks - The Display Name
-* Change Text Domain to `wpau-yt-channel` to resolve Misusing trademarks - The URL
-* (20230105) Security: fix XSS and Authorization Bypass vulnerability (thanks to WPScan)
+= 3.23.0 (20230111) =
 * Tested: WordPress 6.1.1 on PHP 8.1.7
+* Security: Fix XSS and Authorization Bypass vulnerability (thanks to WPScan)
+* Security: Replace legacy library Magnific Popup with BiggerPicture
+* Change: Plugin name to `My YouTube Channel` to resolve Misusing trademarks - The Display Name
+* Change: Text Domain to `wpau-yt-channel` to resolve Misusing trademarks - The URL
+* Improve: Code improvements and simplification
+* Deprecated: Remove general settings export to JSON as now we have Site Health info
 * Add: Support for YouTube Handle
 * Add: General option to prevent YTC Widet Preview gets rendered in Block Editor
 

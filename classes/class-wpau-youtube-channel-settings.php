@@ -18,11 +18,9 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 		 */
 		public function __construct() {
 
-			global $wpau_youtube_channel;
-
 			// get default values
 			$this->slug        = YTC_PLUGIN_SLUG;
-			$this->option_name = $wpau_youtube_channel->plugin_option;
+			$this->option_name = YTC_PLUGIN_OPTION_KEY;
 			$this->defaults    = get_option( $this->option_name );
 
 			// register actions
@@ -35,6 +33,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 		 * hook into WP's register_settings action hook
 		 */
 		public function register_settings() {
+
 			global $wpau_youtube_channel;
 
 			// =========================== General ===========================
@@ -192,7 +191,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 					'description' => __( 'Define caching timeout for YouTube feeds, in seconds', 'wpau-yt-channel' ),
 					'class'       => 'wide-text',
 					'value'       => isset( $this->defaults['cache'] ) ? $this->defaults['cache'] : '300',
-					'items'       => $wpau_youtube_channel->cache_times_arr(),
+					'items'       => $wpau_youtube_channel->cache_timeouts,
 				)
 			);
 			// Fetch

@@ -29,24 +29,3 @@ function ytc_sanitize_api_key( $key ) {
 
 	return $key;
 }
-
-/**
- * Prepare environment data for debugging
- *
- * @param string $for Target source (global | widget)
- *
- * @return array      Array of environment details
- */
-function ytc_environment_info( $for = 'widget' ) {
-	global $wp_version;
-
-	return array(
-		'date'   => gmdate( 'r' ),
-		'server' => sanitize_text_field( $_SERVER['SERVER_SOFTWARE'] ),
-		'php'    => PHP_VERSION,
-		'wp'     => $wp_version,
-		'ytc'    => YTC_VER,
-		'url'    => get_site_url(),
-		'for'    => sanitize_key( $for ),
-	);
-}

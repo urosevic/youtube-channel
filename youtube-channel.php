@@ -29,6 +29,7 @@ define( 'YTC_PLUGIN_FILE', plugin_basename( __FILE__ ) );
 define( 'YTC_PLUGIN_NAME', $plugin_data['Name'] );
 define( 'YTC_PLUGIN_URI', $plugin_data['PluginURI'] );
 define( 'YTC_PLUGIN_SLUG', 'youtube-channel' );
+define( 'YTC_PLUGIN_OPTION_KEY', 'youtube_channel_defaults' );
 define( 'YTC_DIR', dirname( __FILE__ ) );
 define( 'YTC_DIR_INC', YTC_DIR . '/inc' );
 define( 'YTC_DIR_CLASSES', YTC_DIR . '/classes' );

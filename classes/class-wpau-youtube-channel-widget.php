@@ -34,16 +34,12 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 			return;
 		}
 
-		$output = $args['before_widget'];
+		echo $args['before_widget'];
 		if ( ! empty( $instance['title'] ) ) {
-			$output .= $args['before_title'];
-			$output .= apply_filters( 'widget_title', $instance['title'], $instance, YTC_PLUGIN_SLUG );
-			$output .= $args['after_title'];
+			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'], $instance, YTC_PLUGIN_SLUG ) . $args['after_title'];
 		}
-		$output .= $wpau_youtube_channel->output( $instance );
-		$output .= $args['after_widget'];
-
-		echo $output;
+		echo $wpau_youtube_channel->generate_ytc_block( $instance );
+		echo $args['after_widget'];
 
 	} // END public function widget()
 
@@ -221,8 +217,11 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 						id="<?php echo esc_attr( $this->get_field_id( 'cache' ) ); ?>"
 						name="<?php echo esc_attr( $this->get_field_name( 'cache' ) ); ?>"
 						>
-						<option value="0" <?php selected( $cache, 0 ); ?>><?php esc_html_e( 'Do not cache', 'wpau-yt-channel' ); ?></option>
-						<?php echo $wpau_youtube_channel->cache_time( $cache ); ?>
+						<?php
+						foreach ( $wpau_youtube_channel->cache_timeouts as $sec => $title ) {
+							echo '<option value="' . intval( $sec ) . '" ' . selected( $cache, $sec, 0 ) . '>' . esc_html( $title ) . '</option>';
+						}
+						?>
 					</select>
 				</label>
 			</p>
