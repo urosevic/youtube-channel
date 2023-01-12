@@ -3,12 +3,12 @@
 
 		// Add a button that opens a window
 		editor.addButton( 'youtube_channel_shortcode', {
-			tooltip: 'YouTube Channel',
+			tooltip: 'My YouTube Channel',
 			icon: 'ytc',
 			onclick: function() {
 				// Open window
 				editor.windowManager.open( {
-					title: 'YouTube Channel',
+					title: 'My YouTube Channel',
 					// width: 600,
 					// height: 400,
 					// autoScroll: true,
@@ -56,20 +56,6 @@
 								},
 								{
 									type: 'textbox',
-									name: 'vanity',
-									label: 'Vanity/Custom ID',
-									value: '',
-									// tooltip: ''
-								},
-								{
-									type: 'textbox',
-									name: 'legacy',
-									label: 'Legacy Username',
-									value: '',
-									// tooltip: ''
-								},
-								{
-									type: 'textbox',
 									name: 'playlist',
 									label: 'Playlist ID',
 									value: '',
@@ -82,8 +68,6 @@
 									tooltip: '',
 									values : [
 										{text: 'Channel (User Uploads)', value: '0'},
-										{text: 'Favourited videos', value: '1'},
-										{text: 'Liked videos', value: '3'},
 										{text: 'Playlist', value: '2'},
 									],
 									value : '0'
@@ -118,15 +102,6 @@
 									],
 									value : '300'
 								},
-								/*
-								{
-									type: 'checkbox',
-									name: 'only_pl',
-									label: 'Embed resource as playlist',
-									tooltip: 'Overrides random video option.',
-									checked: false
-								},
-								*/
 								{
 									type: 'textbox',
 									name: 'fetch',
@@ -204,7 +179,6 @@
 										{text: 'HTML5 (iframe)', value: 'iframe'},
 										{text: 'HTML5 (iframe) Asynchronous', value: 'iframe2'},
 										{text: 'Embedded Playlist', value: 'playlist'},
-										// {text: 'Gallery', value: 'gallery'},
 									],
 									value : 'thumbnail'
 								},
@@ -222,31 +196,12 @@
 									],
 									value : 'hqdefault'
 								},
-								/*
-								{
-									type: 'textbox',
-									name: 'cols',
-									label: 'Columns in Gallery',
-									value: '3',
-									tooltip: 'Set number of columns for gallery display mode (min 1, max 8)'
-								},
-								*/
 								{
 									type: 'checkbox',
 									name: 'nolightbox',
 									label: 'Disable YTC lightbox',
-									tooltip: 'This will work only for Thumbnail',
+									tooltip: 'This will work only for Thumbnail and will open linked video in new tab',
 									checked: false
-								},
-								{
-									type: 'listbox',
-									name: 'target',
-									label: 'Open thumbnail anchor',
-									tooltip: 'If you select Thumbnail and enable Disable lightbox, you can open thumbnail anchor in new window/tab',
-									values : [
-										{text: 'Default', value: ''},
-										{text: 'New window/tab', value: '_blank'},
-									]
 								},
 								{
 									type: 'checkbox',
@@ -262,15 +217,16 @@
 								},
 								{
 									type: 'checkbox',
-									name: 'autoplay',
-									label: 'Autoplay video/playlist',
-									checked: false
+									name: 'nobrand',
+									label: 'Hide YT Logo',
+									tooltip: 'Does not work for all videos',
+									checked: true
 								},
 								{
 									type: 'checkbox',
-									name: 'mute',
-									label: 'Mute video on autoplay',
-									checked: false
+									name: 'noanno',
+									label: 'Hide annotations',
+									checked: true
 								},
 								{
 									type: 'checkbox',
@@ -280,10 +236,15 @@
 								},
 								{
 									type: 'checkbox',
-									name: 'nobrand',
-									label: 'Hide YT Logo',
-									tooltip: 'Does not work for all videos',
-									checked: true
+									name: 'autoplay',
+									label: 'Autoplay video/playlist',
+									checked: false
+								},
+								{
+									type: 'checkbox',
+									name: 'mute',
+									label: 'Mute video on autoplay',
+									checked: false
 								},
 							]
 						},
@@ -341,12 +302,6 @@
 									value: '0',
 									tooltip: 'Set number of characters to cut down video description to (0 means full length)'
 								},
-								{
-									type: 'checkbox',
-									name: 'noanno',
-									label: 'Hide annotations',
-									checked: true
-								},
 							]
 						},
 
@@ -363,8 +318,6 @@
 										{text: 'Hide link', value: 'none'},
 										{text: 'Channel page URL', value: 'channel'}, // ex 1
 										{text: 'Handle URL', value: 'handle'}, // new 2023
-										{text: 'Vanity/Custom URL', value: 'vanity'}, // ex 2
-										{text: 'Legacy username URL', value: 'legacy'}, // ex 0
 									],
 									value : 'none'
 								},
@@ -385,9 +338,7 @@
 
 						// General Settings
 						if ( e.data.handle ) shortcode += ' handle=' + e.data.handle +'';
-						if ( e.data.vanity ) shortcode += ' vanity=' + e.data.vanity +'';
 						if ( e.data.channel ) shortcode += ' channel=' + e.data.channel +'';
-						if ( e.data.legacy ) shortcode += ' legacy=' + e.data.legacy +'';
 						if ( e.data.playlist ) shortcode += ' playlist=' + e.data.playlist +'';
 						if ( e.data.resource ) shortcode += ' resource=' + e.data.resource +'';
 						if ( e.data.cache ) shortcode += ' cache=' + e.data.cache +'';
@@ -403,7 +354,6 @@
 						if ( e.data.width ) shortcode += ' width=' + e.data.width.replace(/[^0-9.]/g, '') + '';
 						if ( e.data.display ) shortcode += ' display=' + e.data.display + '';
 						if ( e.data.thumb_quality ) shortcode += ' thumb_quality=' + e.data.thumb_quality + '';
-						// if ( e.data.cols ) shortcode += ' cols=' + e.data.cols + '';
 						if ( e.data.no_thumb_title ) shortcode += ' no_thumb_title=1';
 						if ( e.data.controls ) shortcode += ' controls=1';
 						if ( e.data.autoplay ) shortcode += ' autoplay=1';
@@ -411,7 +361,6 @@
 						if ( e.data.norel ) shortcode += ' norel=1';
 						if ( e.data.nobrand ) shortcode += ' nobrand=1';
 						if ( e.data.nolightbox ) shortcode += ' nolightbox=1';
-						if ( e.data.target ) shortcode += ' target=' + e.data.target + '';
 
 						// Content Layout
 						if ( e.data.showtitle ) shortcode += ' showtitle=' + e.data.showtitle + '';

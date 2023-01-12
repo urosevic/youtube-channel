@@ -119,7 +119,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 		</p>
 
 		<div class="halfs">
-			<p class="glue-top">
+			<p class="mt-0">
 				<label for="<?php echo esc_attr( $this->get_field_id( 'channel' ) ); ?>">
 					<?php esc_html_e( 'Channel ID', 'wpau-yt-channel' ); ?>
 					<input type="text"
@@ -134,7 +134,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 					</span>
 				</label>
 			</p>
-			<p class="glue-top">
+			<p class="mt-0">
 				<label for="<?php echo esc_attr( $this->get_field_id( 'playlist' ) ); ?>">
 					<?php esc_html_e( 'Playlist ID', 'wpau-yt-channel' ); ?>
 					<input type="text" 
@@ -168,7 +168,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 		</p>
 
 		<div class="halfs">
-			<p class="glue-top deprecated">
+			<p class="mt-0 deprecated">
 				<label for="<?php echo esc_attr( $this->get_field_id( 'vanity' ) ); ?>">
 					<?php esc_html_e( 'Vanity/Custom ID (deprecated)', 'wpau-yt-channel' ); ?>
 					<input type="text"
@@ -179,7 +179,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 						title="<?php esc_html_e( 'Legacy YouTube Vanity/Custom ID from URL (part after /c/)', 'wpau-yt-channel' ); ?>" />
 				</label>
 			</p>
-			<p class="glue-top deprecated">
+			<p class="mt-0 deprecated">
 				<label for="<?php echo esc_attr( $this->get_field_id( 'username' ) ); ?>">
 					<?php esc_html_e( 'Legacy Username (deprecated)', 'wpau-yt-channel' ); ?>
 					<input type="text"
@@ -193,7 +193,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 		</div><!-- .halfs -->
 
 		<div class="halfs">
-			<p class="glue-top">
+			<p class="mt-0">
 				<label for="<?php echo esc_attr( $this->get_field_id( 'resource' ) ); ?>">
 					<?php esc_html_e( 'Resource to use', 'wpau-yt-channel' ); ?>
 					<select
@@ -209,7 +209,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 					</select>
 				</label>
 			</p>
-			<p class="glue-top">
+			<p class="mt-0">
 				<label for="<?php echo esc_attr( $this->get_field_id( 'cache' ) ); ?>">
 					<?php esc_html_e( 'Cache feed', 'wpau-yt-channel' ); ?>
 					<select
@@ -228,7 +228,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 		</div><!-- .halfs -->
 
 		<div class="thirds">
-			<p class="third left glue-top">
+			<p class="third left mt-0">
 				<label for="<?php echo esc_attr( $this->get_field_id( 'fetch' ) ); ?>">
 					<?php esc_html_e( 'Fetch', 'wpau-yt-channel' ); ?>
 					<input type="number"
@@ -242,7 +242,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 					<small><?php esc_html_e( 'video(s)', 'wpau-yt-channel' ); ?></small>
 				</label>
 			</p>
-			<p class="third right glue-top">
+			<p class="third right mt-0">
 				<label for="<?php echo esc_attr( $this->get_field_id( 'num' ) ); ?>">
 					<?php esc_html_e( 'Show', 'wpau-yt-channel' ); ?>
 					<input type="number"
@@ -256,7 +256,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 					<small><?php esc_html_e( 'video(s)', 'wpau-yt-channel' ); ?></small>
 				</label>
 			</p>
-			<p class="third left glue-top">
+			<p class="third left mt-0">
 				<label for="<?php echo esc_attr( $this->get_field_id( 'skip' ) ); ?>">
 					<?php esc_html_e( 'Skip', 'wpau-yt-channel' ); ?>
 					<input type="number"
@@ -358,7 +358,34 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 			</label>
 		</p>
 		<div class="checkboxes">
-			<p>
+			<p class="mt-0 mb-0">
+				<label for="<?php echo esc_attr( $this->get_field_id( 'thumb_quality' ) ); ?>" <?php echo 'thumbnail' !== $display ? 'class="hidden"' : ''; ?>>
+					<?php esc_html_e( 'Thumbnail Quality', 'wpau-yt-channel' ); ?>
+					<select
+						class="widefat"
+						id="<?php echo esc_attr( $this->get_field_id( 'thumb_quality' ) ); ?>"
+						name="<?php echo esc_attr( $this->get_field_name( 'thumb_quality' ) ); ?>"
+						>
+						<option value="default" <?php selected( $thumb_quality, 'default' ); ?>><?php esc_html_e( 'Default Quality (120x90px)', 'wpau-yt-channel' ); ?></option>
+						<option value="mqdefault" <?php selected( $thumb_quality, 'mqdefault' ); ?>><?php esc_html_e( 'Medium Quality (320x180px)', 'wpau-yt-channel' ); ?></option>
+						<option value="hqdefault" <?php selected( $thumb_quality, 'hqdefault' ); ?>><?php esc_html_e( 'High Quality (480x360px)', 'wpau-yt-channel' ); ?></option>
+						<option value="sddefault" <?php selected( $thumb_quality, 'sddefault' ); ?>><?php esc_html_e( 'Standard Definition (640x480px)', 'wpau-yt-channel' ); ?></option>
+						<option value="maxresdefault" <?php selected( $thumb_quality, 'maxresdefault' ); ?>><?php esc_html_e( 'Maximum Resolution (1280x720px)', 'wpau-yt-channel' ); ?></option>
+					</select>
+				</label>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'no_thumb_title' ) ); ?>" <?php echo 'thumbnail' !== $display ? 'class="hidden"' : ''; ?>>
+					<input type="checkbox"
+						class="checkbox"
+						id="<?php echo esc_attr( $this->get_field_id( 'no_thumb_title' ) ); ?>"
+						name="<?php echo esc_attr( $this->get_field_name( 'no_thumb_title' ) ); ?>"
+						<?php checked( (bool) $no_thumb_title, true ); ?>
+						/>
+					<?php esc_html_e( 'Disable thumbnail tooltip', 'wpau-yt-channel' ); ?>
+				</label>
+			</p>
+		</div><!-- .checkboxes -->
+		<div class="checkboxes">
+			<p class="mt-0">
 				<label for="<?php echo esc_attr( $this->get_field_id( 'controls' ) ); ?>"
 					title="<?php esc_html_e( 'This option indicates whether the video player controls are displayed', 'wpau-yt-channel' ); ?>"
 				>
@@ -423,33 +450,6 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 				</label>
 			</p>
 		</div><!-- .checkboxes -->
-		<div class="checkboxes">
-			<p>
-				<label for="<?php echo esc_attr( $this->get_field_id( 'thumb_quality' ) ); ?>" <?php echo 'thumbnail' !== $display ? 'class="hidden"' : ''; ?>>
-					<?php esc_html_e( 'Thumbnail Quality', 'wpau-yt-channel' ); ?>
-					<select
-						class="widefat"
-						id="<?php echo esc_attr( $this->get_field_id( 'thumb_quality' ) ); ?>"
-						name="<?php echo esc_attr( $this->get_field_name( 'thumb_quality' ) ); ?>"
-						>
-						<option value="default" <?php selected( $thumb_quality, 'default' ); ?>><?php esc_html_e( 'Default Quality (120x90px)', 'wpau-yt-channel' ); ?></option>
-						<option value="mqdefault" <?php selected( $thumb_quality, 'mqdefault' ); ?>><?php esc_html_e( 'Medium Quality (320x180px)', 'wpau-yt-channel' ); ?></option>
-						<option value="hqdefault" <?php selected( $thumb_quality, 'hqdefault' ); ?>><?php esc_html_e( 'High Quality (480x360px)', 'wpau-yt-channel' ); ?></option>
-						<option value="sddefault" <?php selected( $thumb_quality, 'sddefault' ); ?>><?php esc_html_e( 'Standard Definition (640x480px)', 'wpau-yt-channel' ); ?></option>
-						<option value="maxresdefault" <?php selected( $thumb_quality, 'maxresdefault' ); ?>><?php esc_html_e( 'Maximum Resolution (1280x720px)', 'wpau-yt-channel' ); ?></option>
-					</select>
-				</label>
-				<label for="<?php echo esc_attr( $this->get_field_id( 'no_thumb_title' ) ); ?>" <?php echo 'thumbnail' !== $display ? 'class="hidden"' : ''; ?>>
-					<input type="checkbox"
-						class="checkbox"
-						id="<?php echo esc_attr( $this->get_field_id( 'no_thumb_title' ) ); ?>"
-						name="<?php echo esc_attr( $this->get_field_name( 'no_thumb_title' ) ); ?>"
-						<?php checked( (bool) $no_thumb_title, true ); ?>
-						/>
-					<?php esc_html_e( 'Disable thumbnail tooltip', 'wpau-yt-channel' ); ?>
-				</label>
-			</p>
-		</div><!-- .checkboxes -->
 
 		<h4><?php esc_html_e( 'Content Layout', 'wpau-yt-channel' ); ?></h4>
 		<div class="checkboxes">
@@ -472,7 +472,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 			</p>
 		</div><!-- .checkboxes -->
 		<div class="checkboxes">
-			<p class="glue-top">
+			<p class="mt-0 mb-0">
 				<label for="<?php echo esc_attr( $this->get_field_id( 'titletag' ) ); ?>" <?php echo 'none' === $showtitle ? 'class="hidden"' : ''; ?>>
 					<?php esc_html_e( 'Title HTML tag', 'wpau-yt-channel' ); ?>
 					<select
@@ -504,7 +504,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 			</p>
 			</div><!-- .checkboxes -->
 			<div class="checkboxes">
-			<p>
+			<p class="mt-0">
 				<label for="<?php echo esc_attr( $this->get_field_id( 'showdesc' ) ); ?>">
 					<input class="checkbox"
 						type="checkbox"
@@ -517,7 +517,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 				</label>
 			</p>
 		</div><!-- .checkboxes -->
-		<p class="glue-top">
+		<p class="mt-0">
 			<label for="<?php echo esc_attr( $this->get_field_id( 'desclen' ) ); ?>" <?php echo ! $showdesc ? 'class="hidden"' : ''; ?>>
 				<?php esc_html_e( 'Description length', 'wpau-yt-channel' ); ?>
 				<input type="number"
@@ -533,7 +533,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 
 		<h4><?php esc_html_e( 'Link to Channel', 'wpau-yt-channel' ); ?></h4>
 		<div class="halfs">
-		<p class="glue-top">
+		<p class="mt-0">
 			<label for="<?php echo esc_attr( $this->get_field_id( 'link_to' ) ); ?>">
 				<?php esc_html_e( 'Link type', 'wpau-yt-channel' ); ?>
 				<select
@@ -550,7 +550,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 				</select>
 			</label>
 		</p>
-		<p class="glue-top">
+		<p class="mt-0">
 			<label for="<?php echo esc_attr( $this->get_field_id( 'popup_goto' ) ); ?>" <?php echo 'none' === $link_to ? 'class="hidden"' : ''; ?>>
 				<?php esc_html_e( 'Link behaviour', 'wpau-yt-channel' ); ?>
 				<select
@@ -559,13 +559,13 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 					name="<?php echo esc_attr( $this->get_field_name( 'popup_goto' ) ); ?>"
 					>
 					<option value="0" <?php selected( $popup_goto, 0 ); ?>><?php esc_html_e( 'Open link in same window', 'wpau-yt-channel' ); ?></option>
-					<option value="1" <?php selected( $popup_goto, 1 ); ?>><?php esc_html_e( 'Open link in new window (JavaScript)', 'wpau-yt-channel' ); ?></option>
-					<option value="2" <?php selected( $popup_goto, 2 ); ?>><?php esc_html_e( 'Open link in new window (target="blank")', 'wpau-yt-channel' ); ?></option>
+					<?php // Option 2 `Open link in new window (JavaScript)` is deprecated since 3.23.2 ?>
+					<option value="2" <?php selected( $popup_goto, 2 ); ?>><?php esc_html_e( 'Open link in new window', 'wpau-yt-channel' ); ?></option>
 				</select>
 			</label>
 		</p>
 		</div><!-- .halfs -->
-		<p class="glue-top">
+		<p class="mt-0">
 			<label for="<?php echo esc_attr( $this->get_field_id( 'goto_txt' ) ); ?>" <?php echo 'none' === $link_to ? 'class="hidden"' : ''; ?>>
 				<?php esc_html_e( 'Link text', 'wpau-yt-channel' ); ?>
 				<input class="widefat"

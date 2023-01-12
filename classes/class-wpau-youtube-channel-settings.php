@@ -172,8 +172,8 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 					'value'       => isset( $this->defaults['resource'] ) ? $this->defaults['resource'] : '0',
 					'items'       => array(
 						'0' => __( 'Channel', 'wpau-yt-channel' ),
-						'1' => __( 'Favourites', 'wpau-yt-channel' ),
-						'3' => __( 'Liked Video', 'wpau-yt-channel' ),
+						// '1' => __( 'Favourites', 'wpau-yt-channel' ), // deprecated since 3.23.0
+						// '3' => __( 'Liked Video', 'wpau-yt-channel' ), // deprecated since 3.23.0
 						'2' => __( 'Playlist', 'wpau-yt-channel' ),
 					),
 				) // args
@@ -768,7 +768,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 					'value'       => isset( $this->defaults['popup_goto'] ) ? $this->defaults['popup_goto'] : '0',
 					'items'       => array(
 						'0' => __( 'same window', 'wpau-yt-channel' ),
-						'1' => __( 'new window (JavaScript)', 'wpau-yt-channel' ),
+						// option 1 - new window (JavaScript) is deprecated since 3.23.2
 						'2' => __( 'new window (target="_blank")', 'wpau-yt-channel' ),
 					),
 				) // args
@@ -1129,7 +1129,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL_SETTINGS' ) ) {
 				case 'ytc_link':
 					$sanitized['link_to']    = isset( $options['link_to'] ) && in_array( $options['link_to'], array( 'none', 'handle', 'vanity', 'channel', 'legacy' ), true ) ? $options['link_to'] : $this->defaults['link_to']; // string
 					$sanitized['goto_txt']   = ! empty( $options['goto_txt'] ) ? sanitize_text_field( $options['goto_txt'], true ) : sanitize_text_field( $this->defaults['goto_txt'] ); // text
-					$sanitized['popup_goto'] = isset( $options['popup_goto'] ) && in_array( intval( $options['popup_goto'] ), array( 0, 1, 2 ), true ) ? intval( $options['popup_goto'] ) : intval( $this->defaults['popup_goto'] ); // integer 0, 1 or 2
+					$sanitized['popup_goto'] = isset( $options['popup_goto'] ) && in_array( intval( $options['popup_goto'] ), array( 0, 1, 2 ), true ) ? intval( $options['popup_goto'] ) : intval( $this->defaults['popup_goto'] ); // integer 0 or 2 (1 is deprecated since 3.23.2)
 					break; // Link to Channel
 
 			} // switch

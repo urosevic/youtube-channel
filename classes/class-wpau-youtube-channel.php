@@ -232,7 +232,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 		function add_plugin_meta_links( $links, $file ) {
 
 			if ( plugin_basename( YTC_PLUGIN_FILE ) === $file ) {
-				$links[] = '<a href="' . esc_url( YTC_PLUGIN_URI ) . '" target="_blank">' . esc_html__( 'Support' ) . '</a>';
+				$links[] = '<a href="https://wordpress.org/support/plugin/youtube-channel/" target="_blank">' . esc_html__( 'Support' ) . '</a>';
 			}
 
 			// Return updated array of links

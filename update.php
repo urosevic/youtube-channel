@@ -113,3 +113,22 @@ function au_youtube_channel_update_routine_24() {
 	delete_option( 'youtube_channel_dismissed_notices' );
 
 } // END function au_youtube_channel_update_routine_24()
+
+/**
+ * Add default value for new option handle and block_preview
+ */
+function au_youtube_channel_update_routine_25() {
+
+	// get options from DB
+	$defaults = get_option( 'youtube_channel_defaults' );
+
+	if ( ! isset( $defaults['resource'] ) ) {
+		$defaults['resource'] = 0;
+	} elseif ( in_array( intval( $defaults['resource'] ), array( 1, 3 ), true ) ) {
+		$defaults['resource'] = 0;
+	}
+	if ( isset( $defaults ) ) {
+		update_option( 'youtube_channel_defaults', $defaults );
+	}
+
+} // END function au_youtube_channel_update_routine_25()

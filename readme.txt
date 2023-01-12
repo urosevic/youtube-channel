@@ -3,8 +3,8 @@ Contributors: urkekg, techwebux
 Donate link: https://urosevic.net/wordpress/donate/?donate_for=youtube-channel
 Tags: youtube, channel, playlist, widget, video
 Requires at least: 5.3
-Tested up to: 6.1.1
-Stable tag: 3.23.1
+Tested up to: 6.2
+Stable tag: 3.23.2
 Requires PHP: 7.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -423,6 +423,10 @@ If you are in a hurry, please find a developer to do it for you or [request a qu
 
 == Changelog ==
 
+= 3.23.2 (20230112) =
+* Tested: WordPress 6.2 on PHP 8.1.14
+* Improve: Remove deprecated options from Widget and Shortcode generator
+
 = 3.23.1 (20230111) =
 * Fix: allow multiple classes defined in Widget and Shortcode
 * Fix: over-escaped content break customized layouts and styling
@@ -462,6 +466,7 @@ An XSS vulnerability is fixed, update ASAP!
 
 1. My YouTube Channel default plugin settings (General tab)
 2. My YouTube Channel customized widget settings
-3. My YouTube Channel in WP Customizer and Dynamic Wall layout
-4. How to add YouTube Data API Key to My YouTube Channel
-5. TinyMCE form to easy configure My YouTube Channel shortcode for content
+3. My YouTube Channel customized widget on website
+4. TinyMCE form to easy configure My YouTube Channel shortcode for content
+5. Shortcode in Classic block
+6. Shortcode rendered on website
