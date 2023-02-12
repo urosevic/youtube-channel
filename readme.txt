@@ -4,7 +4,7 @@ Donate link: https://urosevic.net/wordpress/donate/?donate_for=youtube-channel
 Tags: youtube, channel, playlist, widget, video
 Requires at least: 5.3
 Tested up to: 6.2
-Stable tag: 3.23.2
+Stable tag: 3.23.3
 Requires PHP: 7.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -422,6 +422,11 @@ Please note, we cannot guarantee an ETA to implement the requested feature.
 If you are in a hurry, please find a developer to do it for you or [request a quote from us](https://urosevic.net/wordpress/contact/?subject=YouTube%20Channel).
 
 == Changelog ==
+
+= 3.23.3 (20230212) =
+* Fix: double trailing slash in assets URLs
+* Fix: thumbnails lightbox does not work with enabled cache or auto optimize
+* Update: Bigger Picture library to 1.1.7
 
 = 3.23.2 (20230112) =
 * Tested: WordPress 6.2 on PHP 8.1.14

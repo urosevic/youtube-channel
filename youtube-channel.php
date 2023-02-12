@@ -3,7 +3,7 @@
  * Plugin Name:       My YouTube Channel
  * Plugin URI:        https://urosevic.net/wordpress/plugins/youtube-channel/
  * Description:       Quick and easy embed latest or random videos from YouTube channel (user uploads) or playlist.
- * Version:           3.23.2
+ * Version:           3.23.3
  * Requires at least: 5.3
  * Requires PHP:      7.4
  * Author:            Aleksandar Urošević

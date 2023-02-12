@@ -259,7 +259,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 
 			wp_enqueue_style(
 				esc_attr( YTC_PLUGIN_SLUG . '-admin' ),
-				esc_url( YTC_URL . '/assets/css/admin.min.css' ),
+				esc_url( YTC_URL . 'assets/css/admin.min.css' ),
 				array(),
 				YTC_VER
 			);
@@ -268,7 +268,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			if ( in_array( $pagenow, array( 'widgets.php', 'customize.php' ), true ) ) {
 				wp_enqueue_script(
 					esc_attr( YTC_PLUGIN_SLUG . '-admin' ),
-					esc_url( YTC_URL . '/assets/js/admin.min.js' ),
+					esc_url( YTC_URL . 'assets/js/admin.min.js' ),
 					array( 'jquery' ),
 					YTC_VER,
 					true
@@ -369,22 +369,31 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 			if ( empty( $this->defaults['nolightbox'] ) ) {
 				wp_enqueue_style(
 					'bigger-picture',
-					esc_url( YTC_URL . '/assets/lib/bigger-picture/css/bigger-picture.min.css' ),
+					esc_url( YTC_URL . 'assets/lib/bigger-picture/css/bigger-picture.min.css' ),
 					array(),
 					YTC_VER
 				);
-				wp_enqueue_script(
+				wp_register_script(
 					'bigger-picture',
-					esc_url( YTC_URL . '/assets/lib/bigger-picture/bigger-picture.min.js' ),
+					esc_url( YTC_URL . 'assets/lib/bigger-picture/bigger-picture.min.js' ),
 					array(),
 					YTC_VER,
 					true
 				);
+				wp_enqueue_script( 'bigger-picture' );
+				wp_register_script(
+					'youtube-channel',
+					esc_url( YTC_URL . 'assets/js/youtube-channel.min.js' ),
+					array( 'bigger-picture' ),
+					YTC_VER,
+					true
+				);
+				wp_enqueue_script( 'youtube-channel' );
 			}
 
 			wp_enqueue_style(
 				'youtube-channel',
-				esc_url( YTC_URL . '/assets/css/youtube-channel.min.css' ),
+				esc_url( YTC_URL . 'assets/css/youtube-channel.min.css' ),
 				array(),
 				YTC_VER
 			);
@@ -436,31 +445,6 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 					function ytc_playmute(event){event.target.mute();event.target.playVideo();}
 				';
 			} // END if ( ! empty( $this->ytc_html5 ) )
-
-			// Print BiggerPicture if not disabled
-			if ( empty( $this->defaults['nolightbox'] ) ) {
-
-				// https://github.com/henrygd/bigger-picture
-				echo '
-				// initialize BiggerPicture
-				let bp = BiggerPicture({
-					target: document.body
-				});
-				document.addEventListener(\'click\', function(event) {
-					// If the clicked element doesn`t have the right selector, bail
-					if (!event.target.parentElement.matches(\'.ytc-lightbox\')) return;
-					// Don`t follow the link
-					event.preventDefault();
-					// Trigger BiggerPicture
-					bp.open({
-						items: event.target.parentElement,
-						el: event.target.parentElement,
-						scale: 0.80
-					});
-				}, false);
-				';
-
-			} // END if ( empty($this->defaults['nolightbox']) )
 
 			if ( ( ! empty( $this->ytc_html5 ) || empty( $this->defaults['nolightbox'] ) ) ) {
 				if ( $this->defaults['js_ev_listener'] ) {
@@ -1653,7 +1637,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 		 */
 		function mce_external_plugins( $plugins ) {
 
-			$plugins['youtube_channel'] = esc_url( YTC_URL . '/assets/js/tinymce/plugin.min.js' );
+			$plugins['youtube_channel'] = esc_url( YTC_URL . 'assets/js/tinymce/plugin.min.js' );
 
 			return $plugins;
 
