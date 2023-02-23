@@ -4,7 +4,7 @@ Donate link: https://urosevic.net/wordpress/donate/?donate_for=youtube-channel
 Tags: youtube, channel, playlist, widget, video
 Requires at least: 5.3
 Tested up to: 6.2
-Stable tag: 3.23.3
+Stable tag: 3.23.4
 Requires PHP: 7.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -422,6 +422,9 @@ Please note, we cannot guarantee an ETA to implement the requested feature.
 If you are in a hurry, please find a developer to do it for you or [request a quote from us](https://urosevic.net/wordpress/contact/?subject=YouTube%20Channel).
 
 == Changelog ==
+
+= 3.23.4 (20230223) =
+* Security: Fix CSRF vulnerability, thanks to [Mika/Patchstack](https://patchstack.com/database/researcher/5ade6efe-f495-4836-906d-3de30c24edad)
 
 = 3.23.3 (20230212) =
 * Fix: double trailing slash in assets URLs

@@ -1552,10 +1552,15 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 		 * @return string Report message about success or failed purge cache
 		 */
 		function clear_all_cache() {
-
-			if ( ! current_user_can( 'activate_plugins' ) ) {
+			if (
+				! current_user_can( 'activate_plugins' ) ||
+				(
+					! isset( $_POST['nonce'] ) ||
+					! wp_verify_nonce( $_POST['nonce'], 'action-ytc_clear_all_cache' )
+				)
+			) {
 				echo 'Oops, insufficient permissions to clear My YouTube Channel cache.';
-				exit();
+				wp_die();
 			}
 
 			global $wpdb;
@@ -1580,7 +1585,7 @@ if ( ! class_exists( 'WPAU_YOUTUBE_CHANNEL' ) ) {
 					echo "Success! We cleared $ret row/s with My YouTube Channel caches.";
 				}
 			}
-			exit();
+			wp_die();
 
 		} // END function clear_all_cache()
 
