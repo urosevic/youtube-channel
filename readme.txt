@@ -3,7 +3,7 @@ Contributors: urkekg, techwebux
 Donate link: https://urosevic.net/wordpress/donate/?donate_for=youtube-channel
 Tags: youtube, channel, playlist, widget, video
 Requires at least: 5.3
-Tested up to: 6.2
+Tested up to: 6.3
 Stable tag: 3.23.4
 Requires PHP: 7.4
 License: GPLv3
@@ -242,19 +242,21 @@ Learn more about [Obtaining authorization credentials](https://developers.google
 
 1. Visit [Google Cloud Platform](https://console.cloud.google.com/cloud-resource-manager).
 1. If you don't have any project, create a new one (click on **CREATE PROJECT**). Set the **Project name** so you can recognize it later (for example **My WordPress Website**). Then click the **CREATE** button and wait until Google create the project.
-1. On the popup click **SELECT PROJECT** and in the left-hand side menu go to **APIs & Services** -> **Dashboard**, then click **ENABLE APIS AND SERVICES**
+1. On the popup click **SELECT PROJECT** and from the left-hand side Navigation menu go to **APIs and Services** -> **Enabled APIs and services**
 1. Search for **YouTube Data API v3** and click on it, then click the **ENABLE** button.
-1. Click the **Credentials** item from the left-hand side menu.
-1. From the **CREATE CREDENTIALS** drop-down menu select **API key**
-1. As soon as the API key gets created, click the **RESTRICT KEY** button
-1. Define recognizable key **Name** (eg. YouTube API key for my website)
-1. Choose **Application restrictions** -> **IP addresses (web servers, cron jobs, etc.)** -> click **ADD AN ITEM** -> enter server IP (make sure you enter proper IP or you'll get **Oops, something went wrong.** error message).
-1. Choose **API restrictions** -> **Restrict key** -> click **Select APIs** -> chose option **YouTube Data API v3**
+1. From the left-hand side Navigation menu go to **APIs and services** -> **Credentials**.
+1. From the **+ CREATE CREDENTIALS** drop-down menu select **API key**
+1. As soon as the API key gets created -> **CLOSE** popup.
+1. Click on newly created key in the **API keys** table
+1. On **Edit API key** screen define recognizable key **Name** (eg. YouTube API key for my website)
+1. Within section **Set an application restrictio** select option **IP addresses**
+1. Under section **IP address restrictions** click **ADD** -> enter your server IP (make sure you enter proper IP or you'll get **Oops, something went wrong.** error message) -> click **DONE**.
+1. Under section **API restrictions** select option **Restrict key** -> click **Select APIs** dropdown -> chose option **YouTube Data API v3** -> OK
 1. When you finish, **SAVE** changes
-1. On **API keys** table click **Copy API key** icon
-1. In WordPress go to **Settings** -> **My YouTube Channel** -> **General** and paster API key in to field **YouTube Data API Key**.
+1. On **API keys** table click **SHOW KEY** and then **Copy to Clipboard** icon on the right hand side of the *Your API key* field
+1. In WordPress go to **Settings** -> **My YouTube Channel** -> **General** and paste API key in to field **YouTube Data API Key**.
 
-Also, do not forget to check and update **Channel ID** in the plugin's General settings, Widgets and/or shortcodes.
+Don't forget to check and update **Channel ID** in the plugin's General settings, Widgets and/or shortcodes.
 You can get **Channel ID** from the page [Account Advanced](https://www.youtube.com/account_advanced) while you're logged in to your YouTube account.
 
 [youtube http://www.youtube.com/watch?v=wOqkfkNhOUE]
@@ -420,6 +422,11 @@ Feel free to submit a feature request by creating a new topic on [Community foru
 Please note, we cannot guarantee an ETA to implement the requested feature.
 
 If you are in a hurry, please find a developer to do it for you or [request a quote from us](https://urosevic.net/wordpress/contact/?subject=YouTube%20Channel).
+
+= Where do I report security bugs found in this plugin? =
+
+Please report security bugs found in the source code of the My YouTube Channel plugin through the [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/youtube-channel). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
+
 
 == Changelog ==
 
