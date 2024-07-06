@@ -39,14 +39,12 @@ function au_youtube_channel_update() {
 
 	// Update plugin version number
 	update_option( 'youtube_channel_version', YTC_VER );
-
 } // END function au_youtube_channel_update()
 
 /**
  * Add default value for new global options sslverify and js_ev_listener
  */
 function au_youtube_channel_update_routine_22() {
-
 	// get options from DB
 	$defaults = get_option( 'youtube_channel_defaults' );
 
@@ -61,14 +59,12 @@ function au_youtube_channel_update_routine_22() {
 		update_option( 'youtube_channel_defaults', $defaults );
 		unset( $defaults );
 	}
-
 } // END function au_youtube_channel_update_routine_22()
 
 /**
  * Add default value for new option skip and remove deprecatged options themelight and showinfo
  */
 function au_youtube_channel_update_routine_23() {
-
 	// get options from DB
 	$defaults = get_option( 'youtube_channel_defaults' );
 
@@ -86,7 +82,6 @@ function au_youtube_channel_update_routine_23() {
 		update_option( 'youtube_channel_defaults', $defaults );
 		unset( $defaults );
 	}
-
 } // END function au_youtube_channel_update_routine_23()
 
 
@@ -94,7 +89,6 @@ function au_youtube_channel_update_routine_23() {
  * Add default value for new option handle and block_preview
  */
 function au_youtube_channel_update_routine_24() {
-
 	// get options from DB
 	$defaults = get_option( 'youtube_channel_defaults' );
 
@@ -111,14 +105,12 @@ function au_youtube_channel_update_routine_24() {
 
 	// Five years after changes with notices, we don't need dissmissable notices anymore
 	delete_option( 'youtube_channel_dismissed_notices' );
-
 } // END function au_youtube_channel_update_routine_24()
 
 /**
  * Add default value for new option handle and block_preview
  */
 function au_youtube_channel_update_routine_25() {
-
 	// get options from DB
 	$defaults = get_option( 'youtube_channel_defaults' );
 
@@ -130,5 +122,19 @@ function au_youtube_channel_update_routine_25() {
 	if ( isset( $defaults ) ) {
 		update_option( 'youtube_channel_defaults', $defaults );
 	}
-
 } // END function au_youtube_channel_update_routine_25()
+
+/**
+ * Add default value for new option local_img
+ */
+function au_youtube_channel_update_routine_26() {
+	// get options from DB
+	$defaults = get_option( 'youtube_channel_defaults' );
+
+	if ( ! isset( $defaults['local_img'] ) ) {
+		$defaults['local_img'] = 0;
+	}
+	if ( isset( $defaults ) ) {
+		update_option( 'youtube_channel_defaults', $defaults );
+	}
+} // END function au_youtube_channel_update_routine_26()

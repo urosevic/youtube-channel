@@ -5,10 +5,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /* My YouTube Channel Widget */
-class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
+class Wpau_My_Youtube_Channel_Widget extends WP_Widget {
 
 	public function __construct() {
-
 		// Initialize Widget
 		parent::__construct(
 			YTC_PLUGIN_SLUG,
@@ -21,16 +20,14 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 				'customize_selective_refresh' => true,
 			)
 		);
-
 	} // END function __construct()
 
 	// Outputs the content of the widget
 	public function widget( $args, $instance ) {
-
-		global $wpau_youtube_channel;
+		global $wpau_my_youtube_channel;
 
 		// Skip rendering attempt if no widget_id is available.
-		if ( empty( $args['widget_id'] ) && true !== boolval( $wpau_youtube_channel->defaults['block_preview'] ) ) {
+		if ( empty( $args['widget_id'] ) && true !== boolval( $wpau_my_youtube_channel->defaults['block_preview'] ) ) {
 			return;
 		}
 
@@ -38,13 +35,12 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 		if ( ! empty( $instance['title'] ) ) {
 			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'], $instance, YTC_PLUGIN_SLUG ) . $args['after_title'];
 		}
-		echo $wpau_youtube_channel->generate_ytc_block( $instance );
+		echo $wpau_my_youtube_channel->generate_ytc_block( $instance );
 		echo $args['after_widget'];
-
 	} // END public function widget()
 
 	public function form( $instance ) {
-		global $wpau_youtube_channel;
+		global $wpau_my_youtube_channel;
 
 		$defaults = get_option( 'youtube_channel_defaults' );
 
@@ -218,7 +214,7 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 						name="<?php echo esc_attr( $this->get_field_name( 'cache' ) ); ?>"
 						>
 						<?php
-						foreach ( $wpau_youtube_channel->cache_timeouts as $sec => $title ) {
+						foreach ( $wpau_my_youtube_channel->cache_timeouts as $sec => $title ) {
 							echo '<option value="' . intval( $sec ) . '" ' . selected( $cache, $sec, 0 ) . '>' . esc_html( $title ) . '</option>';
 						}
 						?>
@@ -633,13 +629,11 @@ class WPAU_YOUTUBE_CHANNEL_Widget extends WP_Widget {
 		$instance['privacy']        = isset( $new_instance['privacy'] ) ? boolval( $new_instance['privacy'] ) : false;
 
 		return $instance;
-
 	} // END public function update()
+} // END class Wpau_My_Youtube_Channel_Widget()
 
-} // END class WPAU_YOUTUBE_CHANNEL_Widget()
-
-// Register WPAU_YOUTUBE_CHANNEL_Widget widget
-function wpau_register_youtube_channel_widget() {
-	register_widget( 'WPAU_YOUTUBE_CHANNEL_Widget' );
+// Register Wpau_My_Youtube_Channel_Widget widget
+function wpau_register_my_youtube_channel_widget() {
+	register_widget( 'Wpau_My_Youtube_Channel_Widget' );
 }
-add_action( 'widgets_init', 'wpau_register_youtube_channel_widget' );
+add_action( 'widgets_init', 'wpau_register_my_youtube_channel_widget' );

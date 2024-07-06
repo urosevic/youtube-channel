@@ -6,7 +6,7 @@ let bp = BiggerPicture({
 });
 document.addEventListener('click', function(event) {
     // If the clicked element doesn`t have the right selector, bail
-    if (!event.target.parentElement.matches('.ytc-lightbox')) return;
+    if (!event.target.parentElement || !event.target.parentElement.matches('.ytc-lightbox')) return;
     // Don`t follow the link
     event.preventDefault();
     // Trigger BiggerPicture

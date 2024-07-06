@@ -3,8 +3,8 @@ Contributors: urkekg, techwebux
 Donate link: https://urosevic.net/wordpress/donate/?donate_for=youtube-channel
 Tags: youtube, channel, playlist, widget, video
 Requires at least: 5.3
-Tested up to: 6.3
-Stable tag: 3.23.4
+Tested up to: 6.6
+Stable tag: 3.24.7
 Requires PHP: 7.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -30,6 +30,7 @@ For a manually picked set of videos from YouTube, check out [Easy YouTube Galler
 * Custom width for video embeded object (default is 306px)
 * Four modes to display video: **thumbnail** (`default`), **HTML5** (`iframe`), **HTML5 Asynchronous** (`iframe2`) abd **Playlist Embed** (`playlist`)
 * Thumbnail mode opens the video in lightbox
+* [NEW] Optionally store thumbnail images locally for improved speed performance and cache policy
 * Enhanced Privacy - please note that display mode **HTML5 (IFRAME) Asynchronous** (shortcode parameter `iframe2`) does not support Enhanced Privacy due to YouTube API limitations
 * Hide or show video title above/below/inside video wrapped to HTML tag by your choice (h3, h4, h5, span or div)
 * Custom feed caching timeout
@@ -51,10 +52,10 @@ Use Customizer, `style.css` from the child theme or [Head & Footer Code](https:/
   * `.default` – for non-responsive block
   * `.responsive` – when you have enabled responsive option
 * `.ytc_title` – class for video title container above thumbnail/video object
-  * `.ytc_title_above` - additional class for video title above video/thumbnail
-  * `.ytc_title_below` - additional class for video title below video/thumbnail
-  * `.ytc_title_inside` - additional class for video title printed inside of the thumbnail
-  * `.ytc_title_inside_bottom` - additional class for bottom aligned video title printed inside of the thumbnail
+  * `.ytc_title_above` – additional class for video title above video/thumbnail
+  * `.ytc_title_below` – additional class for video title below video/thumbnail
+  * `.ytc_title_inside` – additional class for video title printed inside of the thumbnail
+  * `.ytc_title_inside_bottom` – additional class for bottom aligned video title printed inside of the thumbnail
 * `.ytc_video_container` – class of container for single item, plus:
   * `.ytc_video_1`, `.ytc_video_2`, … – class of container for single item with ordering number of item in widget
   * `.ytc_video_first` – class of first container for single item
@@ -165,13 +166,13 @@ You can modify final output of video block by hooking to filter `ytc_print_video
 
 Four parameters are provided:
 
-* `video_content` - HTML of original video block
-* `item` - YouTube video object which contains:
-  * `snippet->publishedAt` - date of publishing YouTube video
-  * `shippet->title` - YouTube video title
-  * `shippet->description` - YouTube video description
-  * `snippet->resourceId->videoId` -> YouTube video ID
-* `instance` - Current My YouTube Channel Block parameters, including global settings:
+* `video_content` – HTML of original video block
+* `item` – YouTube video object which contains:
+  * `snippet->publishedAt` – date of publishing YouTube video
+  * `shippet->title` – YouTube video title
+  * `shippet->description` – YouTube video description
+  * `snippet->resourceId->videoId` – YouTube video ID
+* `instance` – Current My YouTube Channel Block parameters, including global settings:
   * `handle`
   * `channel`
   * `vanity` **DEPRECATED**
@@ -211,7 +212,7 @@ Four parameters are provided:
   * `no_thumb_title`
   * `class`
   * `target`
-* `y` - order number of video (`1` for first, `2` for second, etc)
+* `y` – order number of video (`1` for first, `2` for second, etc)
 
 Example:
 
@@ -423,12 +424,17 @@ Please note, we cannot guarantee an ETA to implement the requested feature.
 
 If you are in a hurry, please find a developer to do it for you or [request a quote from us](https://urosevic.net/wordpress/contact/?subject=YouTube%20Channel).
 
-= Where do I report security bugs found in this plugin? =
+= How can I report security bugs? =
 
-Please report security bugs found in the source code of the My YouTube Channel plugin through the [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/youtube-channel). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
+You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/youtube-channel)
 
 
 == Changelog ==
+
+= 3.24.7 (20240706) =
+* Change: Rename classes to match new plugin name `My YouTube Channel`
+* Improve: Introduce option to locally store thumbnail images for improved cache policy
+* Tested: WordPress 6.6 and theme Twenty Twenty Four 1.1 on PHP 8.3.7
 
 = 3.23.4 (20230223) =
 * Security: Fix CSRF vulnerability, thanks to [Mika/Patchstack](https://patchstack.com/database/researcher/5ade6efe-f495-4836-906d-3de30c24edad)
