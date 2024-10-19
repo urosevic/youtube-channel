@@ -3,7 +3,7 @@ Contributors: urkekg, techwebux
 Donate link: https://urosevic.net/wordpress/donate/?donate_for=youtube-channel
 Tags: youtube, channel, playlist, widget, video
 Requires at least: 5.3
-Tested up to: 6.6
+Tested up to: 6.6.2
 Stable tag: 3.24.7
 Requires PHP: 7.4
 License: GPLv3
@@ -344,6 +344,15 @@ Yet another server issue, not related to My YouTube Channel nor WordPress.
 
 Please restart Apache (or Nginx) server. If that does not fix the issue, restart the entire server. Or contact server support to help.
 
+= Getting message Sign in to confirm you're not a bot when video start play =
+
+The issue is not related to the My YouTube Channel plugin but YouTube itself.
+
+Although Google indirectly refers to the cause in the article to which the link '[Learn more](https://support.google.com/youtube/answer/3037019#zippy=%2Ccheck-that-youre-signed-into-youtube)' leads, you most likely use a VPN, proxy, or shared public IP address.
+The IP address has a lot of traffic, so Google wants to verify whether the client is a bot or not.
+
+To resolve this, use another VPN or proxy.
+
 = Where to find correct Channel ID and User ID? =
 
 Login to your YouTube account and visit page [Account Advanced](https://www.youtube.com/account_advanced).
@@ -428,31 +437,36 @@ If you are in a hurry, please find a developer to do it for you or [request a qu
 
 You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/youtube-channel)
 
-
 == Changelog ==
 
 = 3.24.7 (20240706) =
+
 * Change: Rename classes to match new plugin name `My YouTube Channel`
 * Improve: Introduce option to locally store thumbnail images for improved cache policy
 * Tested: WordPress 6.6 and theme Twenty Twenty Four 1.1 on PHP 8.3.7
 
 = 3.23.4 (20230223) =
+
 * Security: Fix CSRF vulnerability, thanks to [Mika/Patchstack](https://patchstack.com/database/researcher/5ade6efe-f495-4836-906d-3de30c24edad)
 
 = 3.23.3 (20230212) =
+
 * Fix: double trailing slash in assets URLs
 * Fix: thumbnails lightbox does not work with enabled cache or auto optimize
 * Update: Bigger Picture library to 1.1.7
 
 = 3.23.2 (20230112) =
+
 * Tested: WordPress 6.2 on PHP 8.1.14
 * Improve: Remove deprecated options from Widget and Shortcode generator
 
 = 3.23.1 (20230111) =
+
 * Fix: allow multiple classes defined in Widget and Shortcode
 * Fix: over-escaped content break customized layouts and styling
 
 = 3.23.0 (20230111) =
+
 * Tested: WordPress 6.1.1 on PHP 8.1.7
 * Security: Fix XSS and Authorization Bypass vulnerability (thanks to WPScan)
 * Security: Replace legacy library Magnific Popup with BiggerPicture
@@ -464,6 +478,7 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 * Add: General option to prevent YTC Widet Preview gets rendered in Block Editor
 
 = 3.0.12.1 (20210227) =
+
 * Tested: WordPress 5.6.2 on PHP 7.4.15 and 8.0.2
 * Add: compatibility with PHP 8
 * Add: conditionally hide not applicable options in widget settings form
@@ -471,6 +486,7 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 * Improve: Readme, Installation (Step-by-Step instructions for obtaining YouTube Data API Key v3), FAQ
 
 = 3.0.12 (20201107) =
+
 * Add: link video title to YouTube playback page opened in new tab/window
 * Cleanup: remove deprecated parameters `theme` (`themelight`), `showinfo` (`noinfo`, `hideinfo`)
 * Improve: code for widget
