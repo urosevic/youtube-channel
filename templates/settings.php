@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 <div class="wrap" id="youtube_channel_settings">
 	<h2>
-		<?php echo esc_html( YTC_PLUGIN_NAME . ' ' . __( 'Settings', 'wpau-yt-channel' ) ); ?>
+		<?php echo esc_html( YTC_PLUGIN_NAME . ' ' . __( 'Settings', 'youtube-channel' ) ); ?>
 		<span class="ver">v. <?php echo esc_html( YTC_VER ); ?></span>
 	</h2>
 	<?php
@@ -14,12 +14,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	// define available tabs
 	$tabs = array(
-		'general' => __( 'General', 'wpau-yt-channel' ),
-		'video'   => __( 'Video', 'wpau-yt-channel' ),
-		'content' => __( 'Content', 'wpau-yt-channel' ),
-		'link'    => __( 'Link to Channel', 'wpau-yt-channel' ),
-		'tools'   => __( 'Tools', 'wpau-yt-channel' ),
-		'help'    => __( 'Help', 'wpau-yt-channel' ),
+		'general' => __( 'General', 'youtube-channel' ),
+		'video'   => __( 'Video', 'youtube-channel' ),
+		'content' => __( 'Content', 'youtube-channel' ),
+		'link'    => __( 'Link to Channel', 'youtube-channel' ),
+		'tools'   => __( 'Tools', 'youtube-channel' ),
+		'help'    => __( 'Help', 'youtube-channel' ),
 	);
 	?>
 	<h2 class="nav-tab-wrapper">
@@ -47,10 +47,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 			echo '</form>';
 
 		} elseif ( 'tools' === $active_tab ) {
-			include_once( YTC_DIR_TEMPLATES . '/settings-tools.php' );
+			include_once YTC_DIR_TEMPLATES . '/settings-tools.php';
 		} elseif ( 'help' === $active_tab ) {
-			include_once( YTC_DIR_TEMPLATES . '/settings-usage.php' );
-			include_once( YTC_DIR_TEMPLATES . '/settings-usage-shortcode.php' );
+			include_once YTC_DIR_TEMPLATES . '/settings-usage.php';
+			include_once YTC_DIR_TEMPLATES . '/settings-usage-shortcode.php';
 		} // $active_tab != 'tools|help|support'
 
 	} // ! empty ( $tabs[$active_tab] )

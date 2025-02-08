@@ -3,8 +3,8 @@ Contributors: urkekg, techwebux
 Donate link: https://urosevic.net/wordpress/donate/?donate_for=youtube-channel
 Tags: youtube, channel, playlist, widget, video
 Requires at least: 5.3
-Tested up to: 6.6.2
-Stable tag: 3.24.7
+Tested up to: 6.7.1
+Stable tag: 3.25.2
 Requires PHP: 7.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -438,6 +438,11 @@ If you are in a hurry, please find a developer to do it for you or [request a qu
 You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/youtube-channel)
 
 == Changelog ==
+
+= 3.25.2 (20250208) =
+
+* Fix: Function _load_textdomain_just_in_time was called incorrectly
+* Tested: WordPress 6.7.1 and themes Twenty Fifteen 3.9, Twenty Twenty-Five 1.0, Astra 4.8.1, GeneratePress 3.5.1 on PHP 8.3.13
 
 = 3.24.7 (20240706) =
 

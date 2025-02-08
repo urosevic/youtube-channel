@@ -36,33 +36,6 @@ class Wpau_My_Youtube_Channel {
 	 * Construct class
 	 */
 	public function __construct() {
-
-		$this->cache_timeouts = array(
-			'0'       => __( 'Do not cache', 'wpau-yt-channel' ),
-			'60'      => __( '1 minute', 'wpau-yt-channel' ),
-			'300'     => __( '5 minutes', 'wpau-yt-channel' ),
-			'900'     => __( '15 minutes', 'wpau-yt-channel' ),
-			'1800'    => __( '30 minutes', 'wpau-yt-channel' ),
-			'3600'    => __( '1 hour', 'wpau-yt-channel' ),
-			'7200'    => __( '2 hours', 'wpau-yt-channel' ),
-			'18000'   => __( '5 hours', 'wpau-yt-channel' ),
-			'36000'   => __( '10 hours', 'wpau-yt-channel' ),
-			'43200'   => __( '12 hours', 'wpau-yt-channel' ),
-			'64800'   => __( '18 hours', 'wpau-yt-channel' ),
-			'86400'   => __( '1 day', 'wpau-yt-channel' ),
-			'172800'  => __( '2 days', 'wpau-yt-channel' ),
-			'259200'  => __( '3 days', 'wpau-yt-channel' ),
-			'345600'  => __( '4 days', 'wpau-yt-channel' ),
-			'432000'  => __( '5 days', 'wpau-yt-channel' ),
-			'518400'  => __( '6 days', 'wpau-yt-channel' ),
-			'604800'  => __( '1 week', 'wpau-yt-channel' ),
-			'1209600' => __( '2 weeks', 'wpau-yt-channel' ),
-			'1814400' => __( '3 weeks', 'wpau-yt-channel' ),
-			'2419200' => __( '1 month', 'wpau-yt-channel' ),
-		);
-
-		load_plugin_textdomain( YTC_PLUGIN_SLUG, false, YTC_DIR . '/languages' );
-
 		// Clear all YTC cache
 		add_action( 'wp_ajax_ytc_clear_all_cache', array( $this, 'clear_all_cache' ) );
 
@@ -193,6 +166,32 @@ class Wpau_My_Youtube_Channel {
 	 * Initialize Settings link for Plugins page and create Settings page
 	 */
 	public function admin_init() {
+		// Localize cache options
+		$this->cache_timeouts = array(
+			'0'       => __( 'Do not cache', 'youtube-channel' ),
+			'60'      => __( '1 minute', 'youtube-channel' ),
+			'300'     => __( '5 minutes', 'youtube-channel' ),
+			'900'     => __( '15 minutes', 'youtube-channel' ),
+			'1800'    => __( '30 minutes', 'youtube-channel' ),
+			'3600'    => __( '1 hour', 'youtube-channel' ),
+			'7200'    => __( '2 hours', 'youtube-channel' ),
+			'18000'   => __( '5 hours', 'youtube-channel' ),
+			'36000'   => __( '10 hours', 'youtube-channel' ),
+			'43200'   => __( '12 hours', 'youtube-channel' ),
+			'64800'   => __( '18 hours', 'youtube-channel' ),
+			'86400'   => __( '1 day', 'youtube-channel' ),
+			'172800'  => __( '2 days', 'youtube-channel' ),
+			'259200'  => __( '3 days', 'youtube-channel' ),
+			'345600'  => __( '4 days', 'youtube-channel' ),
+			'432000'  => __( '5 days', 'youtube-channel' ),
+			'518400'  => __( '6 days', 'youtube-channel' ),
+			'604800'  => __( '1 week', 'youtube-channel' ),
+			'1209600' => __( '2 weeks', 'youtube-channel' ),
+			'1814400' => __( '3 weeks', 'youtube-channel' ),
+			'2419200' => __( '1 month', 'youtube-channel' ),
+		);
+
+		// Add plugin Setting slink on Plugins page
 		add_filter( 'plugin_action_links_' . plugin_basename( YTC_PLUGIN_FILE ), array( $this, 'add_action_links' ) );
 		// Add row on Plugins page
 		add_filter( 'plugin_row_meta', array( $this, 'add_plugin_meta_links' ), 10, 2 );
@@ -284,7 +283,7 @@ class Wpau_My_Youtube_Channel {
 			$notice['error'] .= '<p>'
 				. sprintf(
 					// translators: %1$s stand for PHP version on server, %2$s is plugin name
-					esc_html__( 'Your website running on web server with PHP version %1$s. Please note that %2$s requires PHP 7.4 or newer to work properly.', 'wpau-yt-channel' ),
+					esc_html__( 'Your website running on web server with PHP version %1$s. Please note that %2$s requires PHP 7.4 or newer to work properly.', 'youtube-channel' ),
 					PHP_VERSION, // 1
 					'<strong>' . esc_html( YTC_PLUGIN_NAME ) . '</strong>' // 2
 				)
@@ -304,13 +303,13 @@ class Wpau_My_Youtube_Channel {
 						*/
 					__(
 						'%1$s require %2$s to be set on plugin %3$s page. You can generate your own key on %4$s by following %5$s.',
-						'wpau-yt-channel'
+						'youtube-channel'
 					),
 					'<strong>' . esc_html( YTC_PLUGIN_NAME ) . '</strong>', // 1
-					'<strong>' . esc_html__( 'YouTube Data API Key', 'wpau-yt-channel' ) . '</strong>', // 2
-					'<a href="' . admin_url( 'options-general.php?page=' . YTC_PLUGIN_SLUG . '&tab=general' ) . '">' . esc_html__( 'General Settings', 'wpau-yt-channel' ) . '</a>', // 3
-					'<a href="https://console.developers.google.com/project" target="_blank">' . esc_html__( 'Google Developers Console', 'wpau-yt-channel' ) . '</a>', // 4
-					'<a href="https://urosevic.net/wordpress/plugins/youtube-channel/#youtube_data_api_key" target="_blank">' . esc_html__( 'this tutorial', 'wpau-yt-channel' ) . '</a>' // 5
+					'<strong>' . esc_html__( 'YouTube Data API Key', 'youtube-channel' ) . '</strong>', // 2
+					'<a href="' . admin_url( 'options-general.php?page=' . YTC_PLUGIN_SLUG . '&tab=general' ) . '">' . esc_html__( 'General Settings', 'youtube-channel' ) . '</a>', // 3
+					'<a href="https://console.developers.google.com/project" target="_blank">' . esc_html__( 'Google Developers Console', 'youtube-channel' ) . '</a>', // 4
+					'<a href="https://urosevic.net/wordpress/plugins/youtube-channel/#youtube_data_api_key" target="_blank">' . esc_html__( 'this tutorial', 'youtube-channel' ) . '</a>' // 5
 				)
 				. '</p>';
 
@@ -577,7 +576,7 @@ class Wpau_My_Youtube_Channel {
 
 			$error_msg = sprintf(
 				// translators: %1$s is replaced with plugin name, %2$s with link to DATA API Key instructions
-				__( '<strong>%1$s v3</strong> requires <strong>YouTube DATA API Key</strong> to work. <a href="%2$s" target="_blank">Learn more here</a>.', 'wpau-yt-channel' ),
+				__( '<strong>%1$s v3</strong> requires <strong>YouTube DATA API Key</strong> to work. <a href="%2$s" target="_blank">Learn more here</a>.', 'youtube-channel' ),
 				YTC_PLUGIN_NAME,
 				'https://urosevic.net/wordpress/plugins/youtube-channel/#youtube_data_api_key'
 			);
@@ -1006,7 +1005,7 @@ class Wpau_My_Youtube_Channel {
 
 		} else {
 
-			$output = __( 'Oops, something went wrong.', 'wpau-yt-channel' );
+			$output = __( 'Oops, something went wrong.', 'youtube-channel' );
 
 		}
 
@@ -1129,7 +1128,7 @@ class Wpau_My_Youtube_Channel {
 
 		$goto_txt = trim( $instance['goto_txt'] );
 		if ( empty( $goto_txt ) ) {
-			$goto_txt = __( 'Visit our YouTube channel', 'wpau-yt-channel' );
+			$goto_txt = __( 'Visit our YouTube channel', 'youtube-channel' );
 		}
 		// replace placeholders
 		$goto_txt = str_replace( '%handle%', $handle, $goto_txt );
@@ -1137,7 +1136,7 @@ class Wpau_My_Youtube_Channel {
 		$goto_txt = str_replace( '%vanity%', $vanity, $goto_txt ); // deprecated
 		$goto_txt = str_replace( '%user%', $username, $goto_txt ); // deprecated
 
-		$newtab = __( 'in new window/tab', 'wpau-yt-channel' );
+		$newtab = __( 'in new window/tab', 'youtube-channel' );
 
 		switch ( $instance['popup_goto'] ) {
 			case 1: // JavaScript is deprecated in 3.24.0

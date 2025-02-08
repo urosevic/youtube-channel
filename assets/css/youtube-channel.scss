@@ -4,6 +4,11 @@
 	position: relative;
 	box-sizing: border-box;
 
+	/* Fix for FSE */
+	&.wp-block-youtube-channel {
+		float: initial;
+	}
+
 	& .ytc_video_container {
 		float: left;
 		position: relative;
